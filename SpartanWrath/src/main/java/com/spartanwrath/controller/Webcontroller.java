@@ -14,5 +14,8 @@ public class Webcontroller {
     public String AboutUs(){
         return "aboutUs";
     }
-
+    @GetMapping("/error")
+    public String error() {
+        return "error";
+    }
 }
