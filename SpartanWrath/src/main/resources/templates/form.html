@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Form</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="team" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- MAIN CSS -->
+    <link rel="icon" type="image/x-icon" href="../images/infinitumwardens.png">
+    <link rel="stylesheet" href="../css/Form.css">
+</head>
+<body>
+<header>
+    <a href="#" class="logo">Infinitum Wardens</a>
+    <ul>
+        <li> <a href="/" >Inicio</a> </li>
+        <li> <a href="/ciber" >Ciberseguridad</a> </li>
+        <li> <a href="/is">Ingenieria Software</a> </li>
+        <li> <a href="/aboutUs">About Us</a> </li>
+        <li> <a href="/Form" class="active">Login</a> </li>
+    </ul>
+</header>
+    <div class="formulario">
+        <div class="form-box">
+            <div class="button-box">
+                <div id="btn"></div>
+                <button type="button" class="toggle-btn" onclick="login()">Log In</button>
+                <button type="button" class="toggle-btn" onclick="registro()">Registro</button>
+
+            </div>
+        <form id="login1" class="input-group" action="/login" method="post">
+            <input type="text" class="input-campo" placeholder="NickName" name="username" required>
+            <input type="password" class="input-campo" placeholder="Contraseña" name="password" required>
+            <input type="hidden" name="_csrf" value="{{token}}"/>
+            <input type="submit" class="submit-btn" value="Sign in">
+        </form>
+        <form id="registro" class="input-group" action="/userAdded">
+            <input type="text" class="input-campo" name="name" placeholder="NickName" required>
+            <input type="email" class="input-campo" name="mail" placeholder="Email" required>
+            <input type="password" class="input-campo" name="password" placeholder="Contraseña" required>
+            <input type="checkbox" class="check"><span>Acepto los terminos</span>
+            <button type="submit" class="submit-btn">Registro</button>
+        </form>
+    </div>
+    </div>
+<script>
+    var x = document.getElementById("login1");
+    var y = document.getElementById("registro");
+    var z = document.getElementById("btn");
+
+    function registro(){
+        x.style.left = "-400px";
+        y.style.left = "50px";
+        z.style.left = "110px";
+    }
+    function login(){
+        x.style.left = "50px";
+        y.style.left = "450px";
+        z.style.left = "0";
+    }
+</script>
+</body>
+</html>

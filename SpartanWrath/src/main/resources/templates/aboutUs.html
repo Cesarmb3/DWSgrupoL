@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>About Us</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="team" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- MAIN CSS -->
+    <link rel="icon" type="image/x-icon" href="../images/infinitumwardens.png">
+    <link rel="stylesheet" href="../css/aboutus.css">
+</head>
+<body>
+<!-- Sección Inicio -->
+<header>
+    <a href="/" class="logo">Infinitum Wardens</a>
+    <ul>
+        <li> <a href="/" >Inicio</a> </li>
+        <li> <a href="/ciber">Ciberseguridad</a> </li>
+        <li> <a href="/is">Ingenieria Software</a> </li>
+        <li> <a href="/aboutUs" class="active">About Us</a> </li>
+        {{#noUser}}
+        <li> <a href="/login">Login</a> </li>
+        {{/noUser}}
+        {{#user}}
+        <li><a href="/private">Pagina de usuario</a></li>
+        {{/user}}
+    </ul>
+</header>
+    <section class="top">
+        <img src="../images/stars.png" id="estrellas">
+        <img src="../images/infinitumwardens.png" id="luna">
+        <img src="../images/mountains_behind.png" id="mountains_behind">
+        <h2 id="texto">About Us</h2>
+        <a href="#sec" id="boton">Grupo 8</a>
+        <img src="../images/mountains_front.png" id="mountains_front">
+    </section>
+    <div class="sec" id="sec">
+        <h2>Nuestro equipo</h2>
+        <p> Somos Infinitum Wardens, un apasionado grupo en ciberseguridad y desarrollo de software. Nuestra misión es proporcionar conocimiento en estos campos. Nuestro viaje comenzó con el objetivo de hacer que la ciberseguridad y las metodologías de desarrollo sean accesibles para todos.<br><br>
+            Estamos comprometidos a ofrecer contenido educativo relevante y actualizado.<br><br>
+            En Infinitum Wardens, creemos que el aprendizaje es una aventura, y nuestra misión es ser tu guía en este viaje. Nos esforzamos por proporcionar información de manera accesible y simplificada.<br><br>
+            Te damos la bienvenida a explorar el conocimiento y las oportunidades que ofrecemos. Juntos, podemos hacer que la ciberseguridad y las metodologías de desarrollo sean más accesibles y comprensibles para todo el público.<br><br>
+            Gracias por visitar nuestro contenido. Tu viaje de aprendizaje comienza aquí.</p>
+    </div>
+<!-- Seccion Equipo -->
+<section class="equipo">
+<div class="square">
+    <span>   </span>
+    <span>   </span>
+    <span>   </span>
+    <div class="content">
+        <div class="contentBx active" id="content1">
+            <div class="card">
+                <div class="imgBx">
+                    <img src="../images/Juan_srz.jpg">
+                </div>
+                <div class="textBx">
+                    <h2>Juan Antonio Suárez Suárez<br><b>Equipo Desarrollo</b></h2>
+                </div>
+            </div>
+        </div>
+        <div class="contentBx" id="content2">
+            <div class="card">
+                <div class="imgBx">
+                    <img src="../images/alvaro.jpg">
+                </div>
+                <div class="textBx">
+                    <h2>Alvaro Sierra Parra<br><b>Equipo Desarrollo</b></h2>
+                </div>
+            </div>
+        </div>
+        <div class="contentBx" id="content3">
+            <div class="card">
+                <div class="imgBx">
+                    <img src="../images/juancar.jpg">
+                </div>
+                <div class="textBx">
+                    <h2>Juan Carlos Sastre García<br><b>Equipo Desarrollo</b></h2>
+                </div>
+            </div>
+        </div>
+        <div class="contentBx" id="content4">
+            <div class="card">
+                <div class="imgBx">
+                    <img src="../images/dani.png">
+                </div>
+                <div class="textBx">
+                    <h2>Daniel Vallejo Pasamón<br><b>Scrum Master</b></h2>
+                </div>
+            </div>
+        </div>
+        <div class="contentBx" id="content5">
+            <div class="card">
+                <div class="imgBx">
+                    <img src="../images/nacho.jpg">
+                </div>
+                <div class="textBx">
+                    <h2>Ignacio Velázquez Mayoral<br><b>Product Owner</b></h2>
+                </div>
+            </div>
+        </div>
+        <div class="contentBx" id="content6">
+            <div class="card">
+                <div class="imgBx">
+                    <img src="../images/diego.jpg">
+                </div>
+                <div class="textBx">
+                    <h2>Diego Torres Sánchez<br><b>Equipo Desarrollo</b></h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="bottom">
+    <div class="waves">
+        <div class="wave" id="wave1"></div>
+        <div class="wave" id="wave2"></div>
+        <div class="wave" id="wave3"></div>
+        <div class="wave" id="wave4"></div>
+    </div>
+<div class="icon">
+    <div class="imgBx active" data-id="content1">
+        <img src="../images/Juan_srz.jpg">
+    </div>
+    <div class="imgBx" data-id="content2">
+        <img src="../images/alvaro.jpg">
+    </div>
+    <div class="imgBx" data-id="content3">
+        <img src="../images/juancar.jpg">
+    </div>
+    <div class="imgBx" data-id="content4">
+        <img src="../images/dani.png">
+    </div>
+    <div class="imgBx" data-id="content5">
+        <img src="../images/nacho.jpg">
+    </div>
+    <div class="imgBx" data-id="content6">
+        <img src="../images/diego.jpg">
+    </div>
+</div>
+</div>
+</section>
+<!--Pie de página-->
+<footer class="pie">
+    <div class="pie2">
+    <img class="footer-logo" src="../images/infinitumwardens.png" alt="logo de IW">
+    <p class="footer-texto">El software de hoy,<br> el futuro de mañana.</p>
+    </div>
+    <div class="derechos-de-autor">Creado por Infinitum Wardens ©</div>
+</footer>
+
+<!-- Scripts -->
+<script src="/js/AboutUs.js" defer></script>
+</body>
+</html>
