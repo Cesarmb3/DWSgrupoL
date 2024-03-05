@@ -10,11 +10,11 @@ let header = document.querySelector('header');
 
 window.addEventListener('scroll',function (){
     let value = window.scrollY;
-    estrellas.style.left = value * 0.25 + 'px';
+    estrellas.style.left =  0 + 'px';
     luna.style.top = value * 1.05 + 'px';
     mountains_behind.style.top = value * 0.5 + 'px';
     mountains_front.style.top = value * 0 + 'px';
-    texto.style.marginRight = value * 2 + 'px';
+    texto.style.marginRight = value * 3.5 + 'px';
     texto.style.marginTop = value * 1.5 + 'px';
     boton.style.marginTop = value * 1.5 + 'px';
     header.style.top = value * 0.5 + 'px';

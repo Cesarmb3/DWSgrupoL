@@ -280,7 +280,7 @@ header ul li a.active{
 section{
     position: relative;
     width: 100%;
-    height: 100vh;
+    height: 62vh;
     padding: 100px;
     display: flex;
     justify-content: center;
@@ -302,21 +302,33 @@ section img{
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    /*height: 100%;*/
     object-fit: cover;
     pointer-events: none;
 }
+
 section img#luna{
     position: absolute;
     mix-blend-mode: normal;
-    width: 10%;
-    height: 25%;
-    left: 655px;
-
+    z-index: 1;
 }
-
-section img#montañas_delanteras{
-    z-index: 12;
+section img#estrellas{
+    z-index: 0;
+}
+section img#mountains_behind{
+    z-index: 4;
+}
+section img#mountains_02{
+    z-index: 3;
+}
+section img#mountains_03{
+     z-index: 2;
+ }
+section img#mountains_front{
+    z-index: 5;
+}
+section img#tree{
+    z-index: 6;
 }
 
 #texto{
