@@ -307,12 +307,12 @@ section img{
     pointer-events: none;
 }
 
-section img#luna{
+section img#cloud{
     position: absolute;
     mix-blend-mode: normal;
     z-index: 1;
 }
-section img#estrellas{
+section img#sky{
     z-index: 0;
 }
 section img#mountains_behind{
@@ -324,7 +324,7 @@ section img#mountains_02{
 section img#mountains_03{
      z-index: 2;
  }
-section img#mountains_front{
+section img#city{
     z-index: 5;
 }
 section img#tree{

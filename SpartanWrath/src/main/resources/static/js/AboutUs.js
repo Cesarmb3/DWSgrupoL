@@ -1,25 +1,23 @@
-let estrellas = document.getElementById('estrellas');
-let luna = document.getElementById('luna');
-let mountains_behind = document.getElementById('mountains_behind');
+let arbol = document.getElementById('tree');
+let cloud = document.getElementById('cloud');
+let mountains_behind = document.getElementById('mountains_02');
 let texto = document.getElementById('texto');
-let boton = document.getElementById('boton');
-let mountains_front = document.getElementById('mountains_front');
+let mountain3 = document.getElementById('mountains_03');
 let header = document.querySelector('header');
-let tree=document.getElementById('tree');
+
 
 
 
 window.addEventListener('scroll',function (){
     let value = window.scrollY;
-    estrellas.style.left =  0 + 'px';
-    luna.style.top = value * 1.05 + 'px';
+    arbol.style.top =  value * 1.5 + 'px';
+    cloud.style.top = value * 1.05 + 'px';
     mountains_behind.style.top = value * 0.5 + 'px';
-    mountains_front.style.top = value * 0 + 'px';
     texto.style.marginRight = value * 4 + 'px';
     texto.style.marginTop = value * 1.5 + 'px';
-    boton.style.marginTop = value * 1.5 + 'px';
+    mountain3.style.top = value * 1.05 + 'px';
     header.style.top = value * 0.5 + 'px';
-    tree.style.top = value * 1.5 + 'px';
+
 })
 
     let imgBx = document.querySelectorAll('.imgBx');
