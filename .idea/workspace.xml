@@ -7,7 +7,7 @@
     <list default="true" id="a0cd12af-c15a-4712-a2ad-cb86702a37f6" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SpartanWrath/src/main/resources/static/css/aboutus.css" beforeDir="false" afterPath="$PROJECT_DIR$/SpartanWrath/src/main/resources/static/css/aboutus.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SpartanWrath/src/main/resources/templates/error.html" beforeDir="false" afterPath="$PROJECT_DIR$/SpartanWrath/src/main/resources/templates/error.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpartanWrath/src/main/resources/static/js/AboutUs.js" beforeDir="false" afterPath="$PROJECT_DIR$/SpartanWrath/src/main/resources/static/js/AboutUs.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SpartanWrath/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/SpartanWrath/src/main/resources/templates/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -75,6 +75,11 @@
       <workItem from="1709645757908" duration="34000" />
       <workItem from="1709725893597" duration="48000" />
       <workItem from="1709726481014" duration="309000" />
+      <workItem from="1709727132710" duration="13000" />
+      <workItem from="1709727687437" duration="43000" />
+      <workItem from="1709729690221" duration="207000" />
+      <workItem from="1709729928307" duration="105000" />
+      <workItem from="1709743084001" duration="64000" />
     </task>
     <servers />
   </component>
