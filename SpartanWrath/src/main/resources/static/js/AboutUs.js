@@ -5,6 +5,7 @@ let texto = document.getElementById('texto');
 let boton = document.getElementById('boton');
 let mountains_front = document.getElementById('mountains_front');
 let header = document.querySelector('header');
+let tree=document.getElementById('tree');
 
 
 
@@ -14,10 +15,11 @@ window.addEventListener('scroll',function (){
     luna.style.top = value * 1.05 + 'px';
     mountains_behind.style.top = value * 0.5 + 'px';
     mountains_front.style.top = value * 0 + 'px';
-    texto.style.marginRight = value * 3.5 + 'px';
+    texto.style.marginRight = value * 4 + 'px';
     texto.style.marginTop = value * 1.5 + 'px';
     boton.style.marginTop = value * 1.5 + 'px';
     header.style.top = value * 0.5 + 'px';
+    tree.style.top = value * 1.5 + 'px';
 })
 
     let imgBx = document.querySelectorAll('.imgBx');
