@@ -16,13 +16,13 @@ body{
     overflow-x: hidden;
 
 }
-.equipo{
+.instalaciones{
 
     height: 100vh;
     background: #0a0a23;
     padding: 0;
 }
-section.equipo::before{
+section.instalaciones::before{
     content: '';
     position: absolute;
     bottom: 0;
@@ -199,7 +199,7 @@ section.equipo::before{
     position: relative;
     width: 150px;
     height: 150px;
-    border-radius: 50%;
+    border-radius: 100%;
     overflow: hidden;
 }
 .contentBx .card .imgBx img{

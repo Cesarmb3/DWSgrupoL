@@ -9,44 +9,50 @@
     <meta name="team" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <!-- MAIN CSS -->
-    <link rel="icon" type="image/x-icon" href="../images/infinitumwardens.png">
+    <link rel="icon" type="image/x-icon" href="../static/images/infinitumwardens.png">
     <link rel="stylesheet" href="../css/aboutus.css">
 </head>
 <body>
 <!-- Sección Inicio -->
 <header>
-    <a href="/" class="logo">Infinitum Wardens</a>
+    <a href="../images/spartan-logo.png" class="logo">Spartan Wrath</a>
     <ul>
         <li> <a href="/" >Inicio</a> </li>
-        <li> <a href="/ciber">Ciberseguridad</a> </li>
-        <li> <a href="/is">Ingenieria Software</a> </li>
+        <li> <a href="/market">Tienda</a> </li>
         <li> <a href="/aboutUs" class="active">About Us</a> </li>
         {{#noUser}}
         <li> <a href="/login">Login</a> </li>
         {{/noUser}}
         {{#user}}
-        <li><a href="/private">Pagina de usuario</a></li>
+        <li><a href="/private">Perfil</a></li>
         {{/user}}
     </ul>
 </header>
     <section class="top">
-        <img src="../images/stars.png" id="estrellas">
-        <img src="../images/infinitumwardens.png" id="luna">
-        <img src="../images/mountains_behind.png" id="mountains_behind">
+        <img src="../images/sky.png" id="estrellas">
+        <img src="../images/cloud.png" id="luna">
+        <img src="../images/hill_03.png" id="mountains_behind">
+        <img src="../images/hill_02.png" id="mountains_02">
+        <img src="../images/hill_01.png" id="mountains_03">
+        <img src="../images/tree.png" id="tree">
         <h2 id="texto">About Us</h2>
-        <a href="#sec" id="boton">Grupo 8</a>
-        <img src="../images/mountains_front.png" id="mountains_front">
+        <a href="#sec" id="boton">Grupo L</a>
+        <img src="../static/images/mountains_front.png" id="mountains_front">
     </section>
-    <div class="sec" id="sec">
-        <h2>Nuestro equipo</h2>
-        <p> Somos Infinitum Wardens, un apasionado grupo en ciberseguridad y desarrollo de software. Nuestra misión es proporcionar conocimiento en estos campos. Nuestro viaje comenzó con el objetivo de hacer que la ciberseguridad y las metodologías de desarrollo sean accesibles para todos.<br><br>
-            Estamos comprometidos a ofrecer contenido educativo relevante y actualizado.<br><br>
-            En Infinitum Wardens, creemos que el aprendizaje es una aventura, y nuestra misión es ser tu guía en este viaje. Nos esforzamos por proporcionar información de manera accesible y simplificada.<br><br>
-            Te damos la bienvenida a explorar el conocimiento y las oportunidades que ofrecemos. Juntos, podemos hacer que la ciberseguridad y las metodologías de desarrollo sean más accesibles y comprensibles para todo el público.<br><br>
-            Gracias por visitar nuestro contenido. Tu viaje de aprendizaje comienza aquí.</p>
+    <div class="sec" id="sec" style="text-align: center">
+        <h2>About us</h2>
+        <p> “Ven a luchar, en definitiva, contra el oponente más formidable que puedes encontrar: tú mismo”.<br><br>
+            Encuentranos en: C. Tulipán, 3, 28933 Móstoles, Madrid, a partir del 1-12-2025<br><br>
+            Contacta con nosotros: atencionalcliente@spartanwrath.es<br><br>
+            ¿No contesta el correo? Llama al +34 645 321 123<br><br>
+            Gracias por interesarte en nuestro gimnasio. Recueda: ¡No te cagues!</p>
+            <br><br>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3041.2821317838225!2d-3.8742989893954096!3d40.33608696042607!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd418e64b4d4b9bb%3A0x276639e91fb8d06c!2zQy4gVHVsaXDDoW4sIDMsIDI4OTMzIE3Ds3N0b2xlcywgTWFkcmlk!5e0!3m2!1ses!2ses!4v1709745275854!5m2!1ses!2ses" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <br><br>
     </div>
-<!-- Seccion Equipo -->
-<section class="equipo">
+
+<!-- Seccion Instalaciones -->
+<section class="instalaciones">
 <div class="square">
     <span>   </span>
     <span>   </span>
@@ -55,60 +61,60 @@
         <div class="contentBx active" id="content1">
             <div class="card">
                 <div class="imgBx">
-                    <img src="../images/Juan_srz.jpg">
+                    <img src="../images/boxing_zone.jpeg">
                 </div>
                 <div class="textBx">
-                    <h2>Juan Antonio Suárez Suárez<br><b>Equipo Desarrollo</b></h2>
+                    <h2>Sala Boxeo/K1<br></h2>
                 </div>
             </div>
         </div>
         <div class="contentBx" id="content2">
             <div class="card">
                 <div class="imgBx">
-                    <img src="../images/alvaro.jpg">
+                    <img src="../images/ring.jpg">
                 </div>
                 <div class="textBx">
-                    <h2>Alvaro Sierra Parra<br><b>Equipo Desarrollo</b></h2>
+                    <h2>Ring<br></h2>
                 </div>
             </div>
         </div>
         <div class="contentBx" id="content3">
             <div class="card">
                 <div class="imgBx">
-                    <img src="../images/juancar.jpg">
+                    <img src="../images/karate_zone.jpg">
                 </div>
                 <div class="textBx">
-                    <h2>Juan Carlos Sastre García<br><b>Equipo Desarrollo</b></h2>
+                    <h2>Sala karate<br></h2>
                 </div>
             </div>
         </div>
         <div class="contentBx" id="content4">
             <div class="card">
                 <div class="imgBx">
-                    <img src="../images/dani.png">
+                    <img src="../images/jiu_jitsu_zone.jpeg">
                 </div>
                 <div class="textBx">
-                    <h2>Daniel Vallejo Pasamón<br><b>Scrum Master</b></h2>
+                    <h2>Sala jiu jitsu brasileño<br></h2>
                 </div>
             </div>
         </div>
         <div class="contentBx" id="content5">
             <div class="card">
                 <div class="imgBx">
-                    <img src="../images/nacho.jpg">
+                    <img src="../images/gym_zone.jpg">
                 </div>
                 <div class="textBx">
-                    <h2>Ignacio Velázquez Mayoral<br><b>Product Owner</b></h2>
+                    <h2>Zona de musculación<br></h2>
                 </div>
             </div>
         </div>
         <div class="contentBx" id="content6">
             <div class="card">
                 <div class="imgBx">
-                    <img src="../images/diego.jpg">
+                    <img src="../images/cardio_zone.jpg">
                 </div>
                 <div class="textBx">
-                    <h2>Diego Torres Sánchez<br><b>Equipo Desarrollo</b></h2>
+                    <h2>Zona de cardio<br></h2>
                 </div>
             </div>
         </div>
@@ -123,22 +129,22 @@
     </div>
 <div class="icon">
     <div class="imgBx active" data-id="content1">
-        <img src="../images/Juan_srz.jpg">
+        <img src="../images/boxing_zone.jpeg">
     </div>
     <div class="imgBx" data-id="content2">
-        <img src="../images/alvaro.jpg">
+        <img src="../images/ring.jpg">
     </div>
     <div class="imgBx" data-id="content3">
-        <img src="../images/juancar.jpg">
+        <img src="../images/karate_zone.jpg">
     </div>
     <div class="imgBx" data-id="content4">
-        <img src="../images/dani.png">
+        <img src="../images/jiu_jitsu_zone.jpeg">
     </div>
     <div class="imgBx" data-id="content5">
-        <img src="../images/nacho.jpg">
+        <img src="../images/gym_zone.jpg">
     </div>
     <div class="imgBx" data-id="content6">
-        <img src="../images/diego.jpg">
+        <img src="../images/cardio_zone.jpg">
     </div>
 </div>
 </div>
@@ -146,13 +152,13 @@
 <!--Pie de página-->
 <footer class="pie">
     <div class="pie2">
-    <img class="footer-logo" src="../images/infinitumwardens.png" alt="logo de IW">
-    <p class="footer-texto">El software de hoy,<br> el futuro de mañana.</p>
+    <img class="footer-logo" src="../images/spartan-logo.png" alt="logo de SW">
+    <p class="footer-texto">This is<br> SPARTA!</p>
     </div>
     <div class="derechos-de-autor">Creado por Infinitum Wardens ©</div>
 </footer>
 
 <!-- Scripts -->
-<script src="/js/AboutUs.js" defer></script>
+<script src="../js/AboutUs.js" defer></script>
 </body>
 </html>
