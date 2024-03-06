@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a0cd12af-c15a-4712-a2ad-cb86702a37f6" name="Changes" comment="" />
+    <list default="true" id="a0cd12af-c15a-4712-a2ad-cb86702a37f6" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpartanWrath/src/main/resources/static/css/aboutus.css" beforeDir="false" afterPath="$PROJECT_DIR$/SpartanWrath/src/main/resources/static/css/aboutus.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpartanWrath/src/main/resources/templates/error.html" beforeDir="false" afterPath="$PROJECT_DIR$/SpartanWrath/src/main/resources/templates/error.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpartanWrath/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/SpartanWrath/src/main/resources/templates/index.html" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -38,6 +43,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/usuario/Desktop/2do/Desarroyo Web Seguro/GymNacio-master&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -47,21 +53,6 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager">
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="DWSgrupoL" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="DWSgrupoL" />
-      <option name="filePath" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -82,6 +73,8 @@
       <workItem from="1709645143998" duration="7000" />
       <workItem from="1709645227208" duration="504000" />
       <workItem from="1709645757908" duration="34000" />
+      <workItem from="1709725893597" duration="48000" />
+      <workItem from="1709726481014" duration="309000" />
     </task>
     <servers />
   </component>
