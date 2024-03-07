@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tienda de Suplementos de Gimnasio</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../static/css/market.css">
+</head>
+<body>
+<header>
+  <h1>Tienda de Suplementos de Gimnasio</h1>
+  <div id="cart-icon" onclick="showCart()">🛒 <span id="cart-count">0</span></div>
+  <div id="cart" class="hide">
+    <h2>Cesta de la compra</h2>
+    <ul id="cart-items"></ul>
+  </div>
+</header>
+<nav>
+  <ul>
+    <li><a href="#">Inicio</a></li>
+    <li><a href="#">Productos</a></li>
+    <li><a href="#">Contacto</a></li>
+  </ul>
+</nav>
+<div class="container">
+  <div class="product" onclick="addToCart('Producto 1', 10.00)">
+    <img src="imagen1.jpg" alt="Producto 1">
+    <h3>Producto 1</h3>
+    <div class="details">
+      <p>Descripción del producto 1.</p>
+      <p>Precio: $10.00</p>
+    </div>
+  </div>
+  <div class="product" onclick="addToCart('Producto 2', 10.00)">
+    <img src="imagen1.jpg" alt="Producto 1">
+    <h3>Producto 2</h3>
+    <div class="details">
+      <p>Descripción del producto 1.</p>
+      <p>Precio: $10.00</p>
+    </div>
+  </div>
+  <div class="product" onclick="addToCart('Producto 3', 10.00)">
+    <img src="imagen1.jpg" alt="Producto 2">
+    <h3>Producto 3</h3>
+    <div class="details">
+      <p>Descripción del producto 1.</p>
+      <p>Precio: $10.00</p>
+    </div>
+  </div>
+  <div class="product" onclick="addToCart('Producto 4', 10.00)">
+    <img src="imagen1.jpg" alt="Producto 3">
+    <h3>Producto 4</h3>
+    <div class="details">
+      <p>Descripción del producto 1.</p>
+      <p>Precio: $10.00</p>
+    </div>
+  </div>
+  <!-- Agregar más productos aquí -->
+</div>
+<footer>
+  <p>&copy; 2024 Tienda de Suplementos de Gimnasio Online</p>
+</footer>
+
+<script src="../static/js/market.js"></script>
+</body>
+</html>
+
