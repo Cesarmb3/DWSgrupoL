@@ -1,14 +1,16 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es"  xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tienda de Suplementos de Gimnasio</title>
+  <title>Spartan Market</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="../css/market.css">
+  <link rel="stylesheet" href="../css/aboutus.css">
 </head>
 <body>
-<header>
+<div th:include="template_header_footer.html::header"></div>
+<!--<header>
   <h1>Tienda de Suplementos de Gimnasio</h1>
   <div id="cart-icon" onclick="showCart()">🛒 <span id="cart-count">0</span></div>
   <div id="cart" class="hide">
@@ -22,7 +24,7 @@
     <li><a href="#">Productos</a></li>
     <li><a href="#">Contacto</a></li>
   </ul>
-</nav>
+</nav>-->
 <div class="container">
   <div class="product" onclick="addToCart('Producto 1', 10.00)">
     <img src="imagen1.jpg" alt="Producto 1">
@@ -58,9 +60,7 @@
   </div>
   <!-- Agregar más productos aquí -->
 </div>
-<footer>
-  <p>&copy; 2024 Tienda de Suplementos de Gimnasio Online</p>
-</footer>
+<div th:include="template_header_footer.html::footer"></div>
 
 <script src="../js/market.js"></script>
 </body>

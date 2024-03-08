@@ -18,4 +18,8 @@ public class Webcontroller {
     public String error() {
         return "error";
     }
+
+    @GetMapping("/Market")
+    public String market() { return "market";}
+
 }
