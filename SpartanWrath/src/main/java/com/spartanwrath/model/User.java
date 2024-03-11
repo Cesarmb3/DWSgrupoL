@@ -1,22 +1,37 @@
 package com.spartanwrath.model;
 
-import java.util.HashMap;
-import java.util.Map;
+import jakarta.persistence.*;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import java.util.HashMap;
+import java.util.Map;
+@Entity
+@Table(name = "Users")
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+    @Column(name = "name")
     private String name;
+    @Column(name = "username")
     private String username;
+    @Column(name = "email")
     private String email;
+    @Column(name = "address")
     private String address;
+    @Column(name = "phone")
     private String phone;
+    @Column(name = "type")
     private String type;
+    @Column(name = "password")
     private String password;
+    @Column(name = "birthday")
     private String birthday;
+    @Column(name = "dni")
     private String dni;
+    @Column(name = "payment")
     private String payment;
 
     public User() {

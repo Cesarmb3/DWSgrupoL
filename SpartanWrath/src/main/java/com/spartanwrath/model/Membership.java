@@ -1,35 +1,48 @@
 package com.spartanwrath.model;
 
+import jakarta.persistence.*;
+
 import java.util.Date;
 
-public class Membresia {
+@Entity
+public class Membership {
 
-        private Integer id;
+        @Id
+        @GeneratedValue(strategy = GenerationType.AUTO)
+        private Long id;
+    @Column(name = "nombre")
         private String nombre;
+    @Column(name = "descripcion")
         private String descripcion;
+    @Column(name = "precio")
         private double precio;
+    @Column(name = "fechaalta")
         private Date fechaalta;
+    @Column(name = "fechafin")
         private Date fechafin;
+    @Column(name = "active")
+        private boolean active;
 
-        public Membresia() {
+        public Membership() {
 
         }
 
-    public Membresia(Integer id, String nombre, String descripcion, double precio, Date fechaalta, Date fechafin) {
+    public Membership(Long id, String nombre, String descripcion, double precio, Date fechaalta, Date fechafin, boolean active) {
         super();
-            this.id = id;
+        this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
         this.fechaalta = fechaalta;
         this.fechafin = fechafin;
+        this.active = active;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -73,15 +86,24 @@ public class Membresia {
         this.fechafin = fechafin;
     }
 
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
     @Override
     public String toString() {
-        return "membresia{" +
+        return "Membership{" +
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
                 ", descripcion='" + descripcion + '\'' +
                 ", precio=" + precio +
                 ", fechaalta=" + fechaalta +
                 ", fechafin=" + fechafin +
+                ", active=" + active +
                 '}';
     }
 }
