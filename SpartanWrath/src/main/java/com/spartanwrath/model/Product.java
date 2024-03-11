@@ -1,9 +1,8 @@
 package com.spartanwrath.model;
 
-<<<<<<<< Updated upstream:SpartanWrath/src/main/java/com/spartanwrath/model/Producto.java
-public class Producto {
-    private Integer id;
-========
+
+
+
 import jakarta.persistence.*;
 
 @Entity
@@ -13,7 +12,7 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column(name = "nombre")
->>>>>>>> Stashed changes:SpartanWrath/src/main/java/com/spartanwrath/model/Product.java
+
     private String nombre;
     @Column(name = "descripcion")
     private String descripcion;
@@ -23,31 +22,22 @@ public class Product {
     private double precio;
     @Column(name = "cantidad")
     private Integer cantidad;
-
-<<<<<<<< Updated upstream:SpartanWrath/src/main/java/com/spartanwrath/model/Producto.java
-    public Producto() {
-
-    }
-
-    public Producto(Integer id, String nombre, String descripcion, String imagen, double precio) {
-========
+    @Column(name = "category")
     private String category;
     public Product() {
 
     }
 
     public Product( String nombre, String descripcion, String imagen, double precio, Integer cantidad, String category) {
->>>>>>>> Stashed changes:SpartanWrath/src/main/java/com/spartanwrath/model/Product.java
+
         super();
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.imagen = imagen;
         this.precio = precio;
-<<<<<<<< Updated upstream:SpartanWrath/src/main/java/com/spartanwrath/model/Producto.java
-========
         this.cantidad = cantidad;
         this.category = category;
->>>>>>>> Stashed changes:SpartanWrath/src/main/java/com/spartanwrath/model/Product.java
+
     }
 
     public Long getId() {
@@ -90,8 +80,6 @@ public class Product {
         this.precio = precio;
     }
 
-<<<<<<<< Updated upstream:SpartanWrath/src/main/java/com/spartanwrath/model/Producto.java
-========
     public Integer getCantidad() {
         return cantidad;
     }
@@ -99,7 +87,7 @@ public class Product {
     public void setCantidad(Integer cantidad) {
         this.cantidad = cantidad;
     }
->>>>>>>> Stashed changes:SpartanWrath/src/main/java/com/spartanwrath/model/Product.java
+
 
     public String getCategory() {
         return category;

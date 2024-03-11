@@ -20,13 +20,4 @@ public class Webcontroller {
         return "error";
     }
 
-<<<<<<< Updated upstream
-    @GetMapping("/Market")
-    public String market() { return "market";}
-
-    @GetMapping("/login")
-    public String login() { return "login";}
-
-=======
->>>>>>> Stashed changes
 }

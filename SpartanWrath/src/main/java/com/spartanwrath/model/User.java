@@ -1,15 +1,11 @@
 package com.spartanwrath.model;
-<<<<<<< Updated upstream
-<<<<<<<< Updated upstream:SpartanWrath/src/main/java/com/spartanwrath/model/User.java
 
-========
 import java.util.HashMap;
 import java.util.Map;
->>>>>>>> Stashed changes:SpartanWrath/src/main/java/com/spartanwrath/model/user.java
-=======
+
 import java.util.HashMap;
 import java.util.Map;
->>>>>>> Stashed changes
+
 public class User {
     private Integer id;
     private String name;
