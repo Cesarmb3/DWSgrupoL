@@ -41,14 +41,17 @@
 <section class="noticia">
     <div class="container">
         <div th:each="product : ${products}" class="card">
-            <img th:src="@{${'imagen1.jpg'}}" alt="Producto" />
-            <h3 th:text="${product.nombre}">Producto</h3>
+            <img class="img" th:src="@{${product.imagen}}" alt="Producto" />
+
             <div class="contenido">
+                <h2 th:text="${product.nombre}">Producto</h2>
                 <p class="lead" th:text="${product.descripcion}">Descripción del producto.</p>
-                <p th:text="'Precio: $' + ${product.precio}">Precio: $10.00</p>
+                <p th:text="'Precio: $' + ${product.precio}">Precio: </p>
                 <p th:text="'Categoría: ' + ${product.category}">Categoría: </p>
                 <a href="/ciber/{{id}}">Más Información</a>
-                <a onclick="addToCart('${product.nombre}', ${product.precio})">🛒</a>
+                <a th:attr="data-productName=${product.nombre},data-price=${product.precio}" th:onclick="addToCart(this.getAttribute('data-productName') , this.getAttribute('data-price'))">🛒</a>
+
+
             </div>
         </div>
     </div>
@@ -65,7 +68,16 @@
     <!--<a href="register.html">Register</a>-->
 </footer>
 <!-- Scripts -->
-<script src="/js/AboutUs.js" defer></script>
+<script src="../../js/AboutUs.js" defer></script>
 <script src="../../js/market.js"></script>
+<script type="text/javascript" src="../../js/vanilla-tilt.js"></script>
+<script>
+    VanillaTilt.init(document.querySelectorAll(".card"), {
+        max: 25,
+        speed: 400,
+        glare: true,
+        "max-glare": 1,
+    });
+</script>
 </body>
 </html>

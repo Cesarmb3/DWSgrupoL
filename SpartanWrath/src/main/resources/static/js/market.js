@@ -1,7 +1,8 @@
 let cartItems = [];
 
 function addToCart(productName, price) {
-    // Buscar si el producto ya está en el carrito
+    console.log("Nombre del producto:", productName);
+    console.log("Precio del producto:", price);
     const existingItem = cartItems.find(item => item.name === productName);
 
     if (existingItem) {
@@ -85,11 +86,3 @@ function showCart() {
 
     cart.classList.toggle('hide');
 }
-
-
-
-
-
-
-
-

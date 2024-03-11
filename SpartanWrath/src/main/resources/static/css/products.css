@@ -65,12 +65,12 @@ section.noticia{
 }
 .container .card .contenido h2{
     font-size: 1.8em;
-    color: #f1f1f2;
+    color: #FFA500;
     z-index: 1;
 }
 .container .card .contenido p{
     font-size: 1em;
-    color: #f1f1f2;
+    color: #FFA500;
     font-weight: 300;
 }
 .container .card .contenido a{
@@ -84,6 +84,24 @@ section.noticia{
     text-decoration: none;
     font-weight: 500;
     box-shadow: 0 5px 15px #0a0a23 ;
+}
+.img{
+    border-radius: 18%;
+    max-width: 150px;
+    margin: 15px;
+    position: absolute;
+    left: unset;
+}
+#cart {
+    position: absolute;
+    top: 80px;
+    right: 20px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    padding: 20px;
+}
+#cart-items {
+    color: #000000; /* Cambia el color del texto a negro */
 }
 /* Seccion descripción */
 
