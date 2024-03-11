@@ -7,19 +7,18 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class UserController {
-
-
+    @GetMapping("/login")
+    public String loginPage() {
+        // Mostrar la página de inicio de sesión
+        return "login";
+    }
     @PostMapping("/register")
     public String registerUser(User user) {
-        System.out.println("Nombre: " + user.getName());
-        System.out.println("Username: " + user.getUsername());
-        System.out.println("Email: " + user.getEmail());
-        System.out.println("Password: " + user.getPassword());
-
         // Agregar el usuario al UserManager
         UserManager.addUser(user);
         return "redirect:/login";
     }
+
     @PostMapping("/login")
     public String loginUser(@RequestParam String username, @RequestParam String password) {
         // Verificar las credenciales del usuario
@@ -44,16 +43,12 @@ public class UserController {
         return "admin/admin";
     }
 
-    @GetMapping("/login")
-    public String loginPage() {
-        // Mostrar la página de inicio de sesión
-        return "form";
-    }
+
 
     @GetMapping("/register")
     public String registerPage() {
         // Mostrar la página de registro de usuario
-        return "form";
+        return "login";
     }
 
     @GetMapping("/private")

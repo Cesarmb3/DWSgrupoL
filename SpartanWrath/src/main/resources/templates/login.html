@@ -10,19 +10,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <!-- MAIN CSS -->
     <link rel="icon" type="image/x-icon" href="../images/spartan-logo.png">
-    <link rel="stylesheet" href="../css/aboutus.css">
+    <link rel="stylesheet" href="../css/Form.css">
 </head>
 <body>
 <header>
     <a href="#" class="logo">Spartan Wrath</a>
     <ul>
-        <li> <a href="/" class="active">Home</a> </li>
-        <li> <a href="/Market">Tienda</a> </li>
+        <li> <a href="/">Home</a> </li>
+        <li> <a href="/api/Market">Tienda</a> </li>
         <li> <a href="/AboutUs">About Us</a> </li>
         <li><a href="/private">Perfil</a></li>
     </ul>
 </header>
-<div th:include="template_header_footer.html::header"></div>
     <div class="formulario">
         <div class="form-box">
             <div class="button-box">
@@ -46,7 +45,6 @@
         </form>
     </div>
     </div>
-<div th:include="template_header_footer.html::footer"></div>
 <script>
     var x = document.getElementById("login1");
     var y = document.getElementById("registro");

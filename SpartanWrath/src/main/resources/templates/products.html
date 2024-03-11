@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Spartan Market</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <!--<link rel="stylesheet" href="../css/market.css">-->
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/market.css">-->
     <link rel="icon" type="image/x-icon" href="../../images/spartan-logo.png">
     <link rel="stylesheet" href="../../css/products.css">
 </head>
@@ -17,8 +17,8 @@
         <li> <a href="/api/Market" class="active">Tienda</a> </li>
         <li> <a href="/AboutUs" >About Us</a> </li>
         <li> <a href="/login">Login</a> </li>
-        <li><a href="/private">Perfil</a></li>
-        <div id="cart-icon" onclick="showCart()">🛒 <span id="cart-count">0</span></div>
+        <!--<li><a href="/private">Perfil</a></li>-->
+        <div id="cart-icon" onclick="showCart()">🛒</div>
         <div id="cart" class="hide">
             <ul id="cart-items"></ul>
         </div>
@@ -37,8 +37,8 @@
 <div class="sec" id="sec">
     <h2>Spartan Products</h2>
 </div>
-<!-- Seccion Equipo -->
-<section class="noticia">
+<!-- Seccion Cards -->
+<section class="producto">
     <div class="container">
         <div th:each="product : ${products}" class="card">
             <img class="img" th:src="@{${product.imagen}}" alt="Producto" />
@@ -48,7 +48,7 @@
                 <p class="lead" th:text="${product.descripcion}">Descripción del producto.</p>
                 <p th:text="'Precio: $' + ${product.precio}">Precio: </p>
                 <p th:text="'Categoría: ' + ${product.category}">Categoría: </p>
-                <a href="/ciber/{{id}}">Más Información</a>
+                <a href="/error">Más Información</a>
                 <a th:attr="data-productName=${product.nombre},data-price=${product.precio}" th:onclick="addToCart(this.getAttribute('data-productName') , this.getAttribute('data-price'))">🛒</a>
 
 

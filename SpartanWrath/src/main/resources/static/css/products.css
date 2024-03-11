@@ -17,7 +17,7 @@ body{
 
 }
 /* Noticia */
-section.noticia{
+section.producto{
     content: '';
     position: relative;
     bottom: 0;
@@ -84,6 +84,7 @@ section.noticia{
     text-decoration: none;
     font-weight: 500;
     box-shadow: 0 5px 15px #0a0a23 ;
+    cursor: pointer;
 }
 .img{
     border-radius: 18%;
@@ -99,9 +100,16 @@ section.noticia{
     background-color: #ffffff;
     border: 1px solid #ddd;
     padding: 20px;
+
+}
+#cart-icon{
+    cursor: pointer;
+}
+.hide {
+    display: none;
 }
 #cart-items {
-    color: #000000; /* Cambia el color del texto a negro */
+    color: #0a0a23;
 }
 /* Seccion descripción */
 

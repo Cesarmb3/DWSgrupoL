@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html lang="es"  xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Página de Administrador</title>
     <meta charset="UTF-8">
@@ -10,59 +10,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <!-- MAIN CSS -->
     <link rel="icon" type="image/x-icon" href="../images/infinitumwardens.png">
-    <link rel="stylesheet" href="../css/ciberseguridad.css">
+    <link rel="stylesheet" href="../css/products.css">
 </head>
 <body>
 <!-- Sección Inicio -->
-<header>
-    <a href="#" class="logo">Infinitum Wardens</a>
-    <ul>
-        <li> <a href="/" >Inicio</a> </li>
-        <li> <a href="/ciber"> Ciberseguridad</a> </li>
-        <li> <a href="/is">Ingenieria Software</a> </li>
-        <li> <a href="/addNoticia">Añadir Noticia</a> </li>
-        {{#noUser}}
-        <li> <a href="/login">Login</a> </li>
-        {{/noUser}}
-        <li><a href="/private">Perfil</a></li>
-    </ul>
-</header>
-<section class="top">
-    <img src="../images/stars.png" id="estrellas">
-    <img src="../images/infinitumwardens.png" id="luna">
-    <img src="../images/mountains_behind.png" id="mountains_behind">
-    <h2 id="texto" style="font-size: 5rem">Admin Page</h2>
-    <a href="#sec" id="boton">Grupo 8</a>
-    <img src="../images/mountains_front.png" id="mountains_front">
-</section>
+<div th:include="template_header_footer.html::header"></div>
+<div th:include="template_header_footer.html::image_top"></div>
 <div class="sec" id="sec">
     <h2>Página de Administrador</h2>
-    <p> En esta sección encontrarás las noticias no verificadas para poder publicarlas</p>
+    <p> En esta sección encontrarás las productos no verificadas para poder publicarlos</p>
 </div>
 <!-- Seccion Equipo -->
-<section class="noticia">
+<section class="producto">
     <div class="container">
+        <div th:each="product : ${products}" class="card">
+            <img class="img" th:src="@{${product.imagen}}" alt="Producto" />
 
-        {{#noticiasCiber}}
-        <div class="card">
             <div class="contenido">
-                <h2 class="display-4">{{titular}}</h2>
-                <p class="lead">{{descripcion}}</p>
-                <a href="/admin/verificar/{{id}}">Verificar</a>
+                <h2 th:text="${product.nombre}">Producto</h2>
+                <p class="lead" th:text="${product.descripcion}">Descripción del producto.</p>
+                <p th:text="'Precio: $' + ${product.precio}">Precio: </p>
+                <p th:text="'Categoría: ' + ${product.category}">Categoría: </p>
+                <a href="/error">Más Información</a>
+                <a th:attr="data-productName=${product.nombre},data-price=${product.precio}" th:onclick="addToCart(this.getAttribute('data-productName') , this.getAttribute('data-price'))">🛒</a>
+
+
             </div>
         </div>
-        {{/noticiasCiber}}
-
     </div>
 </section>
 <!--Pie de página-->
-<footer class="pie">
-    <div class="pie2">
-        <img class="footer-logo" src="../images/infinitumwardens.png" alt="logo de IW">
-        <p class="footer-texto">El software de hoy,<br> el futuro de mañana.</p>
-    </div>
-    <div class="derechos-de-autor">Creado por Infinitum Wardens ©</div>
-</footer>
+<div th:include="template_header_footer.html::footer"></div>
 
 <!-- Scripts -->
 <script src="/js/AboutUs.js" defer></script>
