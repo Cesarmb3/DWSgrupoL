@@ -2,7 +2,7 @@ package com.spartanwrath.model;
 
 import java.util.Date;
 
-public class membresia {
+public class Membresia {
 
         private Integer id;
         private String nombre;
@@ -11,11 +11,11 @@ public class membresia {
         private Date fechaalta;
         private Date fechafin;
 
-        public membresia() {
+        public Membresia() {
 
         }
 
-    public membresia(Integer id, String nombre, String descripcion, double precio, Date fechaalta, Date fechafin) {
+    public Membresia(Integer id, String nombre, String descripcion, double precio, Date fechaalta, Date fechafin) {
         super();
             this.id = id;
         this.nombre = nombre;

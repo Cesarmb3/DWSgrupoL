@@ -1,6 +1,6 @@
 package com.spartanwrath.model;
 
-public class user {
+public class User {
     private Integer id;
     private String name;
     private String username;
@@ -13,10 +13,10 @@ public class user {
     private String dni;
     private String payment;
 
-    public user() {
+    public User() {
     }
 
-    public user(Integer id, String name, String username, String email, String address, String phone, String type, String password, String birthday, String dni, String payment) {
+    public User(Integer id, String name, String username, String email, String address, String phone, String type, String password, String birthday, String dni, String payment) {
         this.id = id;
         this.name = name;
         this.username = username;

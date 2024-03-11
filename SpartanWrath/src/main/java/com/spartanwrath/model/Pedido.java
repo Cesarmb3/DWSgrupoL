@@ -2,7 +2,7 @@ package com.spartanwrath.model;
 
 import java.util.Date;
 
-public class pedido {
+public class Pedido {
     private Integer id;
     private String numero;
     private Date fechaCreacion;
@@ -10,11 +10,11 @@ public class pedido {
 
     private double total;
 
-    public pedido() {
+    public Pedido() {
 
     }
 
-    public pedido(Integer id, String numero, Date fechaCreacion, Date fechaRecibido, double total) {
+    public Pedido(Integer id, String numero, Date fechaCreacion, Date fechaRecibido, double total) {
         super();
         this.id = id;
         this.numero = numero;

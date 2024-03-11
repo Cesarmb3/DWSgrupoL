@@ -22,4 +22,7 @@ public class Webcontroller {
     @GetMapping("/Market")
     public String market() { return "market";}
 
+    @GetMapping("/login")
+    public String login() { return "login";}
+
 }

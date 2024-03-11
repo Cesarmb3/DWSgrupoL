@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="../css/aboutus.css">
 </head>
 <body>
-<div th:include="template_header_footer.html::header"></div>
+  <div th:include="template_header_footer.html::header"></div>
 <!--<header>
   <h1>Tienda de Suplementos de Gimnasio</h1>
   <div id="cart-icon" onclick="showCart()">🛒 <span id="cart-count">0</span></div>
@@ -25,39 +25,55 @@
     <li><a href="#">Contacto</a></li>
   </ul>
 </nav>-->
-<div class="container">
-  <div class="product" onclick="addToCart('Producto 1', 10.00)">
-    <img src="imagen1.jpg" alt="Producto 1">
-    <h3>Producto 1</h3>
-    <div class="details">
-      <p>Descripción del producto 1.</p>
-      <p>Precio: $10.00</p>
+  <div class="container">
+    <div class="product" onclick="addToCart('Casco', 10.00)">
+      <img src="../images/casco.jpeg" alt="Casco">
+      <h3>Producto 1</h3>
+      <div class="details">
+        <p>Descripción del producto 1.</p>
+        <p>Precio: 10.00$</p>
     </div>
-  </div>
-  <div class="product" onclick="addToCart('Producto 2', 10.00)">
-    <img src="imagen1.jpg" alt="Producto 1">
-    <h3>Producto 2</h3>
-    <div class="details">
-      <p>Descripción del producto 1.</p>
-      <p>Precio: $10.00</p>
     </div>
-  </div>
-  <div class="product" onclick="addToCart('Producto 3', 10.00)">
-    <img src="imagen1.jpg" alt="Producto 2">
-    <h3>Producto 3</h3>
-    <div class="details">
-      <p>Descripción del producto 1.</p>
-      <p>Precio: $10.00</p>
+    <div class="product" onclick="addToCart('Espinilleras', 12.50)">
+      <img src="../images/espinilleras.jpg" alt="Espinilleras">
+      <h3>Producto 2</h3>
+      <div class="details">
+        <p>Descripción del producto 1.</p>
+        <p>Precio: $12.50</p>
     </div>
-  </div>
-  <div class="product" onclick="addToCart('Producto 4', 10.00)">
-    <img src="imagen1.jpg" alt="Producto 3">
-    <h3>Producto 4</h3>
-    <div class="details">
-      <p>Descripción del producto 1.</p>
-      <p>Precio: $10.00</p>
+   </div>
+    <div class="product" onclick="addToCart('Guantes', 50.00)">
+      <img src="../images/guantes.png" alt="Guantes">
+      <h3>Producto 3</h3>
+      <div class="details">
+        <p>Descripción del producto 1.</p>
+        <p>Precio: $50.00</p>
+      </div>
     </div>
-  </div>
+    <div class="product" onclick="addToCart('Vendas', 5.00)">
+      <img src="../images/vendas.jpg" alt="Vendas">
+      <h3>Producto 4</h3>
+      <div class="details">
+        <p>Descripción del producto 1.</p>
+        <p>Precio: $50.00</p>
+      </div>
+    </div>
+    <div class="product" onclick="addToCart('Bucal', 3.00)">
+      <img src="../images/bucal.jpg" alt="Bucal">
+      <h3>Producto 4</h3>
+      <div class="details">
+        <p>Descripción del producto 1.</p>
+        <p>Precio: $3.00</p>
+      </div>
+    </div>
+    <div class="product" onclick="addToCart('Proteina en polvo', 25.00)">
+      <img src="../images/proteinas.jpg" alt="Proteina en polvo">
+      <h3>Producto 4</h3>
+      <div class="details">
+        <p>Descripción del producto 1.</p>
+        <p>Precio: $25.00</p>
+      </div>
+    </div>
   <!-- Agregar más productos aquí -->
 </div>
 <div th:include="template_header_footer.html::footer"></div>

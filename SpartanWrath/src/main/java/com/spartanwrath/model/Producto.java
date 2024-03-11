@@ -1,25 +1,24 @@
 package com.spartanwrath.model;
 
-import java.util.Date;
+public class Producto {
+    private Integer id;
+    private String nombre;
+    private String descripcion;
+    private String imagen;
+    private double precio;
+    private int cantidad;
 
-public class sala {
-        private Integer id;
-        private String nombre;
-        private String clase;
-        private Date horaclase;
-        private String descripcion;
-        private String imagen;
+    public Producto() {
 
-    public sala() {
     }
 
-    public sala(Integer id, String nombre, String clase, Date horaclase, String descripcion, String imagen) {
+    public Producto(Integer id, String nombre, String descripcion, String imagen, double precio) {
+        super();
         this.id = id;
         this.nombre = nombre;
-        this.clase = clase;
-        this.horaclase = horaclase;
         this.descripcion = descripcion;
         this.imagen = imagen;
+        this.precio = precio;
     }
 
     public Integer getId() {
@@ -38,22 +37,6 @@ public class sala {
         this.nombre = nombre;
     }
 
-    public String getClase() {
-        return clase;
-    }
-
-    public void setClase(String clase) {
-        this.clase = clase;
-    }
-
-    public Date getHoraclase() {
-        return horaclase;
-    }
-
-    public void setHoraclase(Date horaclase) {
-        this.horaclase = horaclase;
-    }
-
     public String getDescripcion() {
         return descripcion;
     }
@@ -70,15 +53,24 @@ public class sala {
         this.imagen = imagen;
     }
 
+    public double getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
+
+
     @Override
     public String toString() {
-        return "sala{" +
+        return "producto{" +
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
-                ", clase='" + clase + '\'' +
-                ", horaclase=" + horaclase +
                 ", descripcion='" + descripcion + '\'' +
                 ", imagen='" + imagen + '\'' +
+                ", precio=" + precio +
+                ", cantidad=" + cantidad +
                 '}';
     }
 }
