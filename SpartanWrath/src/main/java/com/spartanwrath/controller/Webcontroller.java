@@ -1,5 +1,6 @@
 package com.spartanwrath.controller;
 
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -19,10 +20,13 @@ public class Webcontroller {
         return "error";
     }
 
+<<<<<<< Updated upstream
     @GetMapping("/Market")
     public String market() { return "market";}
 
     @GetMapping("/login")
     public String login() { return "login";}
 
+=======
+>>>>>>> Stashed changes
 }

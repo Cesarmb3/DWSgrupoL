@@ -1,5 +1,15 @@
 package com.spartanwrath.model;
+<<<<<<< Updated upstream
+<<<<<<<< Updated upstream:SpartanWrath/src/main/java/com/spartanwrath/model/User.java
 
+========
+import java.util.HashMap;
+import java.util.Map;
+>>>>>>>> Stashed changes:SpartanWrath/src/main/java/com/spartanwrath/model/user.java
+=======
+import java.util.HashMap;
+import java.util.Map;
+>>>>>>> Stashed changes
 public class User {
     private Integer id;
     private String name;
@@ -28,6 +38,7 @@ public class User {
         this.birthday = birthday;
         this.dni = dni;
         this.payment = payment;
+        UserManager.addUser(this);
     }
 
     public Integer getId() {
@@ -120,7 +131,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "user{" +
+        return "User{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", username='" + username + '\'' +
@@ -134,4 +145,5 @@ public class User {
                 ", payment='" + payment + '\'' +
                 '}';
     }
+
 }
