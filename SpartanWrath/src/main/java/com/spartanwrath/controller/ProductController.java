@@ -51,11 +51,7 @@ public class ProductController {
         return "products";
     }
 
-    @PostMapping("/Market/products")
-    public String createProduct(@RequestBody Product product) {
-        productService.createProduct(product);
-        return "redirect:/api/Market/products";
-    }
+
 
     @PutMapping("/Market/products/{id}")
     public String updateProduct(@PathVariable("id") Long id, @RequestBody Product product) {
