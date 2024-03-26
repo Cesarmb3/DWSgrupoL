@@ -1,43 +1,33 @@
 package com.spartanwrath.model;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.Columns;
+
+import java.util.*;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import java.util.HashMap;
-import java.util.Map;
-@Entity
-@Table(name = "Users")
 public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
-    @Column(name = "name")
+
+    private Long id;
     private String name;
-    @Column(name = "username")
     private String username;
-    @Column(name = "email")
     private String email;
-    @Column(name = "address")
     private String address;
-    @Column(name = "phone")
     private String phone;
-    @Column(name = "type")
     private String type;
-    @Column(name = "password")
     private String password;
-    @Column(name = "birthday")
     private String birthday;
-    @Column(name = "dni")
     private String dni;
-    @Column(name = "payment")
     private String payment;
+    private List<Product> products;
+    private List<Membership> memberships;
 
     public User() {
     }
 
-    public User(Integer id, String name, String username, String email, String address, String phone, String type, String password, String birthday, String dni, String payment) {
+    public User(Long id, String name, String username, String email, String address, String phone, String type, String password, String birthday, String dni, String payment) {
         this.id = id;
         this.name = name;
         this.username = username;
@@ -49,14 +39,15 @@ public class User {
         this.birthday = birthday;
         this.dni = dni;
         this.payment = payment;
-        UserManager.addUser(this);
+        this.products = new ArrayList<>();
+        this.memberships = new ArrayList<>();
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -140,6 +131,24 @@ public class User {
         this.payment = payment;
     }
 
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public List<Membership> getMemberships() {
+        return memberships;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
+
+    public void setMemberships(List<Membership> memberships) {
+        this.memberships = memberships;
+    }
+
+
+
     @Override
     public String toString() {
         return "User{" +
@@ -154,7 +163,10 @@ public class User {
                 ", birthday='" + birthday + '\'' +
                 ", dni='" + dni + '\'' +
                 ", payment='" + payment + '\'' +
+                ", products=" + products +
+                ", memberships=" + memberships +
                 '}';
     }
+
 
 }

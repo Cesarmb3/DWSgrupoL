@@ -5,25 +5,18 @@ package com.spartanwrath.model;
 
 import jakarta.persistence.*;
 
-@Entity
-@Table(name = "products")
-public class Product {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    @Column(name = "nombre")
+import java.util.List;
 
+public class Product {
+
+    private Long id;
     private String nombre;
-    @Column(name = "descripcion")
     private String descripcion;
-    @Column(name = "imagen")
     private String imagen;
-    @Column(name = "precio")
     private double precio;
-    @Column(name = "cantidad")
     private Integer cantidad;
-    @Column(name = "category")
     private String category;
+    private List<User> usuarios;
     public Product() {
 
     }
@@ -97,6 +90,14 @@ public class Product {
         this.category = category;
     }
 
+    public List<User> getUsuarios() {
+        return usuarios;
+    }
+
+    public void setUsuarios(List<User> usuarios) {
+        this.usuarios = usuarios;
+    }
+
     @Override
     public String toString() {
         return "Product{" +
@@ -107,6 +108,7 @@ public class Product {
                 ", precio=" + precio +
                 ", cantidad=" + cantidad +
                 ", category='" + category + '\'' +
+                ", usuarios=" + usuarios +
                 '}';
     }
 }

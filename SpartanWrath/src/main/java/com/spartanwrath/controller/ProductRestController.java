@@ -30,7 +30,7 @@ public class ProductRestController {
 
     @PostMapping("/Market/products")
     public ResponseEntity<Product> createProduct(@RequestBody Product product){
-        productServ.createProduct(product);
+        productServ.create(product);
         URI location = fromCurrentRequest().path("/{id}").buildAndExpand(product.getId()).toUri();
 
         return ResponseEntity.created(location).body(product);

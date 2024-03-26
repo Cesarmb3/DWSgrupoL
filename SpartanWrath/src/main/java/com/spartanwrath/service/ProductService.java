@@ -1,51 +1,52 @@
 package com.spartanwrath.service;
 
 import com.spartanwrath.model.Product;
-import com.spartanwrath.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicLong;
+
 
 @Service
 public class ProductService {
 
-    private final ProductRepository productRepository;
-
     @Autowired
-    public ProductService(ProductRepository productRepository) {
-        this.productRepository = productRepository;
+    private ImageService imageService;
+
+    private AtomicLong nextId = new AtomicLong(1L);
+    private ConcurrentHashMap<Long, Product> productos = new ConcurrentHashMap<>();
+
+    public Optional<Product> findById(long id) {
+        if(this.productos.containsKey(id)) {
+            return Optional.of(this.productos.get(id));
+        }
+        return Optional.empty();
     }
 
-    // Método para crear un nuevo producto
-    public Product createProduct(Product product) {
-        return productRepository.save(product);
+    public boolean exist(long id) {
+        return this.productos.containsKey(id);
     }
 
-    // Método para obtener todos los productos
-    public List<Product> getAllProducts() {
-        return productRepository.findAll();
+    public List<Product> findAll() {
+        return this.productos.values().stream().toList();
     }
 
-    // Método para obtener un producto por su ID
-    public Optional<Product> getProductById(Long id) {
-        return productRepository.findById(id);
-    }
+    public Product save(Product product, MultipartFile imageField) {
 
-    public List<Product> getProductsByCategory(String category) {
-        return productRepository.findByCategory(category);
-    }
-    // Método para actualizar un producto
-    public void updateProduct(Product product) {
-        productRepository.save(product);
-    }
+        if (imageField != null && !imageField.isEmpty()){
+            String path = imageService.createImage(imageField);
+            product.setImagen(path);
+        }
 
-    // Método para eliminar un producto por su ID
-    public void deleteProduct(Long id) {
-        productRepository.deleteById(id);
-    }
-    public void deleteAllProduct(){
-        productRepository.deleteAll();
+        if(product.getImagen() == null || product.getImagen().isEmpty()) product.setImagen("no-image.png");
+
+        long id = nextId.getAndIncrement();
+        product.setId(id);
+        productos.put(id, product);
+        return product;
     }
 }

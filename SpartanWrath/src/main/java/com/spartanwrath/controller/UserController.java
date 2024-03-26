@@ -1,6 +1,6 @@
 package com.spartanwrath.controller;
 
-import com.spartanwrath.model.UserManager;
+import com.spartanwrath.config.DatabaseInitializer;
 import com.spartanwrath.model.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -15,15 +15,15 @@ public class UserController {
     @PostMapping("/register")
     public String registerUser(User user) {
         // Agregar el usuario al UserManager
-        UserManager.addUser(user);
+        DatabaseInitializer.addUser(user);
         return "redirect:/login";
     }
 
     @PostMapping("/login")
     public String loginUser(@RequestParam String username, @RequestParam String password) {
         // Verificar las credenciales del usuario
-        if (UserManager.authenticate(username, password)) {
-            if (UserManager.isAdmin(username)) {
+        if (DatabaseInitializer.authenticate(username, password)) {
+            if (DatabaseInitializer.isAdmin(username)) {
                 // Si el usuario es un administrador, redirigir a la página de administrador
                 return "redirect:/admin";
             } else {

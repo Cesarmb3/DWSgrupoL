@@ -1,4 +1,4 @@
 package com.spartanwrath.service;
 
-public class GymService {
+public class ClassService {
 }
