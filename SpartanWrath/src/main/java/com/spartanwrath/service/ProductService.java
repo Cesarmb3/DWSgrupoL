@@ -16,9 +16,11 @@ public class ProductService {
 
     @Autowired
     private ImageService imageService;
-
     private AtomicLong nextId = new AtomicLong(1L);
     private ConcurrentHashMap<Long, Product> productos = new ConcurrentHashMap<>();
+
+    public ProductService() {
+    }
 
     public Optional<Product> findById(long id) {
         if(this.productos.containsKey(id)) {

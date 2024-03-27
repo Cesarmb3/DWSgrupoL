@@ -2,11 +2,15 @@ package com.spartanwrath.controller;
 
 import com.spartanwrath.config.DatabaseInitializer;
 import com.spartanwrath.model.User;
+import com.spartanwrath.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-public class UserController {
+public class LoginController {
+    @Autowired
+    UserService userService;
     @GetMapping("/login")
     public String loginPage() {
         // Mostrar la página de inicio de sesión
@@ -15,10 +19,10 @@ public class UserController {
     @PostMapping("/register")
     public String registerUser(User user) {
         // Agregar el usuario al UserManager
-        DatabaseInitializer.addUser(user);
+        userService.save(user);
         return "redirect:/login";
     }
-
+    /*
     @PostMapping("/login")
     public String loginUser(@RequestParam String username, @RequestParam String password) {
         // Verificar las credenciales del usuario
@@ -35,15 +39,13 @@ public class UserController {
             return "redirect:/login?error";
         }
     }
-
+    */
 
     @GetMapping("/admin")
     public String adminPage() {
         // Mostrar la página de administrador
         return "admin/admin";
     }
-
-
 
     @GetMapping("/register")
     public String registerPage() {

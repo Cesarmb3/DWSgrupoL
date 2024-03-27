@@ -14,6 +14,9 @@ public class UserService {
     private AtomicLong nextId = new AtomicLong(1L);
     private ConcurrentHashMap<Long, User> usuarios = new ConcurrentHashMap<>();
 
+    public UserService() {
+    }
+
     public Optional<User> findById(long id) {
         if(this.usuarios.containsKey(id)) {
             return Optional.of(this.usuarios.get(id));

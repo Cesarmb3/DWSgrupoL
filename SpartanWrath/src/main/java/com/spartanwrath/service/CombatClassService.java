@@ -14,6 +14,9 @@ public class CombatClassService {
     private AtomicLong nextId = new AtomicLong(1L);
     private ConcurrentHashMap<Long, CombatClass> clases = new ConcurrentHashMap<>();
 
+    public CombatClassService() {
+    }
+
     public Optional<CombatClass> findById(long id) {
         if(this.clases.containsKey(id)) {
             return Optional.of(this.clases.get(id));

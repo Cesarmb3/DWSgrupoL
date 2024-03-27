@@ -20,6 +20,9 @@ public class MembershipService {
     private AtomicLong nextId = new AtomicLong(1L);
     private ConcurrentHashMap<Long, Membership> suscripciones = new ConcurrentHashMap<>();
 
+    public MembershipService() {
+    }
+
     public Optional<Membership> findById(long id) {
         if(this.suscripciones.containsKey(id)) {
             return Optional.of(this.suscripciones.get(id));

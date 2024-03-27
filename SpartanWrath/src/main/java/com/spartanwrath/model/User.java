@@ -167,6 +167,4 @@ public class User {
                 ", memberships=" + memberships +
                 '}';
     }
-
-
 }

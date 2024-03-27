@@ -14,7 +14,7 @@
     <a href="/" class="logo">Spartan Wrath</a>
     <ul>
         <li> <a href="/" >Home</a> </li>
-        <li> <a href="/api/Market" class="active">Tienda</a> </li>
+        <li> <a href="/Market" class="active">Tienda</a> </li>
         <li> <a href="/AboutUs" >About Us</a> </li>
         <li> <a href="/login">Login</a> </li>
         <!--<li><a href="/private">Perfil</a></li>-->
@@ -50,8 +50,6 @@
                 <p th:text="'Categoría: ' + ${product.category}">Categoría: </p>
                 <a href="/error">Más Información</a>
                 <a th:attr="data-productName=${product.nombre},data-price=${product.precio}" th:onclick="addToCart(this.getAttribute('data-productName') , this.getAttribute('data-price'))">🛒</a>
-
-
             </div>
         </div>
     </div>

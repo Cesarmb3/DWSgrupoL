@@ -4,7 +4,6 @@ import com.spartanwrath.model.CombatClass;
 import com.spartanwrath.model.Membership;
 import com.spartanwrath.model.Product;
 import com.spartanwrath.model.User;
-import com.spartanwrath.repository.ProductRepository;
 import com.spartanwrath.service.CombatClassService;
 import com.spartanwrath.service.MembershipService;
 import com.spartanwrath.service.ProductService;
@@ -23,6 +22,7 @@ import java.util.Map;
 
 @Component
 public class DatabaseInitializer {
+    /*
     @Autowired
     private UserService usersService;
     @Autowired
@@ -31,12 +31,6 @@ public class DatabaseInitializer {
     private ProductService productService;
     @Autowired
     private CombatClassService combatClassService;
-
-    // Map para almacenar los usuarios
-    private static final Map<String, User> usersMap = new HashMap<>();
-    // Map para almacenar nombres de usuario y contraseñas para autenticación
-    private static final Map<String, String> credentialsMap = new HashMap<>();
-
     // Map para almacenar los usuarios
     @PostConstruct
     public void init() throws IOException {
@@ -44,14 +38,6 @@ public class DatabaseInitializer {
         User user1 = new User(1L, "Nombre1", "usuario1", "email1@example.com", "Dirección1", "123456789", "type1", "contraseña1", "01/01/2000", "123456789X", "pago1");
         User user2 = new User(2L, "Nombre2", "usuario2", "email2@example.com", "Dirección2", "987654321", "type2", "contraseña2", "02/02/2000", "987654321Y", "pago2");
         User admin = new User(3L, "Admin", "admin", "admin@example.com", "Dirección Admin", "999999999", "admin", "admin123", "03/03/2000", "000000000Z", "pagoAdmin");
-
-        usersMap.put(user1.getUsername(), user1);
-        usersMap.put(user2.getUsername(), user2);
-        usersMap.put(admin.getUsername(), admin);
-
-        credentialsMap.put(user1.getUsername(), user1.getPassword());
-        credentialsMap.put(user2.getUsername(), user2.getPassword());
-        credentialsMap.put(admin.getUsername(), admin.getPassword());
 
         //NuEVOS PRODUCTOS
         Product product1 = new Product("Casco", "Casco de proteccion para sparring", "../../images/casco.jpeg", 10.00, 2, "");
@@ -103,7 +89,7 @@ public class DatabaseInitializer {
         combatClassService.save(clase2);
         combatClassService.save(clase3);
     }
-
+    */
 }
 
 
