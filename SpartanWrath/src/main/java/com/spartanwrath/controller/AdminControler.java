@@ -2,7 +2,6 @@ package com.spartanwrath.controller;
 
 import com.spartanwrath.model.CombatClass;
 import com.spartanwrath.model.Membership;
-import com.spartanwrath.model.Product;
 import com.spartanwrath.model.User;
 import com.spartanwrath.service.CombatClassService;
 import com.spartanwrath.service.MembershipService;
@@ -10,7 +9,6 @@ import com.spartanwrath.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -25,25 +23,25 @@ public class AdminControler {
     @Autowired
     CombatClassService combatClassService;
 
-    @GetMapping("/admin/")
+    @GetMapping("/Admin")
     public String showAdmin(){
-        return "admin/admin";
+        return "admin";
     }
 
-    @GetMapping("/admin/users")
+    @GetMapping("/Admin/users")
     public String showUsers(){
-        return "admin/admin/users";
+        return "users";
     }
-    @GetMapping("/admin/combatclasses")
+    @GetMapping("/Admin/combatclasses")
     public String showCombatClasses(){
-        return "admin/admin/combatclasses";
+        return "combatclasses";
     }
-    @GetMapping("/admin/memberships")
+    @GetMapping("/Admin/memberships")
     public String showMemberships(){
-        return "admin/admin/memberships";
+        return "memberships";
     }
 
-    @GetMapping("/admin/users/{id}")
+    @GetMapping("/Admin/users/{id}")
     public String showUser(Model model, @PathVariable long id) {
 
         Optional<User> user = userService.findById(id);
@@ -55,7 +53,7 @@ public class AdminControler {
         }
     }
 
-    @GetMapping("/admin/memberships/{id}")
+    @GetMapping("/Admin/memberships/{id}")
     public String showMembership(Model model, @PathVariable long id) {
 
         Optional<Membership> membership = membershipService.findById(id);
@@ -67,7 +65,7 @@ public class AdminControler {
         }
     }
 
-    @GetMapping("/admin/combatclasses/{id}")
+    @GetMapping("/Admin/combatclasses/{id}")
     public String showCombatClass(Model model, @PathVariable long id) {
 
         Optional<CombatClass> combatClass = combatClassService.findById(id);

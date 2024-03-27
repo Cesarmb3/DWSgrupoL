@@ -1,6 +1,5 @@
 package com.spartanwrath.controller;
 
-import com.spartanwrath.config.DatabaseInitializer;
 import com.spartanwrath.model.User;
 import com.spartanwrath.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
