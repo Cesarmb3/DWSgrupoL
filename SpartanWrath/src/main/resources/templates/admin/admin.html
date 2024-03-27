@@ -1,60 +1,35 @@
 <!DOCTYPE html>
 <html lang="es"  xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Página de Administrador</title>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-    <meta name="description" content="">
-    <meta name="keywords" content="">
-    <meta name="team" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <!-- MAIN CSS -->
-    <link rel="icon" type="image/x-icon" href="../images/infinitumwardens.png">
-    <link rel="stylesheet" href="../css/products.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/market.css">-->
+    <link rel="icon" type="image/x-icon" href="../images/spartan-logo.png">
+    <link rel="stylesheet" href="../css/aboutus.css">
 </head>
 <body>
-<!-- Sección Inicio -->
 <div th:include="template_header_footer.html::header"></div>
-<div th:include="template_header_footer.html::image_top"></div>
-<div class="sec" id="sec">
-    <h2>Página de Administrador</h2>
-    <p> En esta sección encontrarás las productos no verificadas para poder publicarlos</p>
-</div>
-<!-- Seccion Equipo -->
-<section class="producto">
-    <div class="container">
-        <div th:each="product : ${products}" class="card">
-            <img class="img" th:src="@{${product.imagen}}" alt="Producto" />
-
-            <div class="contenido">
-                <h2 th:text="${product.nombre}">Producto</h2>
-                <p class="lead" th:text="${product.descripcion}">Descripción del producto.</p>
-                <p th:text="'Precio: $' + ${product.precio}">Precio: </p>
-                <p th:text="'Categoría: ' + ${product.category}">Categoría: </p>
-                <a href="/error">Más Información</a>
-                <a th:attr="data-productName=${product.nombre},data-price=${product.precio}" th:onclick="addToCart(this.getAttribute('data-productName') , this.getAttribute('data-price'))">🛒</a>
 
 
-            </div>
-        </div>
-    </div>
+<section class="top">
+    <img src="../images/sky.png" id="sky">
+    <img src="../images/cloud.png" id="cloud">
+    <img src="../images/hill_03.png" id="mountains_behind">
+    <img src="../images/hill_02.png" id="mountains_02">
+    <img src="../images/hill_01.png" id="mountains_03">
+    <img src="../images/tree.png" id="tree">
+    <h2 id="texto">Admin</h2>
+    <a href="/api/Admin/productsadmin" id="boton1">Productos</a>
+    <a href="/api/Admin/membershipsadmin" id="boton2">Suscripciones</a>
+    <a href="/api/Admin/combatclassesadmin" id="boton3">Clases</a>
+    <a href="/api/Admin/usersadmin" id="boton4">Usuarios</a>
+
+    <img src="../images/city.png" id="city">
 </section>
-<!--Pie de página-->
 <div th:include="template_header_footer.html::footer"></div>
 
-<!-- Scripts -->
-<script src="/js/AboutUs.js" defer></script>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="/js/vanilla-tilt.js"></script>
-<script>
-    VanillaTilt.init(document.querySelectorAll(".card"), {
-        max: 25,
-        speed: 400,
-        glare: true,
-        "max-glare": 1,
-    });
-</script>
+<script src="../js/aboutus.js"></script>
 </body>
 </html>
