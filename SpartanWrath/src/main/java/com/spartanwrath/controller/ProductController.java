@@ -28,14 +28,14 @@ public class ProductController {
 
     @GetMapping("/Market/products")
     public String showMarket(Model model) {
-        List<Product> productList = productService.getAllProducts();
+        List<Product> productList = productService.findAll();
         model.addAttribute("products", productList);
         return "products";
     }
 
     @GetMapping("/Market/products/{id}")
     public String getProductById(@PathVariable("id") Long id, Model model) {
-        Optional<Product> productOptional = productService.getProductById(id);
+        Optional<Product> productOptional = productService.findById(id);
         if (productOptional.isPresent()) {
             model.addAttribute("product", productOptional.get());
             return "product";
@@ -55,7 +55,7 @@ public class ProductController {
 
     @PutMapping("/Market/products/{id}")
     public String updateProduct(@PathVariable("id") Long id, @RequestBody Product product) {
-        Optional<Product> productData = productService.getProductById(id);
+        Optional<Product> productData = productService.findById(id);
         if (productData.isPresent()) {
             Product _product = productData.get();
             _product.setNombre(product.getNombre());
@@ -73,12 +73,12 @@ public class ProductController {
 
     @DeleteMapping("/Market/products/{id}")
     public String deleteProduct(@PathVariable("id") Long id) {
-        productService.deleteProduct(id);
+        productService.delete(id);
         return "redirect:/api/Market/products";
     }
     @DeleteMapping("/Market/products")
     public String deleteProduct(){
-        productService.deleteAllProduct();
+        productService.deleteAll();
         return "redirect:/api/Market/products";
     }
 }

@@ -7,17 +7,17 @@ import java.util.Arrays;
 import java.util.List;
 
 
-public class Class {
+public class CombatClass {
     private Long id;
     private String name;
     private String description;
     private String turn;
     private List<Membership> memberships;
 
-    public Class() {
+    public CombatClass() {
     }
 
-    public Class(Long id, String name, String description, String turn) {
+    public CombatClass(Long id, String name, String description, String turn) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -59,6 +59,10 @@ public class Class {
 
     public void setTurn(String turn) {
         this.turn = turn;
+    }
+
+    public void setMemberships(List<Membership> memberships) {
+        this.memberships = memberships;
     }
 
     @Override

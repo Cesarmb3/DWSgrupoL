@@ -49,4 +49,8 @@ public class ProductService {
         productos.put(id, product);
         return product;
     }
+
+    public void delete(long id) {
+        this.productos.remove(id);
+    }
 }

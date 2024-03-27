@@ -22,11 +22,11 @@ public class UserService {
     }
 
     public List<User> findByIds(List<Long> ids){
-        List<User> shops = new ArrayList<>();
+        List<User> users = new ArrayList<>();
         for(long id : ids){
-            shops.add(this.usuarios.get(id));
+            users.add(this.usuarios.get(id));
         }
-        return shops;
+        return users;
     }
 
     public boolean exist(long id) {

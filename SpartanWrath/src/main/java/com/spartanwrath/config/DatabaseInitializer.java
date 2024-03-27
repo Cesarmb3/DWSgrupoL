@@ -1,9 +1,11 @@
 package com.spartanwrath.config;
 
+import com.spartanwrath.model.CombatClass;
 import com.spartanwrath.model.Membership;
 import com.spartanwrath.model.Product;
 import com.spartanwrath.model.User;
 import com.spartanwrath.repository.ProductRepository;
+import com.spartanwrath.service.CombatClassService;
 import com.spartanwrath.service.MembershipService;
 import com.spartanwrath.service.ProductService;
 import com.spartanwrath.service.UserService;
@@ -23,12 +25,12 @@ import java.util.Map;
 public class DatabaseInitializer {
     @Autowired
     private UserService usersService;
-
     @Autowired
     private MembershipService membershipService;
-
     @Autowired
     private ProductService productService;
+    @Autowired
+    private CombatClassService combatClassService;
 
     // Map para almacenar los usuarios
     private static final Map<String, User> usersMap = new HashMap<>();
@@ -63,6 +65,12 @@ public class DatabaseInitializer {
         Date date2 = new Date(1,2,2025);
         Membership membership1 = new Membership(1L,"1 mes","Acceso a todas las clases durante 1 mes",50.00, date1,date2,true);
 
+        //NUEVAS CLASES
+        CombatClass clase1 = new CombatClass(1L,"Boxeo","Clase de boxeo para principiantes, necesario guantes y vendas", "Lunes por la mañana");
+        CombatClass clase2 = new CombatClass(2L,"K1","Clase de K1 para competidores, se requiere experiencia previa,espinilleras necesarias", "Lunes por la tarde");
+        CombatClass clase3 = new CombatClass(3L,"Muay Thai","Clase de Muay thai para principiantes, espinilleras no necesarias", "Martes por la mañana");
+
+
         //AÑADIMOS COMPRAS A LOS USUARIOS
         user1.setProducts(List.of(product1, product2));
         product1.getUsuarios().add(user1);
@@ -75,6 +83,8 @@ public class DatabaseInitializer {
         //AÑADIMOS SUSCRIPCIONES A LOS USUARIOS
         user1.setMemberships(List.of(membership1));
 
+        //AÑADIMOS SUSCRIPCIONES A LAS CLASES
+        clase1.setMemberships(List.of(membership1));
 
         usersService.save(user1);
         usersService.save(user2);
@@ -88,30 +98,10 @@ public class DatabaseInitializer {
         productService.save(product6,null);
 
         membershipService.save(membership1);
-    }
 
-    // Método para agregar un usuario
-    public static void addUser(User user) {
-        usersMap.put(user.getUsername(), user);
-        credentialsMap.put(user.getUsername(), user.getPassword());
-    }
-
-    // Método para eliminar un usuario
-    public static void removeUser(String username) {
-        usersMap.remove(username);
-        credentialsMap.remove(username);
-    }
-
-    // Método para verificar si un usuario está autenticado
-    public static boolean authenticate(String username, String password) {
-        String storedPassword = credentialsMap.get(username);
-        return storedPassword != null && storedPassword.equals(password);
-    }
-
-    // Método para verificar si un usuario es administrador
-    public static boolean isAdmin(String username) {
-        User user = usersMap.get(username);
-        return user != null && "admin".equals(user.getType());
+        combatClassService.save(clase1);
+        combatClassService.save(clase2);
+        combatClassService.save(clase3);
     }
 
 }
