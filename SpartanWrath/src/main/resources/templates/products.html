@@ -42,7 +42,7 @@
 <!-- Seccion Cards -->
 <section class="producto">
     <div class="container">
-        <ul th:each="product : ${products}" class="card">
+        <div th:each="product : ${products}" class="card">
             <img class="img" th:src="@{${product.imagen}}" alt="Producto" />
 
             <div class="contenido">
@@ -52,9 +52,11 @@
                 <a href="/Market/products/{{id}}">Más información</a>
                 <a th:attr="data-productName=${product.nombre},data-price=${product.precio}" th:onclick="addToCart(this.getAttribute('data-productName') , this.getAttribute('data-price'))">🛒</a>
             </div>
-        </ul>
+        </div>
+        <a href="/Market/products/formproducto" type="button">Nuevo Producto</a>
     </div>
 </section>
+
 
 
 <!--Pie de página-->
