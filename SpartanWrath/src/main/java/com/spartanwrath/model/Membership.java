@@ -4,14 +4,28 @@ import jakarta.persistence.*;
 
 import java.util.Date;
 
+@Entity
 public class Membership {
+
+        @Id
+        @GeneratedValue(strategy = GenerationType.AUTO)
         private Long id;
+    @Column(name = "nombre")
         private String nombre;
+    @Column(name = "descripcion")
         private String descripcion;
+    @Column(name = "precio")
         private double precio;
+    @Column(name = "fechaalta")
         private Date fechaalta;
+    @Column(name = "fechafin")
         private Date fechafin;
+    @Column(name = "active")
         private boolean active;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
         public Membership() {
 

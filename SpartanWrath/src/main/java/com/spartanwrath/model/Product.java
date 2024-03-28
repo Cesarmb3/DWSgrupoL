@@ -4,18 +4,27 @@ package com.spartanwrath.model;
 
 
 import jakarta.persistence.*;
-
 import java.util.List;
-
+@Entity
+@Table(name = "products")
 public class Product {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column(name = "nombre")
+
     private String nombre;
+    @Column(name = "descripcion")
     private String descripcion;
+    @Column(name = "imagen")
     private String imagen;
+    @Column(name = "precio")
     private double precio;
+    @Column(name = "cantidad")
     private Integer cantidad;
+    @Column(name = "category")
     private String category;
+    @ManyToMany(mappedBy = "products")
     private List<User> usuarios;
     public Product() {
 

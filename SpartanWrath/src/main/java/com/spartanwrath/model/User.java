@@ -7,21 +7,41 @@ import java.util.*;
 
 import java.util.HashMap;
 import java.util.Map;
-
+@Entity
+@Table(name = "Users")
 public class User {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column(name = "name")
     private String name;
+    @Column(name = "username")
     private String username;
+    @Column(name = "email")
     private String email;
+    @Column(name = "address")
     private String address;
+    @Column(name = "phone")
     private String phone;
+    @Column(name = "type")
     private String type;
+    @Column(name = "password")
     private String password;
+    @Column(name = "birthday")
     private String birthday;
+    @Column(name = "dni")
     private String dni;
+    @Column(name = "payment")
     private String payment;
+    @ManyToMany
+    @JoinTable(
+            name = "user_product",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id")
+    )
     private List<Product> products;
+
+    @OneToMany(mappedBy = "user")
     private List<Membership> memberships;
 
     public User() {
