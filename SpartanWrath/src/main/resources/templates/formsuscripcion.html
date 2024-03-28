@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es"  xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nueva Suscripcion</title>
+  <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../css/market.css">-->
+  <link rel="icon" type="image/x-icon" href="../images/spartan-logo.png">
+  <link rel="stylesheet" href="../css/aboutus.css">
+</head>
+<body>
+<div th:include="template_header_footer.html::header"></div>
+<section class="top">
+  <img src="../images/sky.png" id="sky">
+  <img src="../images/cloud.png" id="cloud">
+  <img src="../images/hill_03.png" id="mountains_behind">
+  <img src="../images/hill_02.png" id="mountains_02">
+  <img src="../images/hill_01.png" id="mountains_03">
+  <img src="../images/tree.png" id="tree">
+  <h2 id="texto">My Memberships</h2>
+  <img src="../images/city.png" id="city">
+</section>
+<div class="sec" id="sec">
+  <form action="/nuevasuscripcion" method="post" enctype="multipart/form-data">
+    <h2>Nueva Suscripcion</h2>
+    <div>
+      <label>Nombre: </label>
+      <input name="nombre" placeholder="nombre"/>
+    </div>
+    <div>
+      <label>Descripcion: </label>
+      <textarea name="description" placeholder="description"></textarea>
+    </div>
+    <div>
+      <label>Precio: </label>
+      <input name="precio" type="number"/>
+    </div>
+    <div>
+      <label>Fecha de alta: </label>
+      <input name="Fecha de alta" type="date"/>
+    </div>
+    <div>
+      <label>Fecha de fin: </label>
+      <input name="Fecha de fin" type="date"/>
+    </div>
+    <p>
+      <button onclick="location.href='/'; return false;">Cancel</button>
+      <input type="submit" value="Save"/>
+    </p>
+  </form>
+</div>
+
+<div th:include="template_header_footer.html::footer"></div>
+
+<script src="../js/aboutus.js"></script>
+</body>
+</html>

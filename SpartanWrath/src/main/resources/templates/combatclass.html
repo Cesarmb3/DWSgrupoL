@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spartan Market</title>
+    <title>Membership</title>
     <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/market.css">-->
     <link rel="icon" type="image/x-icon" href="../../images/spartan-logo.png">
@@ -18,11 +18,8 @@
         <li> <a href="/AboutUs" >About Us</a> </li>
         <li> <a href="/login">Login</a> </li>
         <li> <a href="/Admin">Admin</a> </li>
+        <li> <a href="/Mymemberships">Login</a> </li>
         <!--<li><a href="/private">Perfil</a></li>-->
-        <div id="cart-icon" onclick="showCart()">🛒</div>
-        <div id="cart" class="hide">
-            <ul id="cart-items"></ul>
-        </div>
     </ul>
 </header>
 <section class="top">
@@ -32,27 +29,25 @@
     <img src="../../images/hill_02.png" id="mountains_02">
     <img src="../../images/hill_01.png" id="mountains_03">
     <img src="../../images/tree.png" id="tree">
-    <h2 id="texto">My Memberships</h2>
+    <h2 id="texto">Combat Classes</h2>
     <img src="../../images/city.png" id="city">
 </section>
 <div class="sec" id="sec">
-    <h2>Memberships</h2>
+    <h2>Class</h2>
 </div>
 <!-- Seccion Cards -->
 <section class="producto">
     <div class="container">
-        <div th:each="membership : ${memberships}" class="card">
-
+        <div class="card">
             <div class="contenido">
-                <h2 th:text="${membership.nombre}">Suscripción</h2>
-                <p th:text="'Precio: $' + ${membership.precio}">Precio: </p>
-                <a href="/Mymemberships/{{id}}">Más información</a>
+                <h2 th:text="${combatclass.nombre}">Clase</h2>
+                <p th:text="'Precio: $' + ${combatclass.turno}">Turno: </p>
+                <p class="lead" th:text="${combatclass.descripcion}">Descripción de la clase.</p>
+                <a href="/Admin/combatclasses/{{id}}/delete">Borrar</a>
             </div>
         </div>
-        <a href="/Mymemberships/formsuscripcion" type="button">Nueva Suscripción</a>
     </div>
 </section>
-
 
 
 <!--Pie de página-->
@@ -66,7 +61,6 @@
 </footer>
 <!-- Scripts -->
 <script src="../../js/AboutUs.js" defer></script>
-<script src="../../js/market.js"></script>
 <script type="text/javascript" src="../../js/vanilla-tilt.js"></script>
 <script>
     VanillaTilt.init(document.querySelectorAll(".card"), {

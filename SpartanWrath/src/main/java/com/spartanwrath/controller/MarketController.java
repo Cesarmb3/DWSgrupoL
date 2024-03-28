@@ -58,11 +58,12 @@ public class MarketController {
     }
 
     @PostMapping("/nuevoproducto")
-    public String newBookProcess(Model model, Product product) throws IOException {
+    public String newProducto(Model model, Product product, MultipartFile imageField) throws IOException {
+
 
         Product newproduct = productService.createProduct(product);
 
-        model.addAttribute("bookId", newproduct.getId());
+        model.addAttribute("productId", newproduct.getId());
 
         return "redirect:/Market/products/"+newproduct.getId();
     }
