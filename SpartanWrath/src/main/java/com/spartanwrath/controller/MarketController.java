@@ -14,8 +14,12 @@ import java.util.Optional;
 
 @Controller
 public class MarketController {
+
+    private final ProductService productService;
     @Autowired
-    private ProductService productService;
+    public MarketController(ProductService productService) {
+        this.productService = productService;
+    }
 
     @GetMapping("/Market")
     public String showMarket(){
@@ -28,37 +32,66 @@ public class MarketController {
 
     @GetMapping("/Market/products")
     public String showProducts(Model model) {
-        model.addAttribute("products", productService.findAll());
+        List<Product> productList = productService.getAllProducts();
+        model.addAttribute("products", productList);
         return "products";
     }
 
     @GetMapping("/Market/products/{id}")
-    public String showProduct(Model model, @PathVariable long id) {
+    public String showProduct(@PathVariable("id") Long id, Model model) {
 
-        Optional<Product> product = productService.findById(id);
-        if (product.isPresent()) {
-            model.addAttribute("product", product.get());
+        Optional<Product> productOptional = productService.getProductById(id);
+        if (productOptional.isPresent()) {
+            model.addAttribute("product", productOptional.get());
             return "product";
         } else {
-            return "products";
+            return "error";
         }
     }
 
     @GetMapping("/Market/products/{id}/delete")
     public String deletePost(Model model, @PathVariable long id) {
 
-        productService.delete(id);
+        productService.deleteProduct(id);
 
         return "products";
     }
 
     @PostMapping("/nuevoproducto")
-    public String newBookProcess(Model model, Product product, MultipartFile imageField) throws IOException {
+    public String newBookProcess(Model model, Product product) throws IOException {
 
-        Product newproduct = productService.save(product, imageField);
+        Product newproduct = productService.createProduct(product);
 
         model.addAttribute("bookId", newproduct.getId());
 
         return "redirect:/Market/products/"+newproduct.getId();
+    }
+    @PutMapping("/Market/products/{id}")
+    public String updateProduct(@PathVariable("id") Long id, @RequestBody Product product) {
+        Optional<Product> productData = productService.getProductById(id);
+        if (productData.isPresent()) {
+            Product _product = productData.get();
+            _product.setNombre(product.getNombre());
+            _product.setDescripcion(product.getDescripcion());
+            _product.setPrecio(product.getPrecio());
+            _product.setImagen(product.getImagen());
+            _product.setCantidad(product.getCantidad());
+            _product.setCategory(product.getCategory());
+            productService.updateProduct(_product);
+            return "redirect:/api/Market/products";
+        }else {
+            return "redirect:/error";
+        }
+    }
+
+    @DeleteMapping("/Market/products/{id}")
+    public String deleteProduct(@PathVariable("id") Long id) {
+        productService.deleteProduct(id);
+        return "redirect:/api/Market/products";
+    }
+    @DeleteMapping("/Market/products")
+    public String deleteProduct(){
+        productService.deleteAllProduct();
+        return "redirect:/api/Market/products";
     }
 }

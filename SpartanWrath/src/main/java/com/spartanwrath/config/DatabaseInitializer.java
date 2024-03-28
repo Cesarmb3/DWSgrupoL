@@ -10,6 +10,7 @@ import com.spartanwrath.service.ProductService;
 import com.spartanwrath.service.UserService;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -18,7 +19,7 @@ import java.util.List;
 
 
 
-@Component
+@Configuration
 public class DatabaseInitializer {
 
     @Autowired
@@ -64,12 +65,12 @@ public class DatabaseInitializer {
 
         usersService.save(user1);
 
-        productService.save(product1,null);
-        productService.save(product2,null);
-        productService.save(product3,null);
-        productService.save(product4,null);
-        productService.save(product5,null);
-        productService.save(product6,null);
+        productService.createProduct(product1);
+        productService.createProduct(product2);
+        productService.createProduct(product3);
+        productService.createProduct(product4);
+        productService.createProduct(product5);
+        productService.createProduct(product6);
 
         membershipService.save(membership1);
 
