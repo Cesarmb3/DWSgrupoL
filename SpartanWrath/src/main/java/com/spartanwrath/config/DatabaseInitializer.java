@@ -14,15 +14,13 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 
 @Component
 public class DatabaseInitializer {
-    /*
+
     @Autowired
     private UserService usersService;
     @Autowired
@@ -31,13 +29,10 @@ public class DatabaseInitializer {
     private ProductService productService;
     @Autowired
     private CombatClassService combatClassService;
-    // Map para almacenar los usuarios
     @PostConstruct
     public void init() throws IOException {
         //NUEVOS USUARIOS
         User user1 = new User(1L, "Nombre1", "usuario1", "email1@example.com", "Dirección1", "123456789", "type1", "contraseña1", "01/01/2000", "123456789X", "pago1");
-        User user2 = new User(2L, "Nombre2", "usuario2", "email2@example.com", "Dirección2", "987654321", "type2", "contraseña2", "02/02/2000", "987654321Y", "pago2");
-        User admin = new User(3L, "Admin", "admin", "admin@example.com", "Dirección Admin", "999999999", "admin", "admin123", "03/03/2000", "000000000Z", "pagoAdmin");
 
         //NuEVOS PRODUCTOS
         Product product1 = new Product("Casco", "Casco de proteccion para sparring", "../../images/casco.jpeg", 10.00, 2, "");
@@ -58,13 +53,8 @@ public class DatabaseInitializer {
 
 
         //AÑADIMOS COMPRAS A LOS USUARIOS
-        user1.setProducts(List.of(product1, product2));
-        product1.getUsuarios().add(user1);
-        product2.getUsuarios().add(user1);
-
-        user1.setProducts(List.of(product3, product4));
-        product3.getUsuarios().add(user2);
-        product4.getUsuarios().add(user2);
+        product1.setUsuarios(List.of(user1));
+        user1.getProducts().add(product1);
 
         //AÑADIMOS SUSCRIPCIONES A LOS USUARIOS
         user1.setMemberships(List.of(membership1));
@@ -73,8 +63,6 @@ public class DatabaseInitializer {
         clase1.setMemberships(List.of(membership1));
 
         usersService.save(user1);
-        usersService.save(user2);
-        usersService.save(admin);
 
         productService.save(product1,null);
         productService.save(product2,null);
@@ -89,7 +77,6 @@ public class DatabaseInitializer {
         combatClassService.save(clase2);
         combatClassService.save(clase3);
     }
-    */
 }
 
 

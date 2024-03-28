@@ -28,41 +28,9 @@ public class AdminControler {
         return "admin";
     }
 
-    @GetMapping("/Admin/users")
-    public String showUsers(){
-        return "users";
-    }
     @GetMapping("/Admin/combatclasses")
     public String showCombatClasses(){
         return "combatclasses";
-    }
-    @GetMapping("/Admin/memberships")
-    public String showMemberships(){
-        return "memberships";
-    }
-
-    @GetMapping("/Admin/users/{id}")
-    public String showUser(Model model, @PathVariable long id) {
-
-        Optional<User> user = userService.findById(id);
-        if (user.isPresent()) {
-            model.addAttribute("user", user.get());
-            return "user";
-        } else {
-            return "users";
-        }
-    }
-
-    @GetMapping("/Admin/memberships/{id}")
-    public String showMembership(Model model, @PathVariable long id) {
-
-        Optional<Membership> membership = membershipService.findById(id);
-        if (membership.isPresent()) {
-            model.addAttribute("membership", membership.get());
-            return "membership";
-        } else {
-            return "memberships";
-        }
     }
 
     @GetMapping("/Admin/combatclasses/{id}")
