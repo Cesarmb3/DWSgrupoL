@@ -2,6 +2,7 @@ package com.spartanwrath.controller;
 
 import com.spartanwrath.model.CombatClass;
 import com.spartanwrath.model.Membership;
+import com.spartanwrath.model.Product;
 import com.spartanwrath.model.User;
 import com.spartanwrath.service.CombatClassService;
 import com.spartanwrath.service.MembershipService;
@@ -11,7 +12,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.Optional;
 
 @Controller
@@ -44,4 +48,27 @@ public class AdminControler {
             return "combatclasses";
         }
     }
+    @PostMapping("/nuevaclase")
+    public String newCombatClass(Model model, CombatClass combatClass) throws IOException {
+
+        CombatClass newCombatClass = combatClassService.save(combatClass);
+
+        model.addAttribute("combatclassId", newCombatClass.getId());
+
+        return "redirect:/Admin/combatclasses/"+newCombatClass.getId();
+    }
+
+    @GetMapping("/Admin/combatclasses/{id}/delete")
+    public String deleteCombatClass(Model model, @PathVariable long id) {
+
+        combatClassService.delete(id);
+
+        return "combatclasses";
+    }
+
+    @GetMapping("/Admin/combatclasses/formcombatclass")
+    public String showClassForm(){
+        return "formcombatclass";
+    }
+
 }

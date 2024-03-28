@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spartan Market</title>
+    <title>Nueva Suscripcion</title>
     <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/market.css">-->
     <link rel="icon" type="image/x-icon" href="../images/spartan-logo.png">
@@ -18,12 +18,12 @@
     <img src="../images/hill_02.png" id="mountains_02">
     <img src="../images/hill_01.png" id="mountains_03">
     <img src="../images/tree.png" id="tree">
-    <h2 id="texto">Spartan Market</h2>
+    <h2 id="texto">Combat Classes</h2>
     <img src="../images/city.png" id="city">
 </section>
 <div class="sec" id="sec">
-    <form action="/nuevoproducto" method="post" enctype="multipart/form-data">
-        <h2>Nuevo Producto</h2>
+    <form action="/nuevaclase" method="post" enctype="multipart/form-data">
+        <h2>Nueva Clase</h2>
         <div>
             <label>Nombre: </label>
             <input name="nombre" placeholder="nombre"/>
@@ -32,19 +32,9 @@
             <label>Descripcion: </label>
             <textarea name="description" placeholder="description"></textarea>
         </div>
-        <p>Imagen: </p>
-        <input type='file' name='imageField' accept=".jpg, .jpeg" />
         <div>
-            <label>Precio: </label>
-            <input name="precio" type="number"/>
-        </div>
-        <div>
-            <label>Cantidad: </label>
-            <input name="cantidad" type="number"/>
-        </div>
-        <div>
-            <label>Categoría: </label>
-            <input name="categoria" placeholder="categoria"/>
+            <label>Turno: </label>
+            <input name="precio" type="nombre"/>
         </div>
         <p>
             <button onclick="location.href='/'; return false;">Cancel</button>
