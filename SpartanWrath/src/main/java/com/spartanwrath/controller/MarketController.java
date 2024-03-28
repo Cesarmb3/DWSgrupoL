@@ -38,4 +38,12 @@ public class MarketController {
             return "products";
         }
     }
+
+    @GetMapping("/Market/products/{id}/delete")
+    public String deletePost(Model model, @PathVariable long id) {
+
+        productService.delete(id);
+
+        return "products";
+    }
 }
