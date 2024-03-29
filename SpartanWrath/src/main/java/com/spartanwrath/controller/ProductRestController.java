@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
@@ -68,6 +69,65 @@ public class ProductRestController {
 
 
     }
+    @GetMapping("/products/{id}/imagen")
+    public ResponseEntity<Object> downloadImage(@PathVariable long id) throws MalformedURLException{
+        return this.imageServ.createResponseFromImage(PRODUCTS_FOLDER,id);
+    }
 
+    @PutMapping("/products/{id}")
+    public ResponseEntity<Product> updateProduct(@PathVariable long id,@RequestBody Product product){
+        Optional<Product> productOptional = productServ.getProductById(id);
 
+        if (productOptional.isPresent()){
+            Product _product = productOptional.get();
+            _product.setNombre(product.getNombre());
+            _product.setDescripcion(product.getDescripcion());
+            _product.setPrecio(product.getPrecio());
+            _product.setImagen(product.getImagen());
+            _product.setCantidad(product.getCantidad());
+            _product.setCategory(product.getCategory());
+            productServ.updateProduct(_product);
+
+            return ResponseEntity.ok().body(product);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @DeleteMapping("/products")
+    public ResponseEntity<Product> deleteAll() {
+        productServ.deleteAllProduct();
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/products/{id}")
+    public ResponseEntity<Product> deleteProduct(@PathVariable long id) throws IOException{
+        Optional<Product> productOptional = productServ.getProductById(id);
+        if (productOptional.isPresent()){
+            Product product = productOptional.get();
+            productServ.deleteProduct(id);
+            if (product.getImagen() != null){
+                this.imageServ.deleteImage(PRODUCTS_FOLDER,id);
+            }
+            return ResponseEntity.ok().body(product);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @DeleteMapping("/products/{id}/imagen")
+    public ResponseEntity<Object> deleteImage(@PathVariable long id) throws IOException{
+        Optional<Product> productOptional = productServ.getProductById(id);
+        if (productOptional.isPresent()) {
+            Product product = productOptional.get();
+            product.setImagen(null);
+            productServ.updateProduct(product);
+
+            this.imageServ.deleteImage(PRODUCTS_FOLDER,id);
+
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }

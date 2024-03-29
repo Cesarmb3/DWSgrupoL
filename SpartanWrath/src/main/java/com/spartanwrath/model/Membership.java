@@ -2,6 +2,7 @@ package com.spartanwrath.model;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -17,9 +18,9 @@ public class Membership {
     @Column(name = "precio")
         private double precio;
     @Column(name = "fechaalta")
-        private Date fechaalta;
+        private LocalDate fechaalta;
     @Column(name = "fechafin")
-        private Date fechafin;
+        private LocalDate fechafin;
     @Column(name = "active")
         private boolean active;
 
@@ -31,8 +32,7 @@ public class Membership {
 
         }
 
-    public Membership(Long id, String nombre, String descripcion, double precio, Date fechaalta, Date fechafin, boolean active) {
-        super();
+    public Membership(Long id, String nombre, String descripcion, double precio, LocalDate fechaalta, LocalDate fechafin, boolean active, User user) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -40,6 +40,7 @@ public class Membership {
         this.fechaalta = fechaalta;
         this.fechafin = fechafin;
         this.active = active;
+        this.user = user;
     }
 
     public Long getId() {
@@ -74,19 +75,19 @@ public class Membership {
         this.precio = precio;
     }
 
-    public Date getFechaalta() {
+    public LocalDate getFechaalta() {
         return fechaalta;
     }
 
-    public void setFechaalta(Date fechaalta) {
+    public void setFechaalta(LocalDate fechaalta) {
         this.fechaalta = fechaalta;
     }
 
-    public Date getFechafin() {
+    public LocalDate getFechafin() {
         return fechafin;
     }
 
-    public void setFechafin(Date fechafin) {
+    public void setFechafin(LocalDate fechafin) {
         this.fechafin = fechafin;
     }
 
@@ -96,6 +97,14 @@ public class Membership {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override
@@ -108,6 +117,7 @@ public class Membership {
                 ", fechaalta=" + fechaalta +
                 ", fechafin=" + fechafin +
                 ", active=" + active +
+                ", user=" + user +
                 '}';
     }
 }

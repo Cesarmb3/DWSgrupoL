@@ -49,7 +49,7 @@
                 <h2 th:text="${product.nombre}">Producto</h2>
                 <p th:text="'Precio: $' + ${product.precio}">Precio: </p>
                 <p th:text="'Categoría: ' + ${product.category}">Categoría: </p>
-                <a href="/Market/products/{{id}}">Más información</a>
+                <a th:href="@{/Market/products/{id}(id=${product.id})}">Más información</a>
                 <a th:attr="data-productName=${product.nombre},data-price=${product.precio}" th:onclick="addToCart(this.getAttribute('data-productName') , this.getAttribute('data-price'))">🛒</a>
             </div>
         </div>

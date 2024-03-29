@@ -12,8 +12,9 @@ import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
-
+import java.time.LocalDate;
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -43,25 +44,14 @@ public class DatabaseInitializer {
         Product product5 = new Product("Bucal", "Bucal de proteccion para sparring", "../../images/bucal.jpg", 3.00, 2, "");
         Product product6 = new Product("Proteina", "Whey Protein facilita el proceso", "../../images/proteinas.jpg", 24.99, 2, "");
         //NUEVAS SUSCRIPCIONES
-        Date date1 = new Date(1,1,2025);
-        Date date2 = new Date(1,2,2025);
-        Membership membership1 = new Membership(1L,"1 mes","Acceso a todas las clases durante 1 mes",50.00, date1,date2,true);
+        LocalDate date1 = LocalDate.of(2025, 1, 1); // 1 de enero de 2025
+        LocalDate date2 = LocalDate.of(2025, 2, 1); // 1 de febrero de 2025
+        Membership membership1 = new Membership(1L, "1 mes", "Acceso a todas las clases durante 1 mes", 50.00, date1, date2, true,user1);
 
         //NUEVAS CLASES
         CombatClass clase1 = new CombatClass(1L,"Boxeo","Clase de boxeo para principiantes, necesario guantes y vendas", "Lunes por la mañana");
         CombatClass clase2 = new CombatClass(2L,"K1","Clase de K1 para competidores, se requiere experiencia previa,espinilleras necesarias", "Lunes por la tarde");
         CombatClass clase3 = new CombatClass(3L,"Muay Thai","Clase de Muay thai para principiantes, espinilleras no necesarias", "Martes por la mañana");
-
-
-        //AÑADIMOS COMPRAS A LOS USUARIOS
-        product1.setUsuarios(List.of(user1));
-        user1.getProducts().add(product1);
-
-        //AÑADIMOS SUSCRIPCIONES A LOS USUARIOS
-        user1.setMemberships(List.of(membership1));
-
-        //AÑADIMOS SUSCRIPCIONES A LAS CLASES
-        clase1.setMemberships(List.of(membership1));
 
         usersService.save(user1);
 
@@ -77,6 +67,18 @@ public class DatabaseInitializer {
         combatClassService.save(clase1);
         combatClassService.save(clase2);
         combatClassService.save(clase3);
+
+        //AÑADIMOS COMPRAS A LOS USUARIOS
+        product1.setUsuarios(List.of(user1));
+        user1.getProducts().add(product1);
+
+        //AÑADIMOS SUSCRIPCIONES A LOS USUARIOS
+        user1.setMemberships(List.of(membership1));
+
+        //AÑADIMOS SUSCRIPCIONES A LAS CLASES
+        clase1.setMemberships(List.of(membership1));
+
+
     }
 }
 
