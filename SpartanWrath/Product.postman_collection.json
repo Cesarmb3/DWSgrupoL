@@ -75,6 +75,41 @@
 			"response": []
 		},
 		{
+			"name": "GetByCategory",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/products?category=Guantes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"products"
+					],
+					"query": [
+						{
+							"key": "category",
+							"value": "Guantes"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetImage",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/api/products/7/imagen"
+			},
+			"response": []
+		},
+		{
 			"name": "PutId2",
 			"request": {
 				"method": "PUT",
@@ -107,6 +142,15 @@
 				"method": "DELETE",
 				"header": [],
 				"url": "http://localhost:8080/api/products"
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteImage",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "http://localhost:8080/api/products/7/imagen"
 			},
 			"response": []
 		}

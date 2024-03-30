@@ -4,9 +4,8 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.Columns;
 
 import java.util.*;
+import java.util.ArrayList;
 
-import java.util.HashMap;
-import java.util.Map;
 @Entity
 @Table(name = "Users")
 public class User {
@@ -22,8 +21,8 @@ public class User {
     @Column(name = "address")
     private String address;
     @Column(name = "phone")
-    private String phone;
-    @Column(name = "type")
+    private long phone;
+
     private String type;
     @Column(name = "password")
     private String password;
@@ -47,14 +46,13 @@ public class User {
     public User() {
     }
 
-    public User(Long id, String name, String username, String email, String address, String phone, String type, String password, String birthday, String dni, String payment) {
+    public User(Long id, String name, String username, String email, String address, long phone, String type, String password, String birthday, String dni, String payment) {
         this.id = id;
         this.name = name;
         this.username = username;
         this.email = email;
         this.address = address;
         this.phone = phone;
-        this.type = type;
         this.password = password;
         this.birthday = birthday;
         this.dni = dni;
@@ -103,21 +101,15 @@ public class User {
         this.address = address;
     }
 
-    public String getPhone() {
+    public long getPhone() {
         return phone;
     }
 
-    public void setPhone(String phone) {
+    public void setPhone(long phone) {
         this.phone = phone;
     }
 
-    public String getType() {
-        return type;
-    }
 
-    public void setType(String type) {
-        this.type = type;
-    }
 
     public String getPassword() {
         return password;
@@ -186,5 +178,23 @@ public class User {
                 ", products=" + products +
                 ", memberships=" + memberships +
                 '}';
+    }
+
+    public static boolean valid (User user){
+        if (user.name.length()>60){
+            return false;
+        } else if (user.dni.length()>9) {
+            return false;
+        } else if (user.address.length()>40) {
+            return false;
+        } else if (user.phone>999999999) {
+            return false;
+        } else if (user.username!=null && user.username.length()>20) {
+            return false;
+        } else if (user.password.length()>20) {
+            return false;
+        } else if (user.payment.length()>15) {
+            return false;
+        }else return user.email.length() <= 30;
     }
 }

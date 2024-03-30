@@ -1,5 +1,7 @@
 package com.spartanwrath.controller;
 
+import com.spartanwrath.exceptions.InvalidUser;
+import com.spartanwrath.exceptions.UserAlreadyRegister;
 import com.spartanwrath.model.User;
 import com.spartanwrath.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +18,9 @@ public class LoginController {
         return "login";
     }
     @PostMapping("/register")
-    public String registerUser(User user) {
+    public String registerUser(User user) throws UserAlreadyRegister, InvalidUser {
         // Agregar el usuario al UserManager
-        userService.save(user);
+        userService.add(user);
         return "redirect:/login";
     }
     /*

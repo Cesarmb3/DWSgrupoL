@@ -1,4 +1,4 @@
-package com.spartanwrath.controller;
+package com.spartanwrath.restController;
 
 
 import com.spartanwrath.model.Product;
@@ -30,8 +30,17 @@ public class ProductRestController {
     private ImageService imageServ;
 
     @GetMapping("/products")
-    public List<Product> getProducts(){
-        return productServ.getAllProducts();
+    public ResponseEntity<List<Product>> getProducts(@RequestParam(required = false) String category) {
+        if (category != null) {
+            List<Product> products = productServ.getProductsByCategory(category);
+            if (!products.isEmpty()) {
+                return ResponseEntity.ok().body(products);
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } else {
+            return ResponseEntity.ok().body(productServ.getAllProducts());
+        }
     }
 
     @GetMapping("/products/{id}")
@@ -73,6 +82,7 @@ public class ProductRestController {
     public ResponseEntity<Object> downloadImage(@PathVariable long id) throws MalformedURLException{
         return this.imageServ.createResponseFromImage(PRODUCTS_FOLDER,id);
     }
+
 
     @PutMapping("/products/{id}")
     public ResponseEntity<Product> updateProduct(@PathVariable long id,@RequestBody Product product){

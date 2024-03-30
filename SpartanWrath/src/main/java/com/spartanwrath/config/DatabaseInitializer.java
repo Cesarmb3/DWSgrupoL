@@ -1,5 +1,7 @@
 package com.spartanwrath.config;
 
+import com.spartanwrath.exceptions.InvalidUser;
+import com.spartanwrath.exceptions.UserAlreadyRegister;
 import com.spartanwrath.model.CombatClass;
 import com.spartanwrath.model.Membership;
 import com.spartanwrath.model.Product;
@@ -32,14 +34,14 @@ public class DatabaseInitializer {
     @Autowired
     private CombatClassService combatClassService;
     @PostConstruct
-    public void init() throws IOException {
+    public void init() throws IOException, UserAlreadyRegister, InvalidUser {
         //NUEVOS USUARIOS
-        User user1 = new User(1L, "Nombre1", "usuario1", "email1@example.com", "Dirección1", "123456789", "type1", "contraseña1", "01/01/2000", "123456789X", "pago1");
+        User user1 = new User(1L, "Nombre1", "usuario1", "email1@example.com", "Dirección1", 123456789, "type1", "contraseña1", "01/01/2000", "123456789X", "pago1");
 
         //NuEVOS PRODUCTOS
-        Product product1 = new Product("Casco", "Casco de proteccion para sparring", "../../images/casco.jpeg", 10.00, 2, "");
+        Product product1 = new Product("Casco", "Casco de proteccion para sparring", "../../images/casco.jpeg", 10.00, 2, "Cascos");
         Product product2 = new Product("Espinilleras", "Espinilleras de proteccion para Kick Boxing/Muai Thai", "../../images/espinilleras.jpg", 12.00, 2, "");
-        Product product3 = new Product("Guantes", "Guantes de boxeo 16 Oz de piel sintetica", "../../images/guantes.png", 49.99, 2, "");
+        Product product3 = new Product("Guantes", "Guantes de boxeo 16 Oz de piel sintetica", "../../images/guantes.png", 49.99, 2, "Guantes");
         Product product4 = new Product("Vendas", "Vendas 4.5 metros", "../../images/vendas.jpg", 5.99, 2, "");
         Product product5 = new Product("Bucal", "Bucal de proteccion para sparring", "../../images/bucal.jpg", 3.00, 2, "");
         Product product6 = new Product("Proteina", "Whey Protein facilita el proceso", "../../images/proteinas.jpg", 24.99, 2, "");
@@ -53,7 +55,7 @@ public class DatabaseInitializer {
         CombatClass clase2 = new CombatClass(2L,"K1","Clase de K1 para competidores, se requiere experiencia previa,espinilleras necesarias", "Lunes por la tarde");
         CombatClass clase3 = new CombatClass(3L,"Muay Thai","Clase de Muay thai para principiantes, espinilleras no necesarias", "Martes por la mañana");
 
-        usersService.save(user1);
+        usersService.add(user1);
 
         productService.createProduct(product1);
         productService.createProduct(product2);
