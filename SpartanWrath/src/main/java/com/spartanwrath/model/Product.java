@@ -4,6 +4,8 @@ package com.spartanwrath.model;
 
 
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
 import java.util.List;
 @Entity
 @Table(name = "products")
@@ -25,12 +27,13 @@ public class Product {
     @Column(name = "category")
     private String category;
     @ManyToMany(mappedBy = "products")
-    private List<User> usuarios;
+    private List<User> usuarios = new ArrayList<>();
+
     public Product() {
 
     }
 
-    public Product( String nombre, String descripcion, String imagen, double precio, Integer cantidad, String category) {
+    public Product(String nombre, String descripcion, String imagen, double precio, Integer cantidad, String category) {
 
         super();
         this.nombre = nombre;
@@ -39,6 +42,7 @@ public class Product {
         this.precio = precio;
         this.cantidad = cantidad;
         this.category = category;
+        this.usuarios = new ArrayList<>();
 
     }
 
@@ -106,6 +110,8 @@ public class Product {
     public void setUsuarios(List<User> usuarios) {
         this.usuarios = usuarios;
     }
+
+
 
     @Override
     public String toString() {

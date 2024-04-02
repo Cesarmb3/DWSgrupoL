@@ -1,6 +1,7 @@
 package com.spartanwrath.model;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.Columns;
 
 import java.util.*;
@@ -28,7 +29,7 @@ public class User {
     private String password;
     @Column(name = "birthday")
     private String birthday;
-    @Column(name = "dni")
+
     private String dni;
     @Column(name = "payment")
     private String payment;
@@ -46,8 +47,8 @@ public class User {
     public User() {
     }
 
-    public User(Long id, String name, String username, String email, String address, long phone, String type, String password, String birthday, String dni, String payment) {
-        this.id = id;
+    public User( String name, String username, String email, String address, long phone, String type, String password, String birthday, String dni, String payment) {
+        super();
         this.name = name;
         this.username = username;
         this.email = email;
@@ -59,6 +60,19 @@ public class User {
         this.payment = payment;
         this.products = new ArrayList<>();
         this.memberships = new ArrayList<>();
+    }
+
+    public User(String name, String username, String email, String address, long phone, String password, String dni, String payment) {
+        super();
+        this.name = name;
+        this.username = username;
+        this.email = email;
+        this.address = address;
+        this.phone = phone;
+        this.password = password;
+        this.dni = dni;
+        this.payment = payment;
+        this.products = new ArrayList<>();
     }
 
     public Long getId() {

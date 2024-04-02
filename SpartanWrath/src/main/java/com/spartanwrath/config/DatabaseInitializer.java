@@ -16,6 +16,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 import java.time.LocalDate;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -34,10 +35,11 @@ public class DatabaseInitializer {
     @Autowired
     private CombatClassService combatClassService;
     @PostConstruct
-    public void init() throws IOException, UserAlreadyRegister, InvalidUser {
+    public void init() throws IOException,UserAlreadyRegister, InvalidUser {
         //NUEVOS USUARIOS
-        User user1 = new User(1L, "Nombre1", "usuario1", "email1@example.com", "Dirección1", 123456789, "type1", "contraseña1", "01/01/2000", "123456789X", "pago1");
-
+        try {
+        User user1 = new User( "Nombre1", "usuario1", "email1@example.com", "Dirección1", 123456789, "contraseña1",  "12345678M", "pago1");
+        usersService.add(user1);
         //NuEVOS PRODUCTOS
         Product product1 = new Product("Casco", "Casco de proteccion para sparring", "../../images/casco.jpeg", 10.00, 2, "Cascos");
         Product product2 = new Product("Espinilleras", "Espinilleras de proteccion para Kick Boxing/Muai Thai", "../../images/espinilleras.jpg", 12.00, 2, "");
@@ -55,7 +57,7 @@ public class DatabaseInitializer {
         CombatClass clase2 = new CombatClass(2L,"K1","Clase de K1 para competidores, se requiere experiencia previa,espinilleras necesarias", "Lunes por la tarde");
         CombatClass clase3 = new CombatClass(3L,"Muay Thai","Clase de Muay thai para principiantes, espinilleras no necesarias", "Martes por la mañana");
 
-        usersService.add(user1);
+
 
         productService.createProduct(product1);
         productService.createProduct(product2);
@@ -70,16 +72,35 @@ public class DatabaseInitializer {
         combatClassService.save(clase2);
         combatClassService.save(clase3);
 
-        //AÑADIMOS COMPRAS A LOS USUARIOS
-        product1.setUsuarios(List.of(user1));
-        user1.getProducts().add(product1);
+            // Establecer los productos asociados al usuario utilizando setProducts
+            List<Product> userProducts = new ArrayList<>();
+            userProducts.add(product1);  // Agregar el producto a la lista de productos del usuario
+            user1.setProducts(userProducts);  // Establecer la lista completa de productos asociados al usuario
+
+            product1.getUsuarios().add(user1); // Agregar usuario al producto
+
+
+            System.out.println("Usuarios asociados al producto 1:");
+            for (User user : product1.getUsuarios()) {
+                System.out.println(user.getName());
+            }
+
+// Imprimir los productos asociados al usuario
+            System.out.println("Productos asociados al usuario 1:");
+            for (Product product : user1.getProducts()) {
+                System.out.println(product.getNombre());
+            }
+
+
 
         //AÑADIMOS SUSCRIPCIONES A LOS USUARIOS
-        user1.setMemberships(List.of(membership1));
+        /*user1.setMemberships(List.of(membership1));
 
         //AÑADIMOS SUSCRIPCIONES A LAS CLASES
-        clase1.setMemberships(List.of(membership1));
-
+        clase1.setMemberships(List.of(membership1));*/
+    } catch (UserAlreadyRegister | InvalidUser ex){
+            throw ex;
+        }
 
     }
 }
