@@ -38,7 +38,11 @@ public class Product {
         super();
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.imagen = imagen;
+        if (imagen == null || imagen.isEmpty()){
+            this.imagen = "../../images/DefaultProduct.jpg";
+        } else {
+            this.imagen = imagen;
+        }
         this.precio = precio;
         this.cantidad = cantidad;
         this.category = category;
@@ -75,7 +79,7 @@ public class Product {
     }
 
     public void setImagen(String imagen) {
-        this.imagen = imagen;
+            this.imagen = imagen;
     }
 
     public double getPrecio() {

@@ -54,6 +54,14 @@ public class UserService {
         if (!User.valid(user)){
             throw new InvalidUser();
         }
+        validuser.setName(user.getName());
+        validuser.setEmail(user.getEmail());
+        validuser.setUsername(user.getUsername());
+        validuser.setAddress(user.getAddress());
+        validuser.setPhone(user.getPhone());
+        validuser.setDni(user.getDni());
+        validuser.setPayment(user.getPayment());
+        validuser.setPassword(user.getPassword());
         UserRepo.save(validuser);
     }
 

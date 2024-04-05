@@ -49,6 +49,26 @@ public class UserRestController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @PutMapping("/update/{username}")
+    public ResponseEntity<User> updateUser(@PathVariable String username, @RequestBody User upuser) {
+    try {
+        userServ.updateUser(username,upuser);
+        return ResponseEntity.ok().body(upuser);
+    } catch (UserNotFound | InvalidUser e) {
+        return ResponseEntity.notFound().build();
+        }
+    }
+
+    @DeleteMapping("/delete/{username}")
+    public ResponseEntity<User> deleteUser(@PathVariable String username) {
+        try {
+            User user = userServ.delete(username);
+            return ResponseEntity.ok().body(user);
+        } catch (UserNotFound userNotFound){
+            return ResponseEntity.notFound().build();
+        }
+    }
 }
 
 

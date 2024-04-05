@@ -15,13 +15,14 @@ import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
+import static com.spartanwrath.service.ImageService.FILES_FOLDER;
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
 
 @RestController
 @RequestMapping("/api")
 public class ProductRestController {
 
-    private static final String PRODUCTS_FOLDER = "products";
+    /*private static final String PRODUCTS_FOLDER = "products";*/
 
     @Autowired
     private ProductService productServ;
@@ -54,6 +55,9 @@ public class ProductRestController {
 
     @PostMapping("/products")
     public ResponseEntity<Product> createProduct(@RequestBody Product product){
+        if (product.getImagen() == null || product.getImagen().isEmpty()){
+            product.setImagen("../../images/DefaultProduct.jpg");
+        }
         productServ.createProduct(product);
         URI location = fromCurrentRequest().path("/{id}").buildAndExpand(product.getId()).toUri();
 
@@ -65,22 +69,28 @@ public class ProductRestController {
         Optional<Product> productOptional = productServ.getProductById(id);
         if (productOptional.isPresent()) {
             Product product = productOptional.get();
-            URI location = fromCurrentRequest().build().toUri();
+            product.setImagen("../../images/" + imageFile.getOriginalFilename());
 
-            product.setImagen(location.toString());
             productServ.updateProduct(product);
 
-            imageServ.saveImage(PRODUCTS_FOLDER,product.getId(),imageFile);
-            return ResponseEntity.created(location).build();
-        }else {
+            // Guardar la imagen en la carpeta de recursos estáticos
+            imageServ.saveImage(product.getImagen(), imageFile);
+            return ResponseEntity.ok().build();
+        } else {
             return ResponseEntity.notFound().build();
         }
-
-
     }
+
     @GetMapping("/products/{id}/imagen")
-    public ResponseEntity<Object> downloadImage(@PathVariable long id) throws MalformedURLException{
-        return this.imageServ.createResponseFromImage(PRODUCTS_FOLDER,id);
+    public ResponseEntity<Object> downloadImage(@PathVariable long id) throws MalformedURLException {
+        Optional<Product> productOptional = productServ.getProductById(id);
+        if (productOptional.isPresent()) {
+            System.out.println(productOptional.get().getImagen());
+
+            return this.imageServ.createResponseFromImage(String.valueOf(FILES_FOLDER), productOptional.get().getImagen());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
 
@@ -117,7 +127,7 @@ public class ProductRestController {
             Product product = productOptional.get();
             productServ.deleteProduct(id);
             if (product.getImagen() != null){
-                this.imageServ.deleteImage(PRODUCTS_FOLDER,id);
+                this.imageServ.deleteImage(product.getImagen());
             }
             return ResponseEntity.ok().body(product);
         } else {
@@ -130,11 +140,11 @@ public class ProductRestController {
         Optional<Product> productOptional = productServ.getProductById(id);
         if (productOptional.isPresent()) {
             Product product = productOptional.get();
-            product.setImagen(null);
+
+
+            this.imageServ.deleteImage(product.getImagen());
+            product.setImagen("../../images/DefaultProduct.jpg");
             productServ.updateProduct(product);
-
-            this.imageServ.deleteImage(PRODUCTS_FOLDER,id);
-
             return ResponseEntity.noContent().build();
         } else {
             return ResponseEntity.notFound().build();
