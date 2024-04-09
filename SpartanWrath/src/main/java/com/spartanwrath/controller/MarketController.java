@@ -50,7 +50,7 @@ public class MarketController {
     }
 
     @GetMapping("/Market/products/{id}/delete")
-    public String deletePost(Model model, @PathVariable long id) {
+    public String deletePost(Model model, @PathVariable Long id) {
 
         productService.deleteProduct(id);
 

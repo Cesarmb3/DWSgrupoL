@@ -50,7 +50,7 @@
                 <p class="lead" th:text="${product.descripcion}">Descripción del producto.</p>
                 <p th:text="'Precio: $' + ${product.precio}">Precio: </p>
                 <p th:text="'Categoría: ' + ${product.category}">Categoría: </p>
-                <a href="/Market/products/{{id}}/delete">Borrar</a>
+                <a href="{/Market/products/{{id}}/delete}">Borrar</a>
             </div>
         </div>
     </div>
