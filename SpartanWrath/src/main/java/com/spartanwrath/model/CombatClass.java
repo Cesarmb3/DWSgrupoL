@@ -7,18 +7,29 @@ import java.util.Arrays;
 import java.util.List;
 
 
+@Entity
 public class CombatClass {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "description")
     private String description;
+
+    @Column(name = "turn")
     private String turn;
+
+    @OneToMany(mappedBy = "combatClass")
     private List<Membership> memberships;
 
     public CombatClass() {
     }
 
-    public CombatClass(Long id, String name, String description, String turn) {
-        this.id = id;
+    public CombatClass(String name, String description, String turn) {
+        super();
         this.name = name;
         this.description = description;
         this.turn = turn;

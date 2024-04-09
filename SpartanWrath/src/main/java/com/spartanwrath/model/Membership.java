@@ -8,9 +8,9 @@ import java.util.Date;
 @Entity
 public class Membership {
 
-        @Id
-        @GeneratedValue(strategy = GenerationType.AUTO)
-        private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     @Column(name = "nombre")
         private String nombre;
     @Column(name = "descripcion")
@@ -28,12 +28,17 @@ public class Membership {
     @JoinColumn(name = "user_id")
     private User user;
 
-        public Membership() {
+    @ManyToOne
+    @JoinColumn(name = "combatclass_id")
+    private CombatClass combatClass;
+
+    public Membership() {
 
         }
 
-    public Membership(Long id, String nombre, String descripcion, double precio, LocalDate fechaalta, LocalDate fechafin, boolean active, User user) {
-        this.id = id;
+    public Membership( String nombre, String descripcion, double precio, LocalDate fechaalta, LocalDate fechafin, boolean active, User user) {
+
+        super();
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;

@@ -66,7 +66,7 @@
 						{
 							"key": "imageFile",
 							"type": "file",
-							"src": "/C:/Users/Juan_/OneDrive/Escritorio/Practica Ingenieria Software/DWSgrupoL/SpartanWrath/src/main/resources/static/images/espinilleras.jpg"
+							"src": "/C:/Users/Juan_/OneDrive/Escritorio/Practica Ingenieria Software/DWSgrupoL/SpartanWrath/src/main/resources/static/images/guantes2.png"
 						}
 					]
 				},
@@ -132,7 +132,16 @@
 			"request": {
 				"method": "DELETE",
 				"header": [],
-				"url": "http://localhost:8080/api/products/5"
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/api/products/2"
 			},
 			"response": []
 		},

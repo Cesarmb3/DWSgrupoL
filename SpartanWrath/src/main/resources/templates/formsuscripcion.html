@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es"  xmlns:th="http://www.thymeleaf.org">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +10,16 @@
   <link rel="stylesheet" href="../css/aboutus.css">
 </head>
 <body>
-<div th:include="template_header_footer.html::header"></div>
+<header>
+  <a href="/" class="logo">Spartan Wrath</a>
+  <ul>
+    <li> <a href="/" >Inicio</a> </li>
+    <li> <a href="/api/Market">Tienda</a> </li>
+    <li> <a href="/AboutUs">About Us</a> </li>
+    <li> <a href="/login">Login</a> </li>
+    <!--<li><a href="/private">Perfil</a></li>-->
+  </ul>
+</header>
 <section class="top">
   <img src="../images/sky.png" id="sky">
   <img src="../images/cloud.png" id="cloud">
@@ -51,7 +60,13 @@
   </form>
 </div>
 
-<div th:include="template_header_footer.html::footer"></div>
+<footer class="pie">
+  <div class="pie2">
+    <img class="footer-logo" src="../images/spartan-logo.png" alt="logo de SW">
+    <p class="footer-texto">This is<br> SPARTA!</p>
+  </div>
+  <div class="derechos-de-autor">Creado por Grupo L ©</div>
+</footer>
 
 <script src="../js/aboutus.js"></script>
 </body>

@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html lang="es"  xmlns:th="http://www.thymeleaf.org">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Spartan Market</title>
-    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/market.css">-->
-    <link rel="icon" type="image/x-icon" href="../../images/spartan-logo.png">
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">-->
     <link rel="stylesheet" href="../../css/products.css">
+    <link rel="icon" type="image/x-icon" href="../../images/spartan-logo.png">
 </head>
 <body>
 <header>
@@ -42,22 +41,22 @@
 <!-- Seccion Cards -->
 <section class="producto">
     <div class="container">
-        <div th:each="product : ${products}" class="card">
-            <img class="img" th:src="@{${product.imagen}}" alt="Producto" />
+        {{#products}}
+        <div class="card">
+            <img class="img" src="{{imagen}}" alt="Producto" />
 
             <div class="contenido">
-                <h2 th:text="${product.nombre}">Producto</h2>
-                <p th:text="'Precio: $' + ${product.precio}">Precio: </p>
-                <p th:text="'Categoría: ' + ${product.category}">Categoría: </p>
-                <a th:href="@{/Market/products/{id}(id=${product.id})}">Más información</a>
-                <a th:attr="data-productName=${product.nombre},data-price=${product.precio}" th:onclick="addToCart(this.getAttribute('data-productName') , this.getAttribute('data-price'))">🛒</a>
+                <h2>{{nombre}}</h2>
+                <p>Precio: ${{precio}}</p>
+                <p>Categoría: {{category}}</p>
+                <a href="/Market/products/{{id}}">Más información</a>
+                <a href="#" data-productName="{{nombre}}" data-price="{{precio}}" onclick="addToCart(this.getAttribute('data-productName'), this.getAttribute('data-price'))">🛒</a>
             </div>
         </div>
+        {{/products}}
         <a href="/Market/products/formproducto" type="button">Nuevo Producto</a>
     </div>
 </section>
-
-
 
 <!--Pie de página-->
 <footer class="pie">
@@ -69,7 +68,6 @@
     <!--<a href="register.html">Register</a>-->
 </footer>
 <!-- Scripts -->
-<script src="../../js/AboutUs.js" defer></script>
 <script src="../../js/market.js"></script>
 <script type="text/javascript" src="../../js/vanilla-tilt.js"></script>
 <script>

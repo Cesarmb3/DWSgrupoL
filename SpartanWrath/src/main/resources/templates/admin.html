@@ -10,7 +10,18 @@
     <link rel="stylesheet" href="../css/aboutus.css">
 </head>
 <body>
-<div th:include="template_header_footer.html::header"></div>
+<header>
+    <a href="/" class="logo">spartan wrath</a>
+    <ul>
+        <li> <a href="/">Inicio</a> </li>
+        <li> <a href="/Market">Tienda</a> </li>
+        <li> <a href="/AboutUs">About Us</a> </li>
+        <li> <a href="/login">Login</a> </li>
+        <li> <a href="/Admin">Admin</a> </li>
+        <li> <a href="/Mymemberships">My memberships</a> </li>
+        <!--<li><a href="/private">Pagina de usuario</a></li>-->
+    </ul>
+</header>
 
 
 <section class="top">
@@ -25,7 +36,14 @@
     <img src="../images/city.png" id="city">
 </section>
 
-<div th:include="template_header_footer.html::footer"></div>
+<!--Pie de página-->
+<footer class="pie">
+    <div class="pie2">
+        <img class="footer-logo" src="../images/spartan-logo.png" alt="logo de SW">
+        <p class="footer-texto">Errar,<br> es humano.</p>
+    </div>
+    <div class="derechos-de-autor">Creado por Grupo L ©</div>
+</footer>
 
 <script src="../js/aboutus.js"></script>
 </body>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es"  xmlns:th="http://www.thymeleaf.org">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -40,15 +40,14 @@
     <div class="container">
         <div class="card">
             <div class="contenido">
-                <h2 th:text="${combatclass.nombre}">Clase</h2>
-                <p th:text="'Precio: $' + ${combatclass.turno}">Turno: </p>
-                <p class="lead" th:text="${combatclass.descripcion}">Descripción de la clase.</p>
-                <a href="/Admin/combatclasses/{{id}}/delete">Borrar</a>
+                <h2>{{combatclass.nombre}}</h2>
+                <p>Precio: ${{combatclass.turno}}</p>
+                <p class="lead">{{combatclass.descripcion}}</p>
+                <a href="/Admin/combatclasses/{{combatclass.id}}/delete">Borrar</a>
             </div>
         </div>
     </div>
 </section>
-
 
 <!--Pie de página-->
 <footer class="pie">

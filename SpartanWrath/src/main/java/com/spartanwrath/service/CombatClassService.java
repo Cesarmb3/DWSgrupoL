@@ -1,45 +1,39 @@
 package com.spartanwrath.service;
 
 import com.spartanwrath.model.CombatClass;
+import com.spartanwrath.repository.CombatClassRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicLong;
-
 
 @Service
 public class CombatClassService {
-    private AtomicLong nextId = new AtomicLong(1L);
-    private ConcurrentHashMap<Long, CombatClass> clases = new ConcurrentHashMap<>();
+
+    @Autowired
+    private CombatClassRepository ccRepo;
 
     public CombatClassService() {
     }
 
     public Optional<CombatClass> findById(long id) {
-        if(this.clases.containsKey(id)) {
-            return Optional.of(this.clases.get(id));
-        }
-        return Optional.empty();
+        return ccRepo.findById(id);
     }
 
     public boolean exist(long id) {
-        return this.clases.containsKey(id);
+        return ccRepo.existsById(id);
     }
 
     public List<CombatClass> findAll() {
-        return this.clases.values().stream().toList();
+        return ccRepo.findAll();
     }
 
     public CombatClass save(CombatClass clase) {
-        long id = nextId.getAndIncrement();
-        clase.setId(id);
-        clases.put(id, clase);
-        return clase;
+        return ccRepo.save(clase);
     }
 
     public void delete(long id) {
-        this.clases.remove(id);
+        ccRepo.deleteById(id);
     }
 }

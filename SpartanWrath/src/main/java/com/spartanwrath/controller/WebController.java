@@ -17,4 +17,5 @@ public class WebController {
     public String error() {
         return "error";
     }
+
 }

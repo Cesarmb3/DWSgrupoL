@@ -50,12 +50,12 @@ public class DatabaseInitializer {
         //NUEVAS SUSCRIPCIONES
         LocalDate date1 = LocalDate.of(2025, 1, 1); // 1 de enero de 2025
         LocalDate date2 = LocalDate.of(2025, 2, 1); // 1 de febrero de 2025
-        Membership membership1 = new Membership(1L, "1 mes", "Acceso a todas las clases durante 1 mes", 50.00, date1, date2, true,user1);
+        Membership membership1 = new Membership("1 mes", "Acceso a todas las clases durante 1 mes", 50.00, date1, date2, true,user1);
 
         //NUEVAS CLASES
-        CombatClass clase1 = new CombatClass(1L,"Boxeo","Clase de boxeo para principiantes, necesario guantes y vendas", "Lunes por la mañana");
-        CombatClass clase2 = new CombatClass(2L,"K1","Clase de K1 para competidores, se requiere experiencia previa,espinilleras necesarias", "Lunes por la tarde");
-        CombatClass clase3 = new CombatClass(3L,"Muay Thai","Clase de Muay thai para principiantes, espinilleras no necesarias", "Martes por la mañana");
+        CombatClass clase1 = new CombatClass("Boxeo","Clase de boxeo para principiantes, necesario guantes y vendas", "Lunes por la mañana");
+        CombatClass clase2 = new CombatClass("K1","Clase de K1 para competidores, se requiere experiencia previa,espinilleras necesarias", "Lunes por la tarde");
+        CombatClass clase3 = new CombatClass("Muay Thai","Clase de Muay thai para principiantes, espinilleras no necesarias", "Martes por la mañana");
 
 
 

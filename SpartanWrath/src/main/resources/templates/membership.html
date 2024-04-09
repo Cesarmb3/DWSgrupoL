@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es"  xmlns:th="http://www.thymeleaf.org">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -38,19 +38,20 @@
 <!-- Seccion Cards -->
 <section class="producto">
     <div class="container">
+        {{#membership}}
         <div class="card">
             <div class="contenido">
-                <h2 th:text="${membership.nombre}">Suscripción</h2>
-                <p th:text="'Precio: $' + ${membership.precio}">Precio: </p>
-                <p class="lead" th:text="${membership.descripcion}">Descripción de la suscripción.</p>
-                <p th:text="'Categoría: ' + ${membership.fechaalta}">Fecha de alta: </p>
-                <p th:text="'Categoría: ' + ${membership.fechafin}">Fecha de fin: </p>
+                <h2>{{nombre}}</h2>
+                <p>Precio: ${{precio}}</p>
+                <p class="lead">{{descripcion}}</p>
+                <p>Fecha de alta: {{fechaalta}}</p>
+                <p>Fecha de fin: {{fechafin}}</p>
                 <a href="/Mymemberships/{{id}}/delete">Borrar</a>
             </div>
         </div>
+        {{/membership}}
     </div>
 </section>
-
 
 <!--Pie de página-->
 <footer class="pie">
@@ -74,3 +75,4 @@
 </script>
 </body>
 </html>
+

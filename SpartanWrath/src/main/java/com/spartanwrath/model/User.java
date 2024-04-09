@@ -1,5 +1,6 @@
 package com.spartanwrath.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.Columns;
@@ -40,7 +41,7 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "product_id")
     )
     private List<Product> products;
-
+    @JsonIgnore
     @OneToMany(mappedBy = "user")
     private List<Membership> memberships;
 

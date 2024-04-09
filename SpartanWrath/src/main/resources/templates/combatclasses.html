@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es"  xmlns:th="http://www.thymeleaf.org">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -38,13 +38,14 @@
 <!-- Seccion Cards -->
 <section class="producto">
     <div class="container">
-        <div th:each="combatclasses : ${combatclass}" class="card">
-
+        {{#combatclasses}}
+        <div class="card">
             <div class="contenido">
-                <h2 th:text="${combatclass.nombre}">Clase:</h2>
+                <h2>{{nombre}}</h2>
                 <a href="/Admin/combatclasses/{{id}}">Más información</a>
             </div>
         </div>
+        {{/combatclasses}}
         <a href="/Admin/combatclasses/formcombatclass" type="button">Nueva Clase</a>
     </div>
 </section>

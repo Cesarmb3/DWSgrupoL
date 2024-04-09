@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es"  xmlns:th="http://www.thymeleaf.org">
+<html lang="es">
 <head>
     <title>Private</title>
     <meta charset="UTF-8">
@@ -22,8 +22,7 @@
         <li> <a href="/AboutUs">About Us</a> </li>
         <li> <a href="/login">Login</a> </li>
         <li> <a href="/Admin">Admin</a> </li>
-        <li> <a href="/Mymembersips">Login</a> </li>
-
+        <li> <a href="/Mymemberships">Login</a> </li>
         <!--<li><a href="/private">Perfil</a></li>-->
     </ul>
 </header>
@@ -36,29 +35,29 @@
                     <i class="far fa-image"></i>
                 </button>
             </div>
-             <form action="/logout" method="post" >
+            <form action="/logout" method="post" >
                 <input type="hidden" name="_csrf" value=""/>
                 <input class="submit-btn" type="submit" value="Sign Out"/>
             </form>
-
         </div>
     </div>
     <div class="perfil-usuario-body">
         <div class="perfil-usuario-bio">
-            <h2 class="titulo" th:text="'Hola,'+ ${username}"></h2>
-
+            <h2 class="titulo">Hola, {{username}}</h2>
             <!--<div class="logout">
                 <a href="/admin">Admin page</a>
             </div>-->
-
-
-
         </div>
-
     </div>
 </section>
 <!--Pie de página-->
-<div th:include="template_header_footer.html::footer"></div>
-
+<footer class="pie">
+    <div class="pie2">
+        <img class="footer-logo" src="../../images/spartan-logo.png" alt="logo de SW">
+        <p class="footer-texto">Respice post te!<br> Hominem te esse memento.</p>
+    </div>
+    <div class="derechos-de-autor">Creado por Grupo L ©</div>
+    <!--<a href="register.html">Register</a>-->
+</footer>
 </body>
 </html>
