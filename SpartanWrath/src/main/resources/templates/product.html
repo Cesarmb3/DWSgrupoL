@@ -42,19 +42,18 @@
 <!-- Seccion Cards -->
 <section class="producto">
     <div class="container">
-        {{#products}}
-        <div class="card">
-            <img class="img" th:src="@{${imagen}}" alt="Producto" />
 
+        <div class="card">
+            <img class="img" src="../../images/{{product.imagen}}" alt="Producto" />
             <div class="contenido">
-                <h2>{{nombre}}</h2>
-                <p>Precio: ${{precio}}</p>
-                <p>Categoría: {{category}}</p>
-                <p>Descripcion: {{descripcion}}</p>
+                <h2>{{product.nombre}}</h2>
+                <p>Precio: ${{product.precio}}</p>
+                <p>Categoría: {{product.category}}</p>
+                <p>Descripcion: {{product.descripcion}}</p>
                 <a href="{/Market/products/{{id}}/delete}">Borrar</a>
             </div>
         </div>
-        {{/products}}
+
     </div>
 </section>
 

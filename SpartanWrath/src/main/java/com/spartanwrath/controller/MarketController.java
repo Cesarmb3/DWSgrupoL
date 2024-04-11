@@ -1,6 +1,7 @@
 package com.spartanwrath.controller;
 
 import com.spartanwrath.model.Product;
+import com.spartanwrath.service.ImageService;
 import com.spartanwrath.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,8 @@ import java.util.Optional;
 @Controller
 public class MarketController {
 
+    @Autowired
+    private ImageService imageServ;
     private final ProductService productService;
     @Autowired
     public MarketController(ProductService productService) {
@@ -42,7 +45,8 @@ public class MarketController {
 
         Optional<Product> productOptional = productService.getProductById(id);
         if (productOptional.isPresent()) {
-            model.addAttribute("product", productOptional.get());
+            Product product = productOptional.get();
+            model.addAttribute("product", product);
             return "product";
         } else {
             return "error";
@@ -58,16 +62,15 @@ public class MarketController {
     }
 
     @PostMapping("/nuevoproducto")
-    public String newProducto(Model model, Product product, MultipartFile imageField) throws IOException {
-        if (product.getImagen() == null || product.getImagen().isEmpty()){
+    public String newProducto(Product product, @RequestParam(required = false) MultipartFile imageFile) throws IOException {
+        if (imageFile != null && !imageFile.isEmpty()) {
+            product.setImagen("../../images/" + imageFile.getOriginalFilename());
+            imageServ.saveImage(product.getImagen(), imageFile);
+        } else {
             product.setImagen("../../images/DefaultProduct.jpg");
         }
-
-        Product newproduct = productService.createProduct(product);
-
-        model.addAttribute("productId", newproduct.getId());
-
-        return "redirect:/Market/products/"+newproduct.getId();
+        Product newProduct = productService.createProduct(product);
+        return "redirect:/Market/products/" + newProduct.getId();
     }
     @PutMapping("/Market/products/{id}")
     public String updateProduct(@PathVariable("id") Long id, @RequestBody Product product) {
