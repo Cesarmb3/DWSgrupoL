@@ -42,15 +42,15 @@ public class DatabaseInitializer {
         usersService.add(user1);
         //NuEVOS PRODUCTOS
         Product product1 = new Product("Casco", "Casco de proteccion para sparring", "../../images/casco.jpeg", 10.00, 2, "Cascos");
-        Product product2 = new Product("Espinilleras", "Espinilleras de proteccion para Kick Boxing/Muai Thai", "../../images/espinilleras.jpg", 12.00, 2, "");
+        Product product2 = new Product("Espinilleras", "Espinilleras de proteccion para Kick Boxing/Muai Thai", "../../images/espinilleras.jpg", 12.00, 2, "Espinilleras");
         Product product3 = new Product("Guantes", "Guantes de boxeo 16 Oz de piel sintetica", "../../images/guantes.png", 49.99, 2, "Guantes");
-        Product product4 = new Product("Vendas", "Vendas 4.5 metros", "../../images/vendas.jpg", 5.99, 2, "");
-        Product product5 = new Product("Bucal", "Bucal de proteccion para sparring", "../../images/bucal.jpg", 3.00, 2, "");
-        Product product6 = new Product("Proteina", "Whey Protein facilita el proceso", "../../images/proteinas.jpg", 24.99, 2, "");
+        Product product4 = new Product("Vendas", "Vendas 4.5 metros", "../../images/vendas.jpg", 5.99, 2, "Accesorios");
+        Product product5 = new Product("Bucal", "Bucal de proteccion para sparring", "../../images/bucal.jpg", 3.00, 2, "Accesorios");
+        Product product6 = new Product("Proteina", "Whey Protein facilita el proceso", "../../images/proteinas.jpg", 24.99, 2, "Suplementos");
         //NUEVAS SUSCRIPCIONES
-        LocalDate date1 = LocalDate.of(2025, 1, 1); // 1 de enero de 2025
-        LocalDate date2 = LocalDate.of(2025, 2, 1); // 1 de febrero de 2025
-        Membership membership1 = new Membership("1 mes", "Acceso a todas las clases durante 1 mes", 50.00, date1, date2, true,user1);
+        //LocalDate date1 = LocalDate.of(2025, 1, 1); // 1 de enero de 2025
+        //LocalDate date2 = LocalDate.of(2025, 2, 1); // 1 de febrero de 2025
+        Membership membership1 = new Membership("1 mes", "Acceso a todas las clases durante 1 mes", 50.00, null, null, true,user1);
 
         //NUEVAS CLASES
         CombatClass clase1 = new CombatClass("Boxeo","Clase de boxeo para principiantes, necesario guantes y vendas", "Lunes por la mañana");

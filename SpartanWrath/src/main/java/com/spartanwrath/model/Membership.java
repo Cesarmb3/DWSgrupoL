@@ -21,6 +21,7 @@ public class Membership {
         private LocalDate fechaalta;
     @Column(name = "fechafin")
         private LocalDate fechafin;
+
     @Column(name = "active")
         private boolean active;
 

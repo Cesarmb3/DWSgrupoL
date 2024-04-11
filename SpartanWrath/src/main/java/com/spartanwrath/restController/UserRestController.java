@@ -8,6 +8,7 @@ import com.spartanwrath.exceptions.UserNotFound;
 import com.spartanwrath.model.User;
 import com.spartanwrath.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -45,18 +46,23 @@ public class UserRestController {
         try {
             userServ.add(user);
             return ResponseEntity.ok().body(user);
-        } catch (UserAlreadyRegister | InvalidUser e) {
-            return ResponseEntity.notFound().build();
+        } catch (UserAlreadyRegister e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).build();
+        } catch (InvalidUser e) {
+            return ResponseEntity.badRequest().build();
         }
     }
+
 
     @PutMapping("/update/{username}")
     public ResponseEntity<User> updateUser(@PathVariable String username, @RequestBody User upuser) {
     try {
         userServ.updateUser(username,upuser);
         return ResponseEntity.ok().body(upuser);
-    } catch (UserNotFound | InvalidUser e) {
+    } catch (UserNotFound e) {
         return ResponseEntity.notFound().build();
+    } catch (InvalidUser e) {
+        return ResponseEntity.badRequest().build();
         }
     }
 
@@ -65,7 +71,7 @@ public class UserRestController {
         try {
             User user = userServ.delete(username);
             return ResponseEntity.ok().body(user);
-        } catch (UserNotFound userNotFound){
+        } catch (UserNotFound e){
             return ResponseEntity.notFound().build();
         }
     }

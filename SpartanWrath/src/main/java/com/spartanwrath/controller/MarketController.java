@@ -59,7 +59,9 @@ public class MarketController {
 
     @PostMapping("/nuevoproducto")
     public String newProducto(Model model, Product product, MultipartFile imageField) throws IOException {
-
+        if (product.getImagen() == null || product.getImagen().isEmpty()){
+            product.setImagen("../../images/DefaultProduct.jpg");
+        }
 
         Product newproduct = productService.createProduct(product);
 
