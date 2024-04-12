@@ -1,10 +1,17 @@
 package com.spartanwrath.restController;
 
 
+import com.spartanwrath.exceptions.InvalidUser;
+import com.spartanwrath.exceptions.UserNotFound;
 import com.spartanwrath.model.Product;
+import com.spartanwrath.model.User;
 import com.spartanwrath.service.ImageService;
 import com.spartanwrath.service.ProductService;
+import com.spartanwrath.service.UserService;
+import netscape.javascript.JSException;
+import netscape.javascript.JSObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -12,7 +19,9 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import static com.spartanwrath.service.ImageService.FILES_FOLDER;
@@ -23,6 +32,9 @@ import static org.springframework.web.servlet.support.ServletUriComponentsBuilde
 public class ProductRestController {
 
     /*private static final String PRODUCTS_FOLDER = "products";*/
+
+    @Autowired
+    private UserService userServ;
 
     @Autowired
     private ProductService productServ;
@@ -150,4 +162,55 @@ public class ProductRestController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @PostMapping("/products/purchase")
+    public ResponseEntity<String> purchaseProducts(@RequestBody Map<Long, Integer> productQuantityMap) throws UserNotFound, InvalidUser {
+        try {
+            User user = userServ.getUserbyUsername("usuario1");
+            if (user == null) {
+                return ResponseEntity.badRequest().body("El usuario no fue encontrado");
+            }
+
+            double totalAmount = 0.0;
+
+            for (Map.Entry<Long, Integer> entry : productQuantityMap.entrySet()) {
+                Long productId = entry.getKey();
+                Integer quantity = entry.getValue();
+
+                Optional<Product> productOptional = productServ.getProductById(productId);
+                if (productOptional.isPresent()) {
+                    Product product = productOptional.get();
+                    int availableQuantity = product.getCantidad();
+                    if (availableQuantity < quantity) {
+                        return ResponseEntity.badRequest().body("La cantidad para el producto con ID " + productId + " es superior al stock disponible");
+                    }
+                    if (quantity == 0 || quantity < 0){
+                        return ResponseEntity.badRequest().body("Añade productos al carrito antes de continuar");
+                    }
+                    totalAmount += product.getPrecio() * quantity;
+                    product.setCantidad(availableQuantity - quantity);
+                    productServ.updateProduct(product);
+
+                    // Agregar el producto a la lista del usuario
+                    user.getProducts().add(product);
+                } else {
+                    return ResponseEntity.badRequest().body("El producto con ID " + productId + " no se encuentra");
+                }
+            }
+
+            totalAmount = Math.round(totalAmount * 100.0) / 100.0;
+            userServ.updateUser(user.getUsername(), user);
+
+            return ResponseEntity.ok().body("Compra realizada. Precio total: $" + String.format("%.2f", totalAmount));
+        } catch (UserNotFound e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("El usuario no fue encontrado");
+        } catch (InvalidUser e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("El usuario no es válido");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error interno del servidor");
+        }
+    }
+
+
+
 }

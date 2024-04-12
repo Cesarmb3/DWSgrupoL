@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns="">
 <head>
     <title>Products</title>
     <meta charset="UTF-8">
@@ -51,12 +51,13 @@
                 <p>Precio: ${{precio}}</p>
                 <p>Categoría: {{category}}</p>
                 <a href="/Market/products/{{id}}">Más información</a>
-                <a href="#" data-productName="{{nombre}}" data-price="{{precio}}" onclick="addToCart(this.getAttribute('data-productName'), this.getAttribute('data-price'))">🛒</a>
+                <a href="#" data-productName="{{nombre}}" data-price="{{precio}}" data-productId="{{id}}" onclick="addToCart(this.getAttribute('data-productName'), this.getAttribute('data-price'), this.getAttribute('data-productId'))">🛒</a>
             </div>
         </div>
         {{/products}}
         <a href="/Market/products/formproducto" type="button">Nuevo Producto</a>
     </div>
+    <!--<span id="cart-count" class="hide">0</span>-->
 </section>
 
 <!--Pie de página-->

@@ -31,6 +31,9 @@
     <img src="../images/cloud.png" id="cloud">
     <img src="../images/hill_03.png" id="mountains_behind">
     <h2 id="texto" style="right: 550px; color: #0a0a23;z-index: 7">Error 404</h2>
+    {{#error}}
+    <div class="error-message">{{error}}</div>
+    {{/error}}
 </section>
 
 <!--Pie de página-->
@@ -42,6 +45,6 @@
     <div class="derechos-de-autor">Creado por Grupo L ©</div>
 </footer>
 <!-- Scripts -->
-<script src="/js/AboutUs.js" defer></script>
+<script src="../js/AboutUs.js" defer></script>
 </body>
 </html>

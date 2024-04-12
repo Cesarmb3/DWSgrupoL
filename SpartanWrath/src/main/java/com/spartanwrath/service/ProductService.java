@@ -5,7 +5,7 @@ import com.spartanwrath.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -49,5 +49,14 @@ public class ProductService {
     }
     public void deleteAllProduct(){
         productRepository.deleteAll();
+    }
+
+    public List<Product> getProductsByIds(List<Long> productIds){
+        List<Product> products = new ArrayList<>();
+        for (Long productId : productIds){
+            Optional<Product> optionalProduct = productRepository.findById(productId);
+            optionalProduct.ifPresent(products::add);
+        }
+        return products;
     }
 }

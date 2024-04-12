@@ -1,6 +1,7 @@
 let cartItems = [];
 
-function addToCart(productName, price) {
+function addToCart(productName, price, productId) {
+    const url = '/products/purchase';
     console.log("Nombre del producto:", productName);
     console.log("Precio del producto:", price);
     const existingItem = cartItems.find(item => item.name === productName);
@@ -10,7 +11,7 @@ function addToCart(productName, price) {
         existingItem.quantity++;
     } else {
         // Si el producto no está en el carrito, agregarlo con una unidad
-        cartItems.push({ name: productName, price: price, quantity: 1 });
+        cartItems.push({ name: productName, price: price, quantity: 1, productId: productId });
     }
 
     // Actualizar la cantidad de productos en el carrito
@@ -21,7 +22,9 @@ function addToCart(productName, price) {
 
 function updateCartCount() {
     const cartCount = document.getElementById('cart-count');
-    cartCount.innerText = cartItems.reduce((total, item) => total + item.quantity, 0);
+    if (cartCount) {
+        cartCount.innerText = cartItems.reduce((total, item) => total + item.quantity, 0);
+    }
 }
 
 function showCart() {
@@ -31,7 +34,7 @@ function showCart() {
 
     if (cartItems.length === 0) {
         const emptyCartMsg = document.createElement('p');
-        emptyCartMsg.textContent = 'El carrito está vacío';
+        emptyCartMsg.textContent = 'Cart is Empty';
         cartItemsList.appendChild(emptyCartMsg);
     } else {
         cartItems.forEach(item => {
@@ -82,7 +85,39 @@ function showCart() {
 
             cartItemsList.appendChild(li);
         });
+
+        const purchaseButton = document.createElement('button');
+        purchaseButton.textContent = 'Comprar';
+        purchaseButton.addEventListener('click', () => {
+            purchaseItems();
+        });
+        cartItemsList.appendChild(purchaseButton);
     }
 
     cart.classList.toggle('hide');
 }
+function purchaseItems() {
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = '/products/purchase';
+
+    cartItems.forEach(item => {
+        const productIdInput = document.createElement('input');
+        productIdInput.type = 'hidden';
+        productIdInput.name = 'productIds';
+        productIdInput.value = item.productId;
+        form.appendChild(productIdInput);
+
+        const quantityInput = document.createElement('input');
+        quantityInput.type = 'hidden';
+        quantityInput.name = 'quantities';
+        quantityInput.value = item.quantity;
+        form.appendChild(quantityInput);
+    });
+
+    document.body.appendChild(form);
+    form.submit();
+}
+
+
+
