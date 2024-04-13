@@ -32,6 +32,7 @@ public class MembershipService {
         } else if (membership.getDescripcion().contains("3 meses")) {
             membership.setFechafin(membership.getFechaalta().plusMonths(3));
         }
+        membership.setActive(true);
         return memRepo.save(membership);
     }
 

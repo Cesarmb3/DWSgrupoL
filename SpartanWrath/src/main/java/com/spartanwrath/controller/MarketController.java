@@ -42,6 +42,18 @@ public class MarketController {
         return "formproducto";
     }
 
+    @GetMapping("/Market/products/{id}/editarproducto")
+    public String editProduct(@PathVariable("id") Long id,Model model){
+        Optional<Product> productOptional = productService.getProductById(id);
+        if (productOptional.isPresent()) {
+            Product product = productOptional.get();
+            model.addAttribute("product", product);
+            return "editarproducto";
+        } else {
+            return "error";
+        }
+    }
+
     @GetMapping("/Market/products")
     public String showProducts(Model model) {
         List<Product> productList = productService.getAllProducts();
