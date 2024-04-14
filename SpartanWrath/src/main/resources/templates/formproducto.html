@@ -35,27 +35,32 @@
     <form action="/nuevoproducto" method="post" enctype="multipart/form-data">
         <h2>Nuevo Producto</h2>
         <div>
-            <label>Nombre: </label>
+            <label style="color: white">Nombre: </label>
             <input name="nombre" placeholder="nombre"/>
         </div>
+        <br>
         <div>
-            <label>Descripcion: </label>
+            <label style="color: white">Descripcion: </label>
             <textarea name="descripcion" placeholder="descripcion"></textarea>
         </div>
+        <br>
         <p>Imagen: </p>
-        <input type='file' name='imageFile' accept=".jpg, .jpeg" />
+        <input style="color: white" type='file' name='imageFile' accept=".jpg, .jpeg" />
         <div>
-            <label>Precio: </label>
+            <label style="color: white">Precio: </label>
             <input name="precio" type="number"/>
         </div>
+        <br>
         <div>
-            <label>Cantidad: </label>
+            <label style="color: white">Cantidad: </label>
             <input name="cantidad" type="number"/>
         </div>
+        <br>
         <div>
-            <label>Categoría: </label>
+            <label style="color: white">Categoría: </label>
             <input name="category" placeholder="category"/>
         </div>
+        <br>
         <p>
             <button onclick="location.href='/'; return false;">Cancel</button>
             <input type="submit" value="Save"/>
