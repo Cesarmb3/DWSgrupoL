@@ -50,7 +50,7 @@ public class MarketController {
             model.addAttribute("product", product);
             return "editarproducto";
         } else {
-            return "error";
+            return "redirect:/error";
         }
     }
 
@@ -87,34 +87,44 @@ public class MarketController {
         Product newProduct = productService.createProduct(product);
         return "redirect:/Market/products/" + newProduct.getId();
     }
-    @PutMapping("/Market/products/{id}")
-    public String updateProduct(@PathVariable("id") Long id, @RequestBody Product product) {
+    @PostMapping("/Market/products/{id}")
+    public String updateProduct(@PathVariable("id") Long id, Product product, @RequestParam(required = false) MultipartFile imageFile) throws IOException {
         Optional<Product> productData = productService.getProductById(id);
         if (productData.isPresent()) {
             Product _product = productData.get();
             _product.setNombre(product.getNombre());
             _product.setDescripcion(product.getDescripcion());
             _product.setPrecio(product.getPrecio());
-            _product.setImagen(product.getImagen());
             _product.setCantidad(product.getCantidad());
             _product.setCategory(product.getCategory());
+
+            if (imageFile != null && !imageFile.isEmpty()) {
+                _product.setImagen("../../images/" + imageFile.getOriginalFilename());
+                imageServ.saveImage(_product.getImagen(), imageFile);
+            }
+
             productService.updateProduct(_product);
             return "redirect:/Market/products";
-        }else {
+        } else {
             return "redirect:/error";
         }
     }
 
-    @DeleteMapping("/Market/products/{id}/delete")
-    public String deleteProduct(@PathVariable("id") Long id) {
-        productService.deleteProduct(id);
-        return "redirect:/Market/products";
+
+    @GetMapping("/Market/products/{id}/delete")
+    public String deleteProduct(@PathVariable("id") Long id) throws IOException {
+        Optional<Product> productOptional = productService.getProductById(id);
+        if (productOptional.isPresent()) {
+            Product product = productOptional.get();
+            String imageUrl = product.getImagen();
+            imageServ.deleteImage(imageUrl);
+            productService.deleteProduct(id);
+            return "redirect:/Market/products";
+        } else {
+            return "redirect:/error";
+        }
     }
-    @DeleteMapping("/Market/products")
-    public String deleteProduct(){
-        productService.deleteAllProduct();
-        return "redirect:/Market/products";
-    }
+
 
     @PostMapping("/products/purchase")
     public String purchaseProducts(HttpServletRequest request, Model model) {

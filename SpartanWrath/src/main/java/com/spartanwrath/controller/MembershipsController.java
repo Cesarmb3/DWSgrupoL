@@ -6,6 +6,7 @@ import com.spartanwrath.service.MembershipService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,20 +38,20 @@ public class MembershipsController {
         return "mymemberships";
     }
 
-    @GetMapping("/Mymemberships/formsuscripcion")
+    @GetMapping("/Membership/formsuscripcion")
     public String showFormSuscripcion(){
         return "formsuscripcion";
     }
 
-    @GetMapping("/Mymemberships/{id}")
-    public String showMembership(Model model, @PathVariable long id) throws NoSuchMem {
+    @GetMapping("/Membership/{id}")
+    public String showMembership(Model model, @PathVariable Long id) throws NoSuchMem {
 
         Membership membership = membershipService.findById(id);
         if (membership != null) {
-            model.addAttribute("membership", membership.getId());
-            return "mymemberships";
+            model.addAttribute("membership", membership);
+            return "Membership";
         } else {
-            return "mymemberships";
+            return "redirect:/error";
         }
     }
 
@@ -61,14 +62,14 @@ public class MembershipsController {
 
         model.addAttribute("MembershipId", newmembership.getId());
 
-        return "redirect:/Mymembership/"+newmembership.getId();
+        return "redirect:/Membership/" + newmembership.getId();
     }
 
-    @GetMapping("/Mymemberships/{id}/delete")
-    public String deleteMembership(Model model, @PathVariable long id) {
+    @GetMapping("/Membership/{id}/delete")
+    public String deleteMembership(@PathVariable long id) {
 
         membershipService.delete(id);
 
-        return "mymemberships";
+        return "Membership";
     }
 }

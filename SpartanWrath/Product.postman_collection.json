@@ -66,7 +66,7 @@
 						{
 							"key": "imageFile",
 							"type": "file",
-							"src": "/C:/Users/Juan_/OneDrive/Escritorio/Practica Ingenieria Software/DWSgrupoL/SpartanWrath/src/main/resources/static/images/guantes2.png"
+							"src": "/C:/Users/Juan_/OneDrive/Escritorio/Practica Ingenieria Software/DWSgrupoL/SpartanWrath/src/main/resources/static/images/bucal.jpg"
 						}
 					]
 				},
@@ -160,6 +160,24 @@
 				"method": "DELETE",
 				"header": [],
 				"url": "http://localhost:8080/api/products/7/imagen"
+			},
+			"response": []
+		},
+		{
+			"name": "PurchaseProducts",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"1\": 2,\r\n    \"3\": 1,\r\n    \"5\": 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/api/products/purchase"
 			},
 			"response": []
 		}

@@ -1,9 +1,6 @@
 package com.spartanwrath.controller;
 
 import com.spartanwrath.model.CombatClass;
-import com.spartanwrath.model.Membership;
-import com.spartanwrath.model.Product;
-import com.spartanwrath.model.User;
 import com.spartanwrath.service.CombatClassService;
 import com.spartanwrath.service.MembershipService;
 import com.spartanwrath.service.UserService;
@@ -13,13 +10,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
-public class AdminControler {
+public class AdminController {
     @Autowired
     UserService userService;
     @Autowired
@@ -32,20 +29,23 @@ public class AdminControler {
         return "admin";
     }
 
-    @GetMapping("/Admin/combatclasses")
-    public String showCombatClasses(){
-        return "combatclasses";
+    @GetMapping("/Admin/combatclass")
+    public String showCombatClasses(Model model){
+        List<CombatClass> combatClassList = combatClassService.findAll();
+        model.addAttribute("combatclasses",combatClassList);
+        return "combatclass";
     }
 
-    @GetMapping("/Admin/combatclasses/{id}")
-    public String showCombatClass(Model model, @PathVariable long id) {
+    @GetMapping("/Admin/combatclass/{id}")
+    public String showCombatClass(Model model, @PathVariable Long id) {
 
         Optional<CombatClass> combatClass = combatClassService.findById(id);
         if (combatClass.isPresent()) {
-            model.addAttribute("user", combatClass.get());
+            CombatClass combatclass = combatClass.get();
+            model.addAttribute("combatclasses", combatclass);
             return "combatclass";
         } else {
-            return "combatclasses";
+            return "redirect:/error";
         }
     }
     @PostMapping("/nuevaclase")
@@ -53,20 +53,20 @@ public class AdminControler {
 
         CombatClass newCombatClass = combatClassService.save(combatClass);
 
-        model.addAttribute("combatclassId", newCombatClass.getId());
+        model.addAttribute("combatclasses", newCombatClass.getId());
 
-        return "redirect:/Admin/combatclasses/"+newCombatClass.getId();
+        return "redirect:/Admin/combatclass/"+newCombatClass.getId();
     }
 
-    @GetMapping("/Admin/combatclasses/{id}/delete")
-    public String deleteCombatClass(Model model, @PathVariable long id) {
+    @GetMapping("/Admin/combatclass/{id}/delete")
+    public String deleteCombatClass(@PathVariable long id) {
 
         combatClassService.delete(id);
 
-        return "combatclasses";
+        return "redirect:/Admin/combatclass";
     }
 
-    @GetMapping("/Admin/combatclasses/formcombatclass")
+    @GetMapping("/Admin/combatclass/formcombatclass")
     public String showClassForm(){
         return "formcombatclass";
     }

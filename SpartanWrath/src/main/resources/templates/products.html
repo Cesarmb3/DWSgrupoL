@@ -16,11 +16,11 @@
         <li> <a href="/" >Home</a> </li>
         <li> <a href="/Market" class="active">Tienda</a> </li>
         <li> <a href="/AboutUs" >About Us</a> </li>
-        <li> <a href="/login">Login</a> </li>
+        <!--<li> <a href="/login">Login</a> </li>-->
         <li> <a href="/Admin">Admin</a> </li>
-        <li> <a href="/Mymemberships">My Memberships</a> </li>
+        <li> <a href="/Membership">Memberships</a> </li>
         <!--<li><a href="/private">Perfil</a></li>-->
-        <div id="cart-icon" onclick="showCart()">🛒</div>
+        <div id="cart-icon" onclick="showCart()"><i class="bi bi-cart4"></i></div>
         <div id="cart" class="hide">
             <ul id="cart-items"></ul>
         </div>
@@ -51,10 +51,11 @@
                 <p>Precio: ${{precio}}</p>
                 <p>Categoría: {{category}}</p>
                 <a href="/Market/products/{{id}}">Más información</a>
-                <a href="#" data-productName="{{nombre}}" data-price="{{precio}}" data-productId="{{id}}" onclick="addToCart(this.getAttribute('data-productName'), this.getAttribute('data-price'), this.getAttribute('data-productId'))">🛒</a>
+                <a href="#" data-productName="{{nombre}}" data-price="{{precio}}" data-productId="{{id}}" onclick="addToCart(this.getAttribute('data-productName'), this.getAttribute('data-price'), this.getAttribute('data-productId'))"><i class="bi bi-cart4"></i></a>
             </div>
         </div>
         {{/products}}
+
         <a id="boton" href="/Market/products/formproducto" >Nuevo Producto</a>
     </div>
     <!--<span id="cart-count" class="hide">0</span>-->

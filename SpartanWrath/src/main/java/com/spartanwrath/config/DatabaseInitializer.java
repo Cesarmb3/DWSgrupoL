@@ -72,26 +72,11 @@ public class DatabaseInitializer {
         combatClassService.save(clase2);
         combatClassService.save(clase3);
 
-            // Establecer los productos asociados al usuario utilizando setProducts
-            List<Product> userProducts = new ArrayList<>();
-            userProducts.add(product1);  // Agregar el producto a la lista de productos del usuario
-            user1.setProducts(userProducts);  // Establecer la lista completa de productos asociados al usuario
 
-            product1.getUsuarios().add(user1); // Agregar usuario al producto
+        Membership membership2 = new Membership("1 mes", "Acceso a la clase 1 durante 1 mes", 25.00, null, null, true, user1);
+        membership2.setCombatClass(clase1);
 
-
-            System.out.println("Usuarios asociados al producto 1:");
-            for (User user : product1.getUsuarios()) {
-                System.out.println(user.getName());
-            }
-
-// Imprimir los productos asociados al usuario
-            System.out.println("Productos asociados al usuario 1:");
-            for (Product product : user1.getProducts()) {
-                System.out.println(product.getNombre());
-            }
-
-
+        membershipService.save(membership2);
 
         //AÑADIMOS SUSCRIPCIONES A LOS USUARIOS
         /*user1.setMemberships(List.of(membership1));

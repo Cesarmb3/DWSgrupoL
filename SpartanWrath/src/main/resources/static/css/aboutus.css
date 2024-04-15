@@ -409,3 +409,57 @@ section img#tree{
     color: #aeaeae;
     padding: 10px;
 }
+.input-group{
+    top: 150px;
+    width: 280px;
+    transition: 0.5s;
+    left: 50px;
+    justify-content: center;
+    align-items: center;
+    color: #FFA500;
+    }
+.input-group p{
+    color: #FFA500;
+}
+.input-campo{
+    width: 100%;
+    padding: 10px 0;
+    margin: 5px 0;
+    border-left: 0;
+    border-top: 0;
+    border-right: 0;
+    border-bottom: 1px solid #999;
+    outline: none;
+    background: transparent;
+    color: #f1f1f2;
+}
+.submit-btn{
+    width: 85%;
+    padding: 10px 30px;
+    cursor: pointer;
+    display: block;
+    margin: auto;
+    background: linear-gradient(20deg,#f1f1f2 1% ,#FFA500 35%);
+    border: 0;
+    outline: none;
+    border-radius: 30px;
+    color: #f1f1f2;
+}
+.error-message {
+    z-index: 12;
+    top: 75px;
+    position: relative;
+    color: #FFA500;
+    font-family: 'Anton',sans-serif;
+    text-transform: uppercase;
+    font-size: 1.5rem
+}
+.success-message {
+    z-index: 12;
+    top: 75px;
+    position: relative;
+    color: #0a0a23;
+    font-family: 'Anton',sans-serif;
+    text-transform: uppercase;
+    font-size: 2.5rem
+}

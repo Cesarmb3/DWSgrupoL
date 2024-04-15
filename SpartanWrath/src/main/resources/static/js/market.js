@@ -45,18 +45,24 @@ function showCart() {
             const addButton = document.createElement('button');
             const removeButton = document.createElement('button');
 
-            quantitySpan.textContent = `${item.quantity} x ⚫ ${item.name}:`;
-            nameSpan.textContent = ''; // Placeholder para el nombre del producto
-            priceSpan.textContent = `${(item.price * item.quantity).toFixed(2)}€ `;
+            quantitySpan.textContent = `${item.quantity} x `;
+            nameSpan.textContent = `${item.name}`;
+            priceSpan.textContent = `$${(item.price * item.quantity).toFixed(2)} `;
             addButton.textContent = '+';
             removeButton.textContent = '-';
 
+            // Icono del círculo relleno con color naranja
+            const circleIcon = document.createElement('i');
+            circleIcon.classList.add('bi', 'bi-circle-fill');
+            circleIcon.style.color = '#FFA500';
+
             // Añadir espacio entre el precio y los botones
-            const space = document.createTextNode(' ');
+            const space = document.createElement('span');
+            space.textContent = ' ';
 
             addButton.addEventListener('click', () => {
                 item.quantity++;
-                quantitySpan.textContent = `${item.quantity} x ⚫ ${item.name}:`;
+                quantitySpan.textContent = `${item.quantity} x `;
                 updateCartCount();
                 showCart();
             });
@@ -64,7 +70,7 @@ function showCart() {
             removeButton.addEventListener('click', () => {
                 if (item.quantity > 1) {
                     item.quantity--;
-                    quantitySpan.textContent = `${item.quantity} x ⚫ ${item.name}:`;
+                    quantitySpan.textContent = `${item.quantity} x `;
                 } else {
                     // Si solo hay una unidad y se hace clic en "-", eliminar el producto del carrito
                     const index = cartItems.indexOf(item);
@@ -77,6 +83,7 @@ function showCart() {
             });
 
             li.appendChild(quantitySpan);
+            li.appendChild(circleIcon); // Agregar el icono del círculo relleno
             li.appendChild(nameSpan);
             li.appendChild(priceSpan);
             li.appendChild(space); // Agregar espacio
@@ -96,6 +103,8 @@ function showCart() {
 
     cart.classList.toggle('hide');
 }
+
+
 function purchaseItems() {
     const form = document.createElement('form');
     form.method = 'POST';

@@ -1,5 +1,6 @@
 package com.spartanwrath.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -8,6 +9,7 @@ import java.util.List;
 
 
 @Entity
+@Table(name="combatclasses")
 public class CombatClass {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,7 +23,7 @@ public class CombatClass {
 
     @Column(name = "turn")
     private String turn;
-
+    @JsonIgnore
     @OneToMany(mappedBy = "combatClass")
     private List<Membership> memberships;
 

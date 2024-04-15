@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
+@Table(name = "membership")
 public class Membership {
 
     @Id
@@ -111,6 +112,14 @@ public class Membership {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public CombatClass getCombatClass() {
+        return combatClass;
+    }
+
+    public void setCombatClass(CombatClass combatClass) {
+        this.combatClass = combatClass;
     }
 
     @Override

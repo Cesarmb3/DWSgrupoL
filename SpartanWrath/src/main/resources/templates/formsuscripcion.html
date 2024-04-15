@@ -14,7 +14,7 @@
   <a href="/" class="logo">Spartan Wrath</a>
   <ul>
     <li> <a href="/" >Inicio</a> </li>
-    <li> <a href="/api/Market">Tienda</a> </li>
+    <li> <a href="/Market">Tienda</a> </li>
     <li> <a href="/AboutUs">About Us</a> </li>
     <li> <a href="/login">Login</a> </li>
     <!--<li><a href="/private">Perfil</a></li>-->
@@ -27,11 +27,11 @@
   <img src="../images/hill_02.png" id="mountains_02">
   <img src="../images/hill_01.png" id="mountains_03">
   <img src="../images/tree.png" id="tree">
-  <h2 id="texto">My Memberships</h2>
+  <h2 id="texto">Memberships</h2>
   <img src="../images/city.png" id="city">
 </section>
 <div class="sec" id="sec">
-  <form action="/nuevasuscripcion" method="post" enctype="multipart/form-data">
+  <form action="/nuevasuscripcion" method="post" class="input-group" enctype="multipart/form-data">
     <h2>Nueva Suscripcion</h2>
     <div>
       <label>Nombre: </label>
@@ -39,12 +39,14 @@
     </div>
     <div>
       <label>Descripcion: </label>
-      <textarea name="description" placeholder="description"></textarea>
+      <textarea name="descripcion" placeholder="descripcion"></textarea>
     </div>
     <div>
       <label>Precio: </label>
       <input name="precio" type="number"/>
     </div>
+
+
     <p>
       <button onclick="location.href='/'; return false;">Cancel</button>
       <input type="submit" value="Save"/>

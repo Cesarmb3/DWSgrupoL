@@ -3,6 +3,7 @@ package com.spartanwrath.model;
 
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -26,6 +27,7 @@ public class Product {
     private Integer cantidad;
     @Column(name = "category")
     private String category;
+    @JsonIgnore
     @ManyToMany(mappedBy = "products")
     private List<User> usuarios = new ArrayList<>();
 

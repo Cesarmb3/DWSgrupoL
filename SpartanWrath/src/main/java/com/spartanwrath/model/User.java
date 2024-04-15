@@ -34,6 +34,7 @@ public class User {
     private String dni;
     @Column(name = "payment")
     private String payment;
+
     @ManyToMany
     @JoinTable(
             name = "user_product",

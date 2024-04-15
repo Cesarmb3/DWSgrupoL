@@ -15,7 +15,7 @@
 <header>
     <a href="/" class="logo">Spartan Wrath</a>
     <ul>
-        <li> <a href="/" >Inicio</a> </li>
+        <li> <a href="/" >Home</a> </li>
         <!--<li><a href="/private">Perfil</a></li>-->
     </ul>
 </header>
@@ -26,12 +26,13 @@
     <img src="../images/hill_02.png" id="mountains_02">
     <img src="../images/hill_01.png" id="mountains_03">
     <img src="../images/tree.png" id="tree">
-    <h2 id="texto">SUCCESS</h2>
+    <h2 id="texto" style="right: 550px; color: #0a0a23;z-index: 7">Success</h2>
     <img src="../images/city.png" id="city">
+    {{#successMessage}}
+    <div class="success-message">{{successMessage}}</div>
+    {{/successMessage}}
 </section>
-<div class="sec" style="text-align: center">
-    <h1 style="color: white" >SUCCESS</h1>
-</div>
+
 <footer class="pie">
     <div class="pie2">
         <img class="footer-logo" src="../images/spartan-logo.png" alt="logo de SW">
@@ -41,6 +42,6 @@
     <!--<a href="register.html">Register</a>-->
 </footer>
 <!-- Scripts -->
-<script src="/js/AboutUs.js" defer></script>
+
 </body>
 </html>
