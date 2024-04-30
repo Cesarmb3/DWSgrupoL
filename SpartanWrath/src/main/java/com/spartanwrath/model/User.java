@@ -42,9 +42,10 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "product_id")
     )
     private List<Product> products;
-    @JsonIgnore
-    @OneToMany(mappedBy = "user")
-    private List<Membership> memberships;
+
+    @ManyToOne
+    @JoinColumn(name = "membership_id")
+    private Membership membership;
 
     public User() {
     }
@@ -61,7 +62,6 @@ public class User {
         this.dni = dni;
         this.payment = payment;
         this.products = new ArrayList<>();
-        this.memberships = new ArrayList<>();
     }
 
     public User(String name, String username, String email, String address, long phone, String password, String dni, String payment) {
@@ -163,18 +163,17 @@ public class User {
         return products;
     }
 
-    public List<Membership> getMemberships() {
-        return memberships;
+    public Membership getMembership() {
+        return membership;
     }
 
     public void setProducts(List<Product> products) {
         this.products = products;
     }
 
-    public void setMemberships(List<Membership> memberships) {
-        this.memberships = memberships;
+    public void setMembership(Membership membership) {
+        this.membership = membership;
     }
-
 
 
     @Override
@@ -185,14 +184,14 @@ public class User {
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
                 ", address='" + address + '\'' +
-                ", phone='" + phone + '\'' +
+                ", phone=" + phone +
                 ", type='" + type + '\'' +
                 ", password='" + password + '\'' +
                 ", birthday='" + birthday + '\'' +
                 ", dni='" + dni + '\'' +
                 ", payment='" + payment + '\'' +
                 ", products=" + products +
-                ", memberships=" + memberships +
+                ", membership=" + membership +
                 '}';
     }
 

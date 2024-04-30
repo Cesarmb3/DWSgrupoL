@@ -20,7 +20,7 @@
         <li> <a href="/Admin">Admin</a> </li>
         <li> <a href="/Membership">Membership</a> </li>
         <!--<li><a href="/private">Perfil</a></li>-->
-        <div id="cart-icon" onclick="showCart()">🛒</div>
+        <div id="cart-icon" onclick="showCart()"><i class="bi bi-cart4"></i></div>
         <div id="cart" class="hide">
             <ul id="cart-items"></ul>
         </div>
@@ -44,7 +44,7 @@
     <div class="container">
 
         <div class="card">
-            <img class="img" src="../../images/{{product.imagen}}" alt="Producto" />
+            <img class="img" src="data:image/jpeg;base64, {{base64Image}}" alt="Producto" />
             <div class="contenido">
                 <h2>{{product.nombre}}</h2>
                 <p>Precio: ${{product.precio}}</p>
@@ -70,6 +70,7 @@
 </footer>
 <!-- Scripts -->
 <script src="../../js/AboutUs.js" defer></script>
+<script src="../../js/market.js"></script>
 <script type="text/javascript" src="../../js/vanilla-tilt.js"></script>
 <script>
     VanillaTilt.init(document.querySelectorAll(".card"), {

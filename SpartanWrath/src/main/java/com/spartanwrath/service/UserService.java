@@ -62,6 +62,7 @@ public class UserService {
         validuser.setDni(user.getDni());
         validuser.setPayment(user.getPayment());
         validuser.setPassword(user.getPassword());
+        validuser.setMembership(user.getMembership());
         UserRepo.save(validuser);
     }
 

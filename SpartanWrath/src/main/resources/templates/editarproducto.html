@@ -43,7 +43,7 @@
             <textarea name="descripcion" placeholder="descripcion">{{product.descripcion}}</textarea>
         </div>
         <p>Imagen: </p>
-        <img src="../{{product.imagen}}" alt="Imagen del Producto" width="200" />
+        <img src="data:image/jpeg;base64, {{base64Image}}" alt="Imagen del Producto" width="200" />
         <input type='file' name='imageFile' accept=".jpg, .jpeg"/>
         <div>
             <label>Precio: </label>

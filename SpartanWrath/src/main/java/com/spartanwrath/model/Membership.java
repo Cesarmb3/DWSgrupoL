@@ -1,9 +1,12 @@
 package com.spartanwrath.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "membership")
@@ -25,10 +28,9 @@ public class Membership {
 
     @Column(name = "active")
         private boolean active;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JsonIgnore
+    @OneToMany
+    private List<User> users;
 
     @ManyToOne
     @JoinColumn(name = "combatclass_id")
@@ -38,7 +40,7 @@ public class Membership {
 
         }
 
-    public Membership( String nombre, String descripcion, double precio, LocalDate fechaalta, LocalDate fechafin, boolean active, User user) {
+    public Membership( String nombre, String descripcion, double precio, LocalDate fechaalta, LocalDate fechafin, boolean active) {
 
         super();
         this.nombre = nombre;
@@ -47,7 +49,6 @@ public class Membership {
         this.fechaalta = fechaalta;
         this.fechafin = fechafin;
         this.active = active;
-        this.user = user;
     }
 
     public Long getId() {
@@ -106,12 +107,12 @@ public class Membership {
         this.active = active;
     }
 
-    public User getUser() {
-        return user;
+    public List<User> getUser() {
+        return users;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser(List<User> users) {
+        this.users = users;
     }
 
     public CombatClass getCombatClass() {
@@ -132,7 +133,8 @@ public class Membership {
                 ", fechaalta=" + fechaalta +
                 ", fechafin=" + fechafin +
                 ", active=" + active +
-                ", user=" + user +
+                ", users=" + users +
+                ", combatClass=" + combatClass +
                 '}';
     }
 }
