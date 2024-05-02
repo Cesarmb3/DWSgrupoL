@@ -31,11 +31,15 @@ public class ImageService {
     @Value("${image.upload.dir}")
     private String uploadDir;
 
+    private static final long MAX_FILE_SIZE_BYTES = 10 * 1024 * 1024;
     private static final List<String> ALLOWED_EXTENSIONS = Arrays.asList("jpg","jpeg","png","gif");
 
     public String saveImage(byte[] imageBytes, String originalFileName) throws IOException {
         if (imageBytes == null || imageBytes.length == 0) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Image is empty");
+        }
+        if (imageBytes.length > MAX_FILE_SIZE_BYTES){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Tamaño de imagen no permitido");
         }
         String fileExtension = getFileExtension(originalFileName);
         if (!imageExtensionAllowed(fileExtension)){
@@ -57,7 +61,7 @@ public class ImageService {
     }
 
     public byte[] getDefault() throws IOException {
-        String ImageName = "DefaultProduct.jpg";
+        String ImageName = getDefaultName();
         Path defaultImagePath = Paths.get(uploadDir).resolve(ImageName);
         if (!Files.exists(defaultImagePath)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Default image not found");
@@ -110,6 +114,7 @@ public class ImageService {
 
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         ImageIO.write(sanitizedImage,"jpg",outputStream);
+        System.out.println("imagen sanitizada");
 
         byte [] sanitizedImageBytes = outputStream.toByteArray();
         outputStream.close();

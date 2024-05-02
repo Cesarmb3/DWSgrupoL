@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
+import org.owasp.html.PolicyFactory;
+import org.owasp.html.Sanitizers;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -40,6 +42,7 @@ public class ProductService {
     // Método para crear un nuevo producto
     public Product createProduct(Product product) throws IOException {
 
+        product = sanitizeProduct(product);
         if(product.getImagen() == null || product.getImagen().length == 0){
             byte[] defaultImageData = imageService.getDefault();
             product.setImagen(defaultImageData);
@@ -67,6 +70,7 @@ public class ProductService {
     }
     // Método para actualizar un producto
     public void updateProduct(Product product) {
+        product = sanitizeProduct(product);
         productRepository.save(product);
     }
 
@@ -85,6 +89,26 @@ public class ProductService {
             optionalProduct.ifPresent(products::add);
         }
         return products;
+    }
+
+    public Product sanitizeProduct(Product product){
+        PolicyFactory policy = Sanitizers.FORMATTING.and(Sanitizers.BLOCKS);
+        String nombreSanitized = policy.sanitize(product.getNombre());
+        product.setNombre(nombreSanitized);
+        String descripcionSanitized = policy.sanitize(product.getDescripcion());
+        product.setDescripcion(descripcionSanitized);
+        String categorySanitized = policy.sanitize(product.getCategory());
+        product.setCategory(categorySanitized);
+        double precioMaximo = 10000;
+        int cantidadMaxima = 1000;
+        if (product.getPrecio() < 0 || product.getPrecio() > precioMaximo){
+            product.setPrecio(0);
+        }
+        if (product.getCantidad() < 0 || product.getCantidad() > cantidadMaxima){
+            product.setCantidad(0);
+        }
+
+        return product;
     }
 
 }

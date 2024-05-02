@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../css/market.css">-->
     <link rel="icon" type="image/x-icon" href="../../../images/spartan-logo.png">
     <link rel="stylesheet" href="../../../css/aboutus.css">
+    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.0-rc.2/dist/quill.snow.css" rel="stylesheet" />
 </head>
 <body>
 <header>
@@ -38,11 +39,12 @@
             <label>Nombre: </label>
             <input name="nombre" placeholder="nombre" value="{{product.nombre}}"/>
         </div>
-        <div>
+        <div id="editor">
             <label>Descripcion: </label>
-            <textarea name="descripcion" placeholder="descripcion">{{product.descripcion}}</textarea>
+            <textarea name="descripcion" placeholder="descripcion" id="description-textarea">{{product.descripcion}}</textarea>
         </div>
-        <p>Imagen: </p>
+        <!--<p>Imagen: </p>-->
+        <label style="color: white">Imagen</label>
         <img src="data:image/jpeg;base64, {{base64Image}}" alt="Imagen del Producto" width="200" />
         <input type='file' name='imageFile' accept=".jpg, .jpeg"/>
         <div>
@@ -71,7 +73,17 @@
     </div>
     <div class="derechos-de-autor">Creado por Grupo L ©</div>
 </footer>
-
+<!-- Include the Quill library -->
+<script src="https://cdn.jsdelivr.net/npm/quill@2.0.0-rc.2/dist/quill.js"></script>
+<!-- Initialize Quill editor -->
+<script>
+    const quill = new Quill('#editor', {
+        theme: 'snow'
+    });
+    quill.on('text-change', function () {
+        document.getElementById('description-textarea').value = quill.root.innerHTML;
+    });
+</script>
 <script src="../../../js/aboutus.js"></script>
 </body>
 </html>

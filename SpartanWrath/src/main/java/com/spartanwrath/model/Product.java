@@ -7,7 +7,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import jakarta.persistence.*;
 import org.hibernate.annotations.Type;
-
 import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,6 +17,7 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     @Column(name = "nombre")
     private String nombre;
     @Column(name = "descripcion")
