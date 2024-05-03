@@ -39,8 +39,31 @@
 <div class="sec" id="sec">
     <h2>Spartan Products</h2>
 </div>
+<div class="consulta">
+    <!-- Formulario para filtrar productos -->
+    <form action="/Market/products" method="get">
+        <label for="category">Categoría:</label>
+        <select id="category" name="category">
+            <option value="">Todas</option>
+            <option value="Accesorios">Accesorios</option>
+            <option value="Cascos">Cascos</option>
+            <option value="Espinilleras">Espinilleras</option>
+            <option value="Guantes">Guantes</option>
+            <option value="Suplementos">Suplementos</option>
+        </select>
+
+        <label for="priceFrom">Precio desde:</label>
+        <input type="number" id="priceFrom" name="from" min="0">
+
+        <label for="priceTo">Precio hasta:</label>
+        <input type="number" id="priceTo" name="to" min="0">
+
+        <button type="submit">Filtrar</button>
+    </form>
+</div>
 <!-- Seccion Cards -->
 <section class="producto">
+
     <div class="container">
         {{#products}}
         <div class="card">

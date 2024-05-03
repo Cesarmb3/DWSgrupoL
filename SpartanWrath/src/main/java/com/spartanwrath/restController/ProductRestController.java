@@ -41,9 +41,9 @@ public class ProductRestController {
     private ImageService imageServ;
 
     @GetMapping("/products")
-    public ResponseEntity<List<Product>> getProducts(@RequestParam(required = false) String category) {
-        if (category != null) {
-            List<Product> products = productServ.getProductsByCategory(category);
+    public ResponseEntity<List<Product>> getProducts(@RequestParam(required = false) Integer from, @RequestParam(required = false) Integer to,@RequestParam(required = false) String category) {
+        if (category != null || from != null || to != null) {
+            List<Product> products = productServ.findProducts(from, to, category);
             if (!products.isEmpty()) {
                 return ResponseEntity.ok().body(products);
             } else {

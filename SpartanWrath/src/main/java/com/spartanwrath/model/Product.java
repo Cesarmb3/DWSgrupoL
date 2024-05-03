@@ -24,6 +24,7 @@ public class Product {
     private String descripcion;
     @Column(name = "original_image_name")
     private String originalImageName;
+    @JsonIgnore
     @Lob
     @Column(name = "imagen", columnDefinition = "LONGBLOB")
     private byte[] imagen;

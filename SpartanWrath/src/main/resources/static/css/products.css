@@ -232,7 +232,56 @@ section img#tree{
     font-family: "Anton",sans-serif;
 }
 
+.consulta{
+    position: relative;
+    background: #0a0a23;
+    padding: 5px;
+}
 
+.consulta label{
+    color: #FFA500;
+    font-size: 14px;
+    font-family: "Anton",sans-serif;
+    flex: 1 0 20%;
+}
+
+.consulta input[type="number"],.consulta select {
+    font-family: "Anton",sans-serif;
+    font-size: 14px;
+}
+
+.consulta button {
+    background-color: #f1f1f2;
+    color: #0a0a23;
+    border: none;
+    border-radius: 15%;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.consulta button:hover {
+    background-color: #FFA500;
+}
+
+.consulta label, .consulta input, .consulta select {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.consulta form{
+    display: flex;
+    flex-wrap: wrap;
+
+}
+
+.consulta input, .consulta select {
+    flex: 1 0 70%;
+}
 .sec{
     position: relative;
     padding: 100px;

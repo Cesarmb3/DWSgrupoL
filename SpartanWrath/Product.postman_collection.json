@@ -80,7 +80,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/products?category=Guantes",
+					"raw": "http://localhost:8080/api/products?category=&from=&to=",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -93,7 +93,15 @@
 					"query": [
 						{
 							"key": "category",
-							"value": "Guantes"
+							"value": ""
+						},
+						{
+							"key": "from",
+							"value": ""
+						},
+						{
+							"key": "to",
+							"value": ""
 						}
 					]
 				}

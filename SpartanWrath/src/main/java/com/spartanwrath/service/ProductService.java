@@ -9,6 +9,7 @@ import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
@@ -61,6 +62,7 @@ public class ProductService {
     }
 
     // Método para obtener un producto por su ID
+
     public Optional<Product> getProductById(Long id) {
         return productRepository.findById(id);
     }
@@ -80,6 +82,24 @@ public class ProductService {
     }
     public void deleteAllProduct(){
         productRepository.deleteAll();
+    }
+
+
+    public List<Product> findProducts(Integer from, Integer to, String category){
+        if (from != null || to != null || (category != null && !category.isEmpty())){
+            if (from != null && to != null  && (category != null && !category.isEmpty())){
+                return productRepository.findByPrecioAndCategory(from,to,category);
+            } else if (from != null && to != null ) {
+                return productRepository.findByPrecioBetween(from,to);
+            } else if (category != null && !category.isEmpty()) {
+                return productRepository.findByCategory(category);
+            } else {
+                return getAllProducts();
+            }
+        }else {
+            return getAllProducts();
+        }
+
     }
 
     public List<Product> getProductsByIds(List<Long> productIds){

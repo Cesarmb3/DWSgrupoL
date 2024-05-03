@@ -46,8 +46,8 @@ public class ImageService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Invalid image");
         }
         byte[] sanitizedImageBytes = sanitizeImage(imageBytes);
-
-        String filename = StringUtils.cleanPath(originalFileName);
+        String sanitizedFileName = sanitizeFileName(originalFileName);
+        String filename = StringUtils.cleanPath(sanitizedFileName);
 
         Path uploadPath = Paths.get(uploadDir);
         if (!Files.exists(uploadPath)) {
@@ -105,6 +105,11 @@ public class ImageService {
     private boolean imageExtensionAllowed (String extension){
         return ALLOWED_EXTENSIONS.contains(extension);
     }
+
+    private String sanitizeFileName(String fileName) {
+        return fileName.replaceAll("[^a-zA-Z0-9.-]", "_");
+    }
+
 
     public byte[] sanitizeImage (byte[] imageBytes) throws IOException {
         BufferedImage originalImage = ImageIO.read(new ByteArrayInputStream(imageBytes));

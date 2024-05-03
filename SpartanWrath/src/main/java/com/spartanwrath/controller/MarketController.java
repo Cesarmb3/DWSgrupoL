@@ -58,12 +58,14 @@ public class MarketController {
     }
 
     @GetMapping("/Market/products")
-    public String showProducts(Model model) {
-        List<Product> productList = productService.getAllProducts();
+    public String showProducts(Model model, @RequestParam(name = "from", required = false) Integer from, @RequestParam(name = "to", required = false) Integer to, @RequestParam(name = "category", required = false) String category) {
+
+        List<Product> productList = productService.findProducts(from, to, category);
         productList.forEach(product -> {
             String base64Image = Base64.getEncoder().encodeToString(product.getImagen());
             product.setBase64Image(base64Image);
         });
+
         model.addAttribute("products", productList);
         return "products";
     }
