@@ -106,7 +106,7 @@ public class ImageService {
         return ALLOWED_EXTENSIONS.contains(extension);
     }
 
-    private String sanitizeFileName(String fileName) {
+    public String sanitizeFileName(String fileName) {
         return fileName.replaceAll("[^a-zA-Z0-9.-]", "_");
     }
 

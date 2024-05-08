@@ -5,23 +5,32 @@ package com.spartanwrath.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.persistence.*;
 import org.hibernate.annotations.Type;
 import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 @Entity
 @Table(name = "products")
 public class Product {
+
+    public interface Basico {}
+    public interface Users {}
+
+    @JsonView(Basico.class)
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
+    @JsonView(Basico.class)
     @Column(name = "nombre")
     private String nombre;
+    @JsonView(Basico.class)
     @Column(name = "descripcion")
     private String descripcion;
+    @JsonView(Basico.class)
     @Column(name = "original_image_name")
     private String originalImageName;
     @JsonIgnore
@@ -31,13 +40,16 @@ public class Product {
     @JsonIgnore
     @Transient
     private String base64Image;
+    @JsonView(Basico.class)
     @Column(name = "precio")
     private double precio;
+    @JsonView(Basico.class)
     @Column(name = "cantidad")
     private Integer cantidad;
+    @JsonView(Basico.class)
     @Column(name = "category")
     private String category;
-
+    @JsonView(Users.class)
     @ManyToMany(mappedBy = "products")
     private List<User> usuarios = new ArrayList<>();
 

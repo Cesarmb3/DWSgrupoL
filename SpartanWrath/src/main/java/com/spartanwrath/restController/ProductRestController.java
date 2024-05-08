@@ -1,6 +1,7 @@
 package com.spartanwrath.restController;
 
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.spartanwrath.exceptions.InvalidUser;
 import com.spartanwrath.exceptions.UserNotFound;
 import com.spartanwrath.model.Product;
@@ -39,7 +40,7 @@ public class ProductRestController {
 
     @Autowired
     private ImageService imageServ;
-
+    @JsonView(Product.Basico.class)
     @GetMapping("/products")
     public ResponseEntity<List<Product>> getProducts(@RequestParam(required = false) Integer from, @RequestParam(required = false) Integer to,@RequestParam(required = false) String category) {
         if (category != null || from != null || to != null) {
@@ -54,6 +55,8 @@ public class ProductRestController {
         }
     }
 
+    interface DetailsProduct extends Product.Basico, Product.Users, User.Basico {}
+    @JsonView(DetailsProduct.class)
     @GetMapping("/products/{id}")
     public ResponseEntity<Optional<Product>> getProduct(@PathVariable long id) {
         Optional<Product> product = productServ.getProductById(id);
@@ -80,7 +83,7 @@ public class ProductRestController {
             if (imageFile != null && !imageFile.isEmpty()){
                 byte[] imageData = imageFile.getBytes();
                 product.setImagen(imageData);
-                product.setOriginalImageName(imageFile.getOriginalFilename());
+                product.setOriginalImageName(imageServ.sanitizeFileName(imageFile.getOriginalFilename()) );
             imageServ.saveImage(imageData, imageFile.getOriginalFilename());
             productServ.updateProduct(product);
 
@@ -119,10 +122,11 @@ public class ProductRestController {
 
         if (productOptional.isPresent()){
             Product _product = productOptional.get();
+            /*_product = productServ.sanitizeProduct(_product);*/
             _product.setNombre(product.getNombre());
             _product.setDescripcion(product.getDescripcion());
             _product.setPrecio(product.getPrecio());
-            _product.setImagen(product.getImagen());
+            _product.setOriginalImageName(product.getOriginalImageName());
             _product.setCantidad(product.getCantidad());
             _product.setCategory(product.getCategory());
             productServ.updateProduct(_product);
@@ -165,6 +169,7 @@ public class ProductRestController {
             }
             byte[] defaultImage = imageServ.getDefault();
             product.setImagen(defaultImage);
+            product.setOriginalImageName(imageServ.getDefaultName());
             productServ.updateProduct(product);
             return ResponseEntity.noContent().build();
         } else {

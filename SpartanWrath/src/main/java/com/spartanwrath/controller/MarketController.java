@@ -9,6 +9,12 @@ import com.spartanwrath.service.ProductService;
 import com.spartanwrath.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -85,7 +91,26 @@ public class MarketController {
         }
     }
 
+    @GetMapping("/download/{id}")
+    public ResponseEntity<Resource> downloadImage(@PathVariable("id") Long id){
+        Optional<Product> productOptional = productService.getProductById(id);
+        if (productOptional.isPresent()) {
+            try{
+                Product product = productOptional.get();
+                byte[] imageData = product.getImagen();
+                ByteArrayResource resource = new ByteArrayResource(imageData);
 
+                return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + product.getOriginalImageName() + "\"")
+                        .contentType(MediaType.IMAGE_JPEG)
+                        .contentLength(imageData.length)
+                        .body(resource);
+            } catch (Exception e) {
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+            }
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 
     @PostMapping("/nuevoproducto")
     public String newProducto(Product product, @RequestParam(required = false) MultipartFile imageFile) throws IOException {

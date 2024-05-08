@@ -1,6 +1,7 @@
 package com.spartanwrath.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -12,26 +13,36 @@ import java.util.List;
 @Table(name = "membership")
 public class Membership {
 
+    public interface Basico {}
+    public interface CombatClasses {}
+    public interface Users {}
+
+    @JsonView(Basico.class)
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @JsonView(Basico.class)
     @Column(name = "nombre")
         private String nombre;
+    @JsonView(Basico.class)
     @Column(name = "descripcion")
         private String descripcion;
+    @JsonView(Basico.class)
     @Column(name = "precio")
         private double precio;
+    @JsonView(Basico.class)
     @Column(name = "fechaalta")
         private LocalDate fechaalta;
+    @JsonView(Basico.class)
     @Column(name = "fechafin")
         private LocalDate fechafin;
-
+    @JsonView(Basico.class)
     @Column(name = "active")
         private boolean active;
-    @JsonIgnore
+    @JsonView(Users.class)
     @OneToMany
     private List<User> users;
-
+    @JsonView(CombatClasses.class)
     @ManyToOne
     @JoinColumn(name = "combatclass_id")
     private CombatClass combatClass;
@@ -133,8 +144,6 @@ public class Membership {
                 ", fechaalta=" + fechaalta +
                 ", fechafin=" + fechafin +
                 ", active=" + active +
-                ", users=" + users +
-                ", combatClass=" + combatClass +
                 '}';
     }
 }

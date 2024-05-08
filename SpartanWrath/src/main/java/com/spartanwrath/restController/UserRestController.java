@@ -1,10 +1,13 @@
 package com.spartanwrath.restController;
 
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.spartanwrath.exceptions.InvalidUser;
 import com.spartanwrath.exceptions.NoUsers;
 import com.spartanwrath.exceptions.UserAlreadyRegister;
 import com.spartanwrath.exceptions.UserNotFound;
+import com.spartanwrath.model.Membership;
+import com.spartanwrath.model.Product;
 import com.spartanwrath.model.User;
 import com.spartanwrath.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +23,7 @@ public class UserRestController {
 
     @Autowired
     private UserService userServ ;
-
+    @JsonView(User.Basico.class)
     @GetMapping("")
     public ResponseEntity<List<User>> getAllUsers(){
         try {
@@ -31,6 +34,8 @@ public class UserRestController {
         }
     }
 
+    interface DetailUsers extends User.Basico, User.Products, User.Memberships, Membership.Basico, Product.Basico {}
+    @JsonView(DetailUsers.class)
     @GetMapping("/{username}")
     public ResponseEntity<User> getUser(@PathVariable String username){
         try {
