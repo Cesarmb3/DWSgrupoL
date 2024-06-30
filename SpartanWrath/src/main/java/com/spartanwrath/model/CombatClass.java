@@ -30,8 +30,8 @@ public class CombatClass {
     @Column(name = "turn")
     private String turn;
     @JsonView(Memberships.class)
-    @OneToMany(mappedBy = "combatClass")
-    private List<Membership> memberships;
+    @OneToMany(mappedBy = "combatClass", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
+    private List<Membership> memberships = new ArrayList<>();
 
     public CombatClass() {
     }

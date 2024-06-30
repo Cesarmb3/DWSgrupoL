@@ -15,12 +15,16 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.security.Principal;
 import java.util.Base64;
 import java.util.List;
 import java.util.Map;
@@ -40,6 +44,7 @@ public class MarketController {
         this.productService = productService;
     }
 
+
     @GetMapping("/Market")
     public String showMarket(){
         return "market";
@@ -49,7 +54,7 @@ public class MarketController {
         return "formproducto";
     }
 
-    @GetMapping("/Market/products/{id}/editarproducto")
+    @GetMapping("/Market/products/editarproducto/{id}")
     public String editProduct(@PathVariable("id") Long id,Model model){
         Optional<Product> productOptional = productService.getProductById(id);
         if (productOptional.isPresent()) {
@@ -77,8 +82,9 @@ public class MarketController {
     }
 
     @GetMapping("/Market/products/{id}")
-    public String showProduct(@PathVariable("id") Long id, Model model) {
-
+    public String showProduct(@PathVariable("id") Long id,HttpServletRequest request, Model model) {
+        CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+        model.addAttribute("token", token.getToken());
         Optional<Product> productOptional = productService.getProductById(id);
         if (productOptional.isPresent()) {
             Product product = productOptional.get();
@@ -113,7 +119,9 @@ public class MarketController {
     }
 
     @PostMapping("/nuevoproducto")
-    public String newProducto(Product product, @RequestParam(required = false) MultipartFile imageFile) throws IOException {
+    public String newProducto(Product product,Model model, HttpServletRequest request, @RequestParam(required = false) MultipartFile imageFile) throws IOException {
+        CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+        model.addAttribute("token", token.getToken());
         if (imageFile != null && !imageFile.isEmpty()) {
             byte[] imageData = imageFile.getBytes();
             product.setImagen(imageData);
@@ -126,8 +134,10 @@ public class MarketController {
         return "redirect:/Market/products/" + newProduct.getId();
     }
     @PostMapping("/Market/products/{id}")
-    public String updateProduct(@PathVariable("id") Long id, Product product, @RequestParam(required = false) MultipartFile imageFile) throws IOException {
+    public String updateProduct(@PathVariable("id") Long id,Model model, HttpServletRequest request, Product product, @RequestParam(required = false) MultipartFile imageFile) throws IOException {
         Optional<Product> productData = productService.getProductById(id);
+        CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+        model.addAttribute("token", token.getToken());
         if (productData.isPresent()) {
             Product _product = productData.get();
             _product.setNombre(product.getNombre());
@@ -151,7 +161,7 @@ public class MarketController {
     }
 
 
-    @GetMapping("/Market/products/{id}/delete")
+    @GetMapping("/Market/products/delete/{id}")
     public String deleteProduct(@PathVariable("id") Long id) throws IOException {
         Optional<Product> productOptional = productService.getProductById(id);
         if (productOptional.isPresent()) {
@@ -169,7 +179,8 @@ public class MarketController {
     @PostMapping("/products/purchase")
     public String purchaseProducts(HttpServletRequest request, Model model) {
         try {
-            User user = userServ.getUserbyUsername("usuario1");
+            String name = request.getUserPrincipal().getName();
+            User user = userServ.findByName(name).orElseThrow();
             if (user == null) {
                 model.addAttribute("error", "El usuario no fue encontrado");
                 return "error";
