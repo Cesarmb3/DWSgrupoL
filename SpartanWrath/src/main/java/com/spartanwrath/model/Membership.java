@@ -40,8 +40,8 @@ public class Membership {
     @Column(name = "active")
         private boolean active;
     @JsonView(Users.class)
-    @OneToMany
-    private List<User> users;
+    @OneToMany(mappedBy = "membership", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
+    private List<User> users = new ArrayList<>();
     @JsonView(CombatClasses.class)
     @ManyToOne
     @JoinColumn(name = "combatclass_id")

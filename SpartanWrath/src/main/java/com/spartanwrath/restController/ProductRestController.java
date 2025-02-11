@@ -9,12 +9,14 @@ import com.spartanwrath.model.User;
 import com.spartanwrath.service.ImageService;
 import com.spartanwrath.service.ProductService;
 import com.spartanwrath.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import netscape.javascript.JSException;
 import netscape.javascript.JSObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -178,9 +180,10 @@ public class ProductRestController {
     }
 
     @PostMapping("/products/purchase")
-    public ResponseEntity<String> purchaseProducts(@RequestBody Map<Long, Integer> productQuantityMap) throws UserNotFound, InvalidUser {
+    public ResponseEntity<String> purchaseProducts(@RequestBody Map<Long, Integer> productQuantityMap, HttpServletRequest request) throws UserNotFound, InvalidUser {
         try {
-            User user = userServ.getUserbyUsername("usuario1");
+            String authenticatedUsername = request.getUserPrincipal().getName();
+            User user = userServ.getUserbyUsername(authenticatedUsername);
             if (user == null) {
                 return ResponseEntity.badRequest().body("El usuario no fue encontrado");
             }

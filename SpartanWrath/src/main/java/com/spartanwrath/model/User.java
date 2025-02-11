@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.Columns;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -22,7 +23,7 @@ public class User {
 
     @JsonView(Basico.class)
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @JsonView(Basico.class)
     @Column(name = "name")
@@ -39,8 +40,6 @@ public class User {
     @JsonView(Basico.class)
     @Column(name = "phone")
     private long phone;
-
-    private String type;
     @JsonView(Basico.class)
     @Column(name = "password")
     private String password;
@@ -235,13 +234,13 @@ public class User {
             return false;
         } else if (user.dni.length()>9) {
             return false;
-        } else if (user.address.length()>40) {
-            return false;
+       // } else if (user.address.length()>40) {
+         //   return false;
         } else if (user.phone>999999999) {
             return false;
         } else if (user.username!=null && user.username.length()>20) {
             return false;
-        } else if (user.password.length()>20) {
+        } else if (!user.getPassword().startsWith("$2a$") && user.getPassword().length() == 60 && user.password.length()>20) {
             return false;
         } else if (user.birthday != null && user.birthday.isAfter(LocalDate.now())){
             return false;

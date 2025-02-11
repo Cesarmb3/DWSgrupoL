@@ -50,7 +50,7 @@ public class Product {
     @Column(name = "category")
     private String category;
     @JsonView(Users.class)
-    @ManyToMany(mappedBy = "products")
+    @ManyToMany(mappedBy = "products", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
     private List<User> usuarios = new ArrayList<>();
 
     public Product() {
