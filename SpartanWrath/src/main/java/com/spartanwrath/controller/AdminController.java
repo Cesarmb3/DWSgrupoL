@@ -1,24 +1,17 @@
 package com.spartanwrath.controller;
 
-import com.spartanwrath.exceptions.NoSuchClass;
 import com.spartanwrath.model.CombatClass;
-import com.spartanwrath.model.Membership;
 import com.spartanwrath.service.CombatClassService;
 import com.spartanwrath.service.MembershipService;
 import com.spartanwrath.service.UserService;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.io.IOException;
-import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,7 +23,6 @@ public class AdminController {
     MembershipService membershipService;
     @Autowired
     CombatClassService combatClassService;
-
 
     @GetMapping("/Admin")
     public String showAdmin(){
@@ -67,16 +59,8 @@ public class AdminController {
     }
 
     @GetMapping("/Admin/combatclass/{id}/delete")
-    public String deleteCombatClass(@PathVariable long id) throws NoSuchClass {
-        Optional<CombatClass> combatClass = combatClassService.findById(id);
-        if (combatClass.isEmpty()){
-            throw new NoSuchClass();
-        }
-        List<Membership> memberships = combatClass.get().getMemberships();
-        for (Membership membership : memberships) {
-            membership.setCombatClass(null);
-            membershipService.save(membership);
-        }
+    public String deleteCombatClass(@PathVariable long id) {
+
         combatClassService.delete(id);
 
         return "redirect:/Admin/combatclass";

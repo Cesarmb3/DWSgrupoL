@@ -106,17 +106,9 @@ function showCart() {
 
 
 function purchaseItems() {
-    const csrfToken = document.querySelector('meta[name="_csrf"]').getAttribute('value');
-
     const form = document.createElement('form');
     form.method = 'POST';
     form.action = '/products/purchase';
-
-    const csrfInput = document.createElement('input');
-    csrfInput.type = 'hidden';
-    csrfInput.name = '_csrf';
-    csrfInput.value = csrfToken;
-    form.appendChild(csrfInput);
 
     cartItems.forEach(item => {
         const productIdInput = document.createElement('input');
@@ -136,12 +128,5 @@ function purchaseItems() {
     form.submit();
 }
 
-document.querySelectorAll('.addToCartButton').forEach(button => {
-    button.addEventListener('click', function() {
-        addToCart(this.getAttribute('data-productName'), this.getAttribute('data-price'), this.getAttribute('data-productId'));
-    });
-});
 
-document.getElementById('cart-icon').addEventListener('click', function() {
-    showCart();
-});
+

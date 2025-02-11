@@ -8,10 +8,23 @@
 	"item": [
 		{
 			"name": "GetFindAll",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": "https://localhost:8443/api/products"
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "imageFile",
+							"type": "file",
+							"src": []
+						}
+					]
+				},
+				"url": "http://localhost:8080/api/products"
 			},
 			"response": []
 		},
@@ -20,7 +33,7 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": "https://localhost:8443/api/products/5"
+				"url": "http://localhost:8080/api/products/2"
 			},
 			"response": []
 		},
@@ -38,7 +51,7 @@
 						}
 					}
 				},
-				"url": "https://localhost:8443/api/products"
+				"url": "http://localhost:8080/api/products"
 			},
 			"response": []
 		},
@@ -53,11 +66,11 @@
 						{
 							"key": "imageFile",
 							"type": "file",
-							"src": "/C:/Users/Juan_/OneDrive/Imágenes/prueba.'; Drop Table.jpg"
+							"src": "/C:/Users/Juan_/OneDrive/Escritorio/Practica Ingenieria Software/DWSgrupoL/SpartanWrath/src/main/resources/static/images/bucal.jpg"
 						}
 					]
 				},
-				"url": "https://localhost:8443/api/products/7/imagen"
+				"url": "http://localhost:8080/api/products/7/imagen"
 			},
 			"response": []
 		},
@@ -67,12 +80,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://localhost:8443/api/products?category=&from=&to=",
-					"protocol": "https",
+					"raw": "http://localhost:8080/api/products?category=Guantes",
+					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8443",
+					"port": "8080",
 					"path": [
 						"api",
 						"products"
@@ -80,15 +93,7 @@
 					"query": [
 						{
 							"key": "category",
-							"value": ""
-						},
-						{
-							"key": "from",
-							"value": ""
-						},
-						{
-							"key": "to",
-							"value": ""
+							"value": "Guantes"
 						}
 					]
 				}
@@ -100,7 +105,7 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": "https://localhost:8443/api/products/7/imagen"
+				"url": "http://localhost:8080/api/products/7/imagen"
 			},
 			"response": []
 		},
@@ -111,14 +116,14 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n        \"id\": 2,\r\n        \"nombre\": \"Espinilleras\",\r\n        \"descripcion\": \"hola k ase <img onerror='alert(1)' src=x>\",\r\n        \"precio\": 18.0,\r\n        \"cantidad\": 4,\r\n        \"category\": \"Espinilleras\"\r\n    }",
+					"raw": "{\r\n        \"id\": 2,\r\n        \"nombre\": \"Espinilleras\",\r\n        \"descripcion\": \"Espinilleras de proteccion para Kick Boxing/Muai Thai\",\r\n        \"imagen\": \"../../images/espinilleras.jpg\",\r\n        \"precio\": 15.0,\r\n        \"cantidad\": 5,\r\n        \"category\": \"Espinilleras\"\r\n    }",
 					"options": {
 						"raw": {
 							"language": "json"
 						}
 					}
 				},
-				"url": "https://localhost:8443/api/products/2"
+				"url": "http://localhost:8080/api/products/2"
 			},
 			"response": []
 		},
@@ -136,7 +141,7 @@
 						}
 					}
 				},
-				"url": "https://localhost:8443/api/products/2"
+				"url": "http://localhost:8080/api/products/2"
 			},
 			"response": []
 		},
@@ -145,7 +150,7 @@
 			"request": {
 				"method": "DELETE",
 				"header": [],
-				"url": "https://localhost:8443/api/products"
+				"url": "http://localhost:8080/api/products"
 			},
 			"response": []
 		},
@@ -154,7 +159,7 @@
 			"request": {
 				"method": "DELETE",
 				"header": [],
-				"url": "https://localhost:8443/api/products/7/imagen"
+				"url": "http://localhost:8080/api/products/7/imagen"
 			},
 			"response": []
 		},
@@ -172,7 +177,7 @@
 						}
 					}
 				},
-				"url": "https://localhost:8443/api/products/purchase"
+				"url": "http://localhost:8080/api/products/purchase"
 			},
 			"response": []
 		}

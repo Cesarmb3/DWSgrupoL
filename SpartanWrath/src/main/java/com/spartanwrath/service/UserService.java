@@ -6,10 +6,9 @@ import com.spartanwrath.exceptions.UserAlreadyRegister;
 import com.spartanwrath.exceptions.UserNotFound;
 import com.spartanwrath.model.User;
 import com.spartanwrath.repository.UserRepository;
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -21,8 +20,6 @@ public class UserService {
     @Autowired
     private UserRepository UserRepo ;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
 
    private ConcurrentHashMap<Long, User> usuarios = new ConcurrentHashMap<>();
 
@@ -38,11 +35,6 @@ public class UserService {
     public User getUserbyId(long id) throws UserNotFound {
         return UserRepo.findById(id).orElseThrow(UserNotFound::new);
     }
-
-    public Optional<User> findByName(String name){
-        return UserRepo.findByUsername(name);
-    }
-
 
     public User getUserbyUsername(String username) throws UserNotFound{
         return UserRepo.findByUsername(username).orElseThrow(UserNotFound::new);
@@ -69,40 +61,7 @@ public class UserService {
         validuser.setPhone(user.getPhone());
         validuser.setDni(user.getDni());
         validuser.setPayment(user.getPayment());
-        if (!user.getPassword().startsWith("$2a$")){
-            String pToEncode = user.getPassword();
-            user.setPassword(passwordEncoder.encode(pToEncode));
-        } else {
-            validuser.setPassword(user.getPassword());
-        }
-
-        if (user.getBirthday() == null) {
-            validuser.setBirthday(validuser.getBirthday());
-        } else {
-            validuser.setBirthday(user.getBirthday());
-        }
-
-
-        if (user.getProducts() == null) {
-            validuser.setProducts(validuser.getProducts());
-        } else {
-            validuser.setProducts(user.getProducts());
-        }
-
-
-        if (user.getMembership() == null) {
-            validuser.setMembership(validuser.getMembership());
-        } else {
-            validuser.setMembership(user.getMembership());
-        }
-
-
-        if (user.getRoles().isEmpty()) {
-            validuser.setRoles(validuser.getRoles());
-        } else {
-            validuser.setRoles(user.getRoles());
-        }
-
+        validuser.setPassword(user.getPassword());
         UserRepo.save(validuser);
     }
 
@@ -116,11 +75,6 @@ public class UserService {
         } else {
             if (User.valid(user)) {
                 System.out.println("Guardando nuevo usuario: " + user);
-                String pToEncode = user.getPassword();
-                user.setPassword(passwordEncoder.encode(pToEncode));
-                if (user.getRoles().isEmpty() || user.getRoles().contains("ADMIN")){
-                    user.setRoles(List.of("USER"));
-                }
                 this.UserRepo.save(user);
                 System.out.println("Usuario guardado exitosamente.");
             } else {
@@ -136,6 +90,7 @@ public class UserService {
         UserRepo.delete(user);
         return user;
     }
+
     public int getNumberUsers(){
         return (int) UserRepo.count();
     }
