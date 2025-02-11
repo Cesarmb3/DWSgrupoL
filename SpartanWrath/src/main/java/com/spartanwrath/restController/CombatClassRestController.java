@@ -1,6 +1,8 @@
 package com.spartanwrath.restController;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.spartanwrath.model.CombatClass;
+import com.spartanwrath.model.Membership;
 import com.spartanwrath.service.CombatClassService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +17,7 @@ public class CombatClassRestController {
 
     @Autowired
     private CombatClassService combatClassService;
-
+    @JsonView(CombatClass.Basico.class)
     @GetMapping("")
     public ResponseEntity<List<CombatClass>> getAllCombatClasses(){
         List<CombatClass> combatClasses = combatClassService.findAll();
@@ -25,6 +27,9 @@ public class CombatClassRestController {
         return ResponseEntity.ok().body(combatClasses);
     }
 
+    interface CombatClassDetails extends CombatClass.Basico, CombatClass.Memberships, Membership.Basico {}
+
+    @JsonView(CombatClassDetails.class)
     @GetMapping("/{id}")
     public ResponseEntity<Optional<CombatClass>> getCombatClass(@PathVariable long id){
         Optional<CombatClass> combatClassOptional = combatClassService.findById(id);

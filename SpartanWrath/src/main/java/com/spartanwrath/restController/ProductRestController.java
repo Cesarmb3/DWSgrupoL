@@ -1,6 +1,7 @@
 package com.spartanwrath.restController;
 
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.spartanwrath.exceptions.InvalidUser;
 import com.spartanwrath.exceptions.UserNotFound;
 import com.spartanwrath.model.Product;
@@ -12,6 +13,7 @@ import netscape.javascript.JSException;
 import netscape.javascript.JSObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,12 +21,9 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
-import static com.spartanwrath.service.ImageService.FILES_FOLDER;
+//import static com.spartanwrath.service.ImageService.FILES_FOLDER;
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
 
 @RestController
@@ -41,11 +40,11 @@ public class ProductRestController {
 
     @Autowired
     private ImageService imageServ;
-
+    @JsonView(Product.Basico.class)
     @GetMapping("/products")
-    public ResponseEntity<List<Product>> getProducts(@RequestParam(required = false) String category) {
-        if (category != null) {
-            List<Product> products = productServ.getProductsByCategory(category);
+    public ResponseEntity<List<Product>> getProducts(@RequestParam(required = false) Integer from, @RequestParam(required = false) Integer to,@RequestParam(required = false) String category) {
+        if (category != null || from != null || to != null) {
+            List<Product> products = productServ.findProducts(from, to, category);
             if (!products.isEmpty()) {
                 return ResponseEntity.ok().body(products);
             } else {
@@ -56,6 +55,8 @@ public class ProductRestController {
         }
     }
 
+    interface DetailsProduct extends Product.Basico, Product.Users, User.Basico {}
+    @JsonView(DetailsProduct.class)
     @GetMapping("/products/{id}")
     public ResponseEntity<Optional<Product>> getProduct(@PathVariable long id) {
         Optional<Product> product = productServ.getProductById(id);
@@ -66,10 +67,8 @@ public class ProductRestController {
     }
 
     @PostMapping("/products")
-    public ResponseEntity<Product> createProduct(@RequestBody Product product){
-        if (product.getImagen() == null || product.getImagen().isEmpty()){
-            product.setImagen("../../images/DefaultProduct.jpg");
-        }
+    public ResponseEntity<Product> createProduct(@RequestBody Product product) throws IOException {
+
         productServ.createProduct(product);
         URI location = fromCurrentRequest().path("/{id}").buildAndExpand(product.getId()).toUri();
 
@@ -81,25 +80,36 @@ public class ProductRestController {
         Optional<Product> productOptional = productServ.getProductById(id);
         if (productOptional.isPresent()) {
             Product product = productOptional.get();
-            product.setImagen("../../images/" + imageFile.getOriginalFilename());
-
+            if (imageFile != null && !imageFile.isEmpty()){
+                byte[] imageData = imageFile.getBytes();
+                product.setImagen(imageData);
+                product.setOriginalImageName(imageServ.sanitizeFileName(imageFile.getOriginalFilename()) );
+            imageServ.saveImage(imageData, imageFile.getOriginalFilename());
             productServ.updateProduct(product);
 
             // Guardar la imagen en la carpeta de recursos estáticos
-            imageServ.saveImage(product.getImagen(), imageFile);
+
             return ResponseEntity.ok().build();
+            }else {
+                return ResponseEntity.badRequest().body("No se proporciona imagen");
+            }
         } else {
             return ResponseEntity.notFound().build();
         }
     }
 
     @GetMapping("/products/{id}/imagen")
-    public ResponseEntity<Object> downloadImage(@PathVariable long id) throws MalformedURLException {
+    public ResponseEntity<byte[]> downloadImage(@PathVariable long id) throws MalformedURLException {
         Optional<Product> productOptional = productServ.getProductById(id);
         if (productOptional.isPresent()) {
-            System.out.println(productOptional.get().getImagen());
+            Product product = productOptional.get();
+            byte[] imageData = product.getImagen();
 
-            return this.imageServ.createResponseFromImage(String.valueOf(FILES_FOLDER), productOptional.get().getImagen());
+            if (imageData == null || imageData.length == 0) {
+                return ResponseEntity.notFound().build();
+            }
+
+            return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(imageData);
         } else {
             return ResponseEntity.notFound().build();
         }
@@ -112,10 +122,11 @@ public class ProductRestController {
 
         if (productOptional.isPresent()){
             Product _product = productOptional.get();
+            /*_product = productServ.sanitizeProduct(_product);*/
             _product.setNombre(product.getNombre());
             _product.setDescripcion(product.getDescripcion());
             _product.setPrecio(product.getPrecio());
-            _product.setImagen(product.getImagen());
+            _product.setOriginalImageName(product.getOriginalImageName());
             _product.setCantidad(product.getCantidad());
             _product.setCategory(product.getCategory());
             productServ.updateProduct(_product);
@@ -139,7 +150,7 @@ public class ProductRestController {
             Product product = productOptional.get();
             productServ.deleteProduct(id);
             if (product.getImagen() != null){
-                this.imageServ.deleteImage(product.getImagen());
+                this.imageServ.deleteImage(product.getOriginalImageName());
             }
             return ResponseEntity.ok().body(product);
         } else {
@@ -152,10 +163,13 @@ public class ProductRestController {
         Optional<Product> productOptional = productServ.getProductById(id);
         if (productOptional.isPresent()) {
             Product product = productOptional.get();
-
-
-            this.imageServ.deleteImage(product.getImagen());
-            product.setImagen("../../images/DefaultProduct.jpg");
+            String imageData = product.getOriginalImageName();
+            if (imageData != null){
+                this.imageServ.deleteImage(imageData);
+            }
+            byte[] defaultImage = imageServ.getDefault();
+            product.setImagen(defaultImage);
+            product.setOriginalImageName(imageServ.getDefaultName());
             productServ.updateProduct(product);
             return ResponseEntity.noContent().build();
         } else {

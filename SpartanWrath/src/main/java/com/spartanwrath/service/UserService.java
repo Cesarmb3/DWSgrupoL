@@ -9,6 +9,8 @@ import com.spartanwrath.repository.UserRepository;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -62,6 +64,9 @@ public class UserService {
         validuser.setDni(user.getDni());
         validuser.setPayment(user.getPayment());
         validuser.setPassword(user.getPassword());
+        validuser.setMembership(user.getMembership());
+        validuser.setProducts(user.getProducts());
+        validuser.setRoles(user.getRoles());
         UserRepo.save(validuser);
     }
 

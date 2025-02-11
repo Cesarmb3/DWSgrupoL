@@ -9,12 +9,19 @@ import com.spartanwrath.service.ProductService;
 import com.spartanwrath.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Base64;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -47,6 +54,8 @@ public class MarketController {
         Optional<Product> productOptional = productService.getProductById(id);
         if (productOptional.isPresent()) {
             Product product = productOptional.get();
+            String base64Image = Base64.getEncoder().encodeToString(product.getImagen());
+            model.addAttribute("base64Image", base64Image);
             model.addAttribute("product", product);
             return "editarproducto";
         } else {
@@ -55,8 +64,14 @@ public class MarketController {
     }
 
     @GetMapping("/Market/products")
-    public String showProducts(Model model) {
-        List<Product> productList = productService.getAllProducts();
+    public String showProducts(Model model, @RequestParam(name = "from", required = false) Integer from, @RequestParam(name = "to", required = false) Integer to, @RequestParam(name = "category", required = false) String category) {
+
+        List<Product> productList = productService.findProducts(from, to, category);
+        productList.forEach(product -> {
+            String base64Image = Base64.getEncoder().encodeToString(product.getImagen());
+            product.setBase64Image(base64Image);
+        });
+
         model.addAttribute("products", productList);
         return "products";
     }
@@ -67,22 +82,45 @@ public class MarketController {
         Optional<Product> productOptional = productService.getProductById(id);
         if (productOptional.isPresent()) {
             Product product = productOptional.get();
+            String base64Image = Base64.getEncoder().encodeToString(product.getImagen());
             model.addAttribute("product", product);
+            model.addAttribute("base64Image", base64Image);
             return "product";
         } else {
             return "error";
         }
     }
 
+    @GetMapping("/download/{id}")
+    public ResponseEntity<Resource> downloadImage(@PathVariable("id") Long id){
+        Optional<Product> productOptional = productService.getProductById(id);
+        if (productOptional.isPresent()) {
+            try{
+                Product product = productOptional.get();
+                byte[] imageData = product.getImagen();
+                ByteArrayResource resource = new ByteArrayResource(imageData);
 
+                return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + product.getOriginalImageName() + "\"")
+                        .contentType(MediaType.IMAGE_JPEG)
+                        .contentLength(imageData.length)
+                        .body(resource);
+            } catch (Exception e) {
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+            }
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 
     @PostMapping("/nuevoproducto")
     public String newProducto(Product product, @RequestParam(required = false) MultipartFile imageFile) throws IOException {
         if (imageFile != null && !imageFile.isEmpty()) {
-            product.setImagen("../../images/" + imageFile.getOriginalFilename());
-            imageServ.saveImage(product.getImagen(), imageFile);
+            byte[] imageData = imageFile.getBytes();
+            product.setImagen(imageData);
+            product.setOriginalImageName(imageFile.getOriginalFilename());
+            imageServ.saveImage(imageData, imageFile.getOriginalFilename());
         } else {
-            product.setImagen("../../images/DefaultProduct.jpg");
+            product.setImagen(imageServ.getDefault());
         }
         Product newProduct = productService.createProduct(product);
         return "redirect:/Market/products/" + newProduct.getId();
@@ -99,8 +137,10 @@ public class MarketController {
             _product.setCategory(product.getCategory());
 
             if (imageFile != null && !imageFile.isEmpty()) {
-                _product.setImagen("../../images/" + imageFile.getOriginalFilename());
-                imageServ.saveImage(_product.getImagen(), imageFile);
+                byte[] imageData = imageFile.getBytes();
+                _product.setImagen(imageData);
+                _product.setOriginalImageName(imageFile.getOriginalFilename());
+                imageServ.saveImage(imageData, imageFile.getOriginalFilename());
             }
 
             productService.updateProduct(_product);
@@ -116,8 +156,8 @@ public class MarketController {
         Optional<Product> productOptional = productService.getProductById(id);
         if (productOptional.isPresent()) {
             Product product = productOptional.get();
-            String imageUrl = product.getImagen();
-            imageServ.deleteImage(imageUrl);
+            String imageName = product.getOriginalImageName();
+            imageServ.deleteImage(imageName);
             productService.deleteProduct(id);
             return "redirect:/Market/products";
         } else {
